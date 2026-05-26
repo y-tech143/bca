@@ -1,0 +1,175 @@
+/* Color Palette Variables */
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --neon-hover: 0 8px 24px rgba(59, 130, 246, 0.25);
+}
+
+[data-theme="light"] {
+    --bg-main: #f8fafc;
+    --bg-card: rgba(0, 0, 0, 0.02);
+    --border-glass: rgba(0, 0, 0, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --neon-hover: 0 8px 24px rgba(37, 99, 235, 0.15);
+}
+
+/* Base Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+body { background: var(--bg-main); color: var(--text-main); transition: background 0.3s ease; }
+
+.gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Sticky Premium Glass Navbar */
+.navbar { position: fixed; top: 0; left: 0; right: 0; height: 70px; background: rgba(11, 15, 25, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-glass); z-index: 1000; }
+.nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1300px; margin: 0 auto; height: 100%; padding: 0 2rem; }
+.logo { font-size: 1.4rem; font-weight: 700; text-decoration: none; color: var(--text-main); }
+.search-box { position: relative; width: 40%; }
+.search-box input { width: 100%; padding: 0.6rem 1rem 0.6rem 2.5rem; border-radius: 30px; border: 1px solid var(--border-glass); background: var(--bg-card); color: var(--text-main); outline: none; transition: 0.3s; }
+.search-box input:focus { border-color: #3b82f6; box-shadow: var(--neon-hover); }
+.search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+.circle-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-glass); background: var(--bg-card); color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* Dashboard Wrapper Layout */
+.main-wrapper { max-width: 1300px; margin: 90px auto 40px; padding: 0 2rem; }
+
+/* Glassmorphism Specification Card */
+.glassmorphism { background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-glass); border-radius: 16px; }
+
+/* Hero Graphic Banner */
+.hero-banner { padding: 3rem 2rem; text-align: center; border-radius: 20px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; margin-bottom: 2rem; border: 1px solid var(--border-glass); }
+.hero-banner h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.hero-banner p { color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem; }
+.quick-stats { display: flex; justify-content: center; gap: 3rem; }
+.stat-item h3 { font-size: 1.5rem; color: #3b82f6; }
+
+/* Resilient Grid Structure */
+.dashboard-layout { display: grid; grid-template-columns: 2.5fr 1fr; gap: 2rem; }
+.grid-system { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+
+.section-title { font-size: 1.3rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+/* Components: Standard Cards */
+.ui-card { padding: 2rem; text-align: center; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.clickable { cursor: pointer; }
+.clickable:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: var(--neon-hover); background: rgba(255,255,255,0.06); }
+.card-icon { font-size: 2.2rem; margin-bottom: 1rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.ui-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.ui-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Components: Interactive Live Notice Items */
+.notice-container { display: flex; flex-direction: column; gap: 1rem; }
+.notice-card { padding: 1.2rem; }
+.notice-card h4 { font-size: 0.95rem; margin-bottom: 0.75rem; line-height: 1.4; }
+.notice-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); }
+.badge { padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; }
+.badge.danger { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+.badge.info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+
+/* Subcategory Internal Display Layout views */
+.action-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; gap: 1rem; }
+.back-btn { padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border-glass); background: var(--bg-card); color: var(--text-main); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+.back-btn:hover { background: rgba(255,255,255,0.1); }
+
+.resources-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+.category-block { padding: 1.5rem; }
+.category-block h3 { font-size: 1.1rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-glass); }
+.links-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.link-item { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem 1rem; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 0.9rem; }
+.link-item .download-btn { text-decoration: none; font-size: 0.8rem; background: #3b82f6; color: white; padding: 0.3rem 0.7rem; border-radius: 4px; font-weight: 600; display: flex; align-items: center; gap: 0.25rem; }
+.link-item .download-btn:hover { background: #2563eb; }
+.empty { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 1rem 0; }
+
+/* Responsive Adjustments */
+@media (max-width: 968px) {
+    .dashboard-layout { grid-template-columns: 1fr; }
+    .search-box { display: none; }
+}
+/* =========================================================================
+   👑 CENTERED & THEME-MATCHED PREMIUM FOOTER
+   ========================================================================= */
+footer {
+    border-top: 1px solid var(--border-glass);
+    padding: 3rem 1rem 2.5rem 1rem;
+    margin-top: 6rem;
+    background: linear-gradient(to top, rgba(10, 15, 30, 0.8), rgba(0, 0, 0, 0.3));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+}
+
+.footer-center-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Hamesha bilkul center me rakhne ke liye */
+    text-align: center;
+    gap: 1rem;
+}
+
+/* Date Badge Style - Website Colors se fully integration */
+.footer-date-badge {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 50px !important; /* Pill style layout */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer-date-badge i {
+    color: #3b82f6; /* Premium Blue accent */
+    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.4));
+}
+
+/* Copyright Text Style */
+.footer-copyright {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+}
+
+/* Developer Credits */
+.footer-developer {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+/* YASH Name Special Glow Effect */
+.yash-name {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
+    position: relative;
+}
+
+/* Beating Red Heart */
+.neon-heart {
+    color: #ff2a5f;
+    margin: 0 2px;
+    filter: drop-shadow(0 0 6px #ff2a5f);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Pulse Animation Logic */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
