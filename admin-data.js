@@ -194,6 +194,7 @@ const ACADEMIC_DATABASE = [
                     { title: "Unit 1: Arrays, Stacks & Queues Operations", url: "notes/sem2/ds-unit1.pdf" },
                     { title: "Unit 2: Linked List (Single & Double) Implementation", url: "notes/sem2/ds-linkedlist.pdf" }
                 ],
+            Privious Year Questions  { title: "Sem 2 bca oprating system PYQ ", url: "https://github.com/y-tech143/bca/blob/main/bca-part-2-operating-syaytems-233-2018.pdf" },
                 pdfs: [],
                 guessPapers: [],
                 assignments: [],
