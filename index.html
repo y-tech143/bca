@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Premium Student Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="window.location.reload()">
+                <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
+            </a>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
+            </div>
+            <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div id="dynamicContentContext">
+            
+            <header class="hero-banner">
+                <h1>Elevate Your <span class="gradient-text">BCA Education</span></h1>
+                <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
+                <div class="quick-stats">
+                    <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
+                    <div class="stat-item"><h3>30+</h3><p>Subjects</p></div>
+                    <div class="stat-item"><h3>100%</h3><p>Free Resources</p></div>
+                </div>
+            </header>
+
+            <div class="dashboard-layout">
+                <section class="left-segment">
+                    <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Choose Semester</h2>
+                    <div class="grid-system" id="semestersGrid"></div>
+                </section>
+
+                <aside class="right-segment">
+                    <h2 class="section-title"><i class="fa-solid fa-bell"></i> Dynamic Updates</h2>
+                    <div class="notice-container" id="noticesContainer"></div>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="admin-data.js"></script>
+    <script>
+        // Global variables for tracking engine states
+        let isNoticesExpanded = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initDashboardSystem();
+            setupSearchEngine();
+            setupThemeControl();
+        });
+
+        // 1. Initial Load Layout (With Dynamic Notice Board Engine)
+        function initDashboardSystem() {
+            renderLiveNotices();
+
+            // Load Semesters
+            const semGrid = document.getElementById("semestersGrid");
+            semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
+                <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
+                    <i class="fa-solid fa-folder-open card-icon"></i>
+                    <h3>${sem.semesterName}</h3>
+                    <p>${sem.subjects.length} Core Subjects Added</p>
+                </div>
+            `).join('');
+        }
+
+        // 🔥 NOTICES ENGINE: 3 se zyada hone par View More / View Less banayega
+        function renderLiveNotices() {
+            const noticeBox = document.getElementById("noticesContainer");
+            if (!noticeBox) return;
+
+            if (!ADMIN_NOTICES || ADMIN_NOTICES.length === 0) {
+                noticeBox.innerHTML = '<p class="empty">No active announcements.</p>';
+                return;
+            }
+
+            // Slice data based on expanded flag
+            const noticesToRender = isNoticesExpanded ? ADMIN_NOTICES : ADMIN_NOTICES.slice(0, 3);
+
+            let html = noticesToRender.map(notice => `
+                <div class="notice-card glassmorphism" style="border-left: 3px solid ${notice.important ? '#ef4444' : '#3b82f6'};">
+                    <h4>${notice.title}</h4>
+                    <div class="notice-footer">
+                        <span><i class="fa-solid fa-calendar-day"></i> ${notice.date}</span>
+                        <span class="badge ${notice.important ? 'danger' : 'info'}">${notice.tag}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add dynamic toggle button if total notices > 3
+            if (ADMIN_NOTICES.length > 3) {
+                const btnText = isNoticesExpanded ? '- View Less' : `+ View More (${ADMIN_NOTICES.length - 3} More)`;
+                const btnColor = isNoticesExpanded ? '#ef4444' : '#3b82f6';
+                html += `
+                    <button onclick="toggleNoticesVisibility()" class="glassmorphism" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; color: ${btnColor}; border: 1px dashed ${btnColor}; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; text-align: center; background: rgba(255,255,255,0.01);">
+                        ${btnText}
+                    </button>
+                `;
+            }
+            noticeBox.innerHTML = html;
+        }
+
+        function toggleNoticesVisibility() {
+            isNoticesExpanded = !isNoticesExpanded;
+            renderLiveNotices();
+        }
+
+        // 2. Open Selected Semester View (With Under Development Checking)
+        function openSemesterView(semIndex) {
+            const context = document.getElementById("dynamicContentContext");
+            const data = ACADEMIC_DATABASE[semIndex];
+
+            // 👑 SEMESTER LOCK CHECK: Agar admin file me status: "under-development" hai
+            if (data.status === "under-development") {
+                context.innerHTML = `
+                    <div class="action-bar">
+                        <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
+                        <h2>${data.semesterName}</h2>
+                    </div>
+                    <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b; border-radius: 12px;">
+                        <i class="fa-solid fa-hourglass-start" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(245,158,11,0.4));"></i>
+                        <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.7rem; font-weight: 700;">Semester Under Construction</h3>
+                        <p style="color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                            Yash bhai is pure semester ka premium content aur syllabus design kar rahe hain. Bahut jald saare subjects live honge!
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div class="action-bar">
+                    <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
+                    <h2>${data.semesterName} Subjects</h2>
+                </div>
+                <div class="grid-system">
+            `;
+
+            data.subjects.forEach((sub, subIndex) => {
+                html += `
+                    <div class="ui-card glassmorphism clickable" onclick="openSubjectCategories(${semIndex}, ${subIndex})">
+                        <i class="fa-solid ${sub.icon || 'fa-book'} card-icon"></i>
+                        <h3>${sub.name}</h3>
+                        <p>Click to open resources</p>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            context.innerHTML = html;
+        }
+
+        // 3. Open Categories (With Subject Lock & Plain Text Note Render Feature)
+        function openSubjectCategories(semIndex, subIndex) {
+            const context = document.getElementById("dynamicContentContext");
+            const subject = ACADEMIC_DATABASE[semIndex].subjects[subIndex];
+
+            // 👑 SUBJECT LOCK CHECK: Agar individual subject level par lock lagaya hai
+            if (subject.status === "under-development") {
+                context.innerHTML = `
+                    <div class="action-bar">
+                        <button onclick="openSemesterView(${semIndex})" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <h2>${subject.name}</h2>
+                    </div>
+                    <div class="glassmorphism" style="padding: 3rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b;">
+                        <i class="fa-solid fa-hourglass-start" style="font-size: 3rem; color: #f59e0b; margin-bottom: 1.5rem;"></i>
+                        <h3>Coming Soon</h3>
+                        <p style="color: var(--text-muted);">Yash bhai is subject ke premium study material par kaam kar rahe hain!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const categoriesMap = [
+                { key: 'notes', label: 'Subject Notes', icon: 'fa-file-lines' },
+                { key: 'pdfs', label: 'PDF Textbooks', icon: 'fa-file-pdf' },
+                { key: 'guessPapers', label: 'Guess Papers', icon: 'fa-lightbulb' },
+                { key: 'assignments', label: 'Assignments', icon: 'fa-pen' },
+                { key: 'practicals', label: 'Practical Files', icon: 'fa-flask' },
+                { key: 'videoLinks', label: 'Video Lectures', icon: 'fa-video' }
+            ];
+
+            let html = `
+                <div class="action-bar">
+                    <button onclick="openSemesterView(${semIndex})" class="back-btn">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Subjects
+                    </button>
+                    <h2>${subject.name} Resources</h2>
+                </div>
+                <div class="accordion-container">
+            `;
+
+            categoriesMap.forEach((cat) => {
+                const items = subject[cat.key] || [];
+                html += `
+                    <div class="accordion-item glassmorphism" style="margin-bottom: 1rem; overflow: hidden;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 1.2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); font-weight: 600;">
+                            <span><i class="fa-solid ${cat.icon}" style="margin-right: 0.75rem; color: #3b82f6;"></i> ${cat.label} (${items.length})</span>
+                            <i class="fa-solid fa-chevron-down arrow-icon" style="transition: transform 0.3s ease; color: var(--text-muted);"></i>
+                        </div>
+                        
+                        <div class="accordion-body" style="display: none; padding: 1.2rem; border-top: 1px solid var(--border-glass); background: rgba(0,0,0,0.15);">
+                            <div class="links-list">
+                                ${items.length === 0 ? '<p class="empty">No resource links uploaded yet.</p>' : 
+                                items.map(item => {
+                                    // SMART CHECK: Link vs Plain Text Message Detector
+                                    const isLink = item.url.includes('.pdf') || item.url.includes('http') || item.url.includes('/');
+                                    
+                                    if (!isLink) {
+                                        return `
+                                            <div class="link-item" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.03); flex-direction: column; align-items: flex-start; gap: 4px;">
+                                                <strong style="color: var(--text-main); font-size: 0.95rem;">${item.title}</strong>
+                                                <p style="color: #3b82f6; font-size: 0.85rem;"><i class="fa-solid fa-circle-info"></i> ${item.url}</p>
+                                            </div>
+                                        `;
+                                    } else {
+                                        return `
+                                            <div class="link-item">
+                                                <span>${item.title}</span>
+                                                <a href="${item.url}" target="_blank" class="download-btn">Open <i class="fa-solid fa-up-right-from-square"></i></a>
+                                            </div>
+                                        `;
+                                    }
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            context.innerHTML = html;
+        }
+
+        function toggleAccordion(headerElement) {
+            const body = headerElement.nextElementSibling;
+            const arrow = headerElement.querySelector(".arrow-icon");
+            
+            if (body.style.display === "none" || body.style.display === "") {
+                body.style.display = "block";
+                arrow.style.transform = "rotate(180deg)";
+                headerElement.style.background = "rgba(59, 130, 246, 0.08)";
+            } else {
+                body.style.display = "none";
+                arrow.style.transform = "rotate(0deg)";
+                headerElement.style.background = "rgba(255,255,255,0.02)";
+            }
+        }
+
+        // 4. Live Global Filtering Search Engine
+        function setupSearchEngine() {
+            const search = document.getElementById("liveSearchInput");
+            search.addEventListener("input", (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const context = document.getElementById("dynamicContentContext");
+
+                if(term.length < 2) return;
+
+                let searchHTML = `
+                    <div class="action-bar">
+                        <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-xmark"></i> Clear Search</button>
+                        <h2>Search Results for: "${e.target.value}"</h2>
+                    </div>
+                    <div class="links-list glassmorphism" style="padding:1.5rem;">
+                `;
+
+                let found = false;
+
+                ACADEMIC_DATABASE.forEach(sem => {
+                    if (sem.status === "under-development") return; // Hidden from search if semester is locked
+                    sem.subjects.forEach(sub => {
+                        if (sub.status === "under-development") return; // Hidden from search if subject is locked
+                        ['notes','pdfs','guessPapers','assignments','practicals','videoLinks'].forEach(key => {
+                            (sub[key] || []).forEach(item => {
+                                if(item.title.toLowerCase().includes(term) || sub.name.toLowerCase().includes(term)) {
+                                    found = true;
+                                    searchHTML += `
+                                        <div class="link-item">
+                                            <div>
+                                                <strong>${item.title}</strong>
+                                                <small style="display:block; color:var(--text-muted);">${sem.semesterName} &bull; ${sub.name}</small>
+                                            </div>
+                                            <a href="${item.url}" target="_blank" class="download-btn">View</a>
+                                        </div>
+                                    `;
+                                }
+                            });
+                        });
+                    });
+                });
+
+                if(!found) searchHTML += `<p class="empty">No matches found for your search query keywords.</p>`;
+                searchHTML += `</div>`;
+                context.innerHTML = searchHTML;
+            });
+        }
+
+        // 5. Dark / Light Theme Toggle System
+        function setupThemeControl() {
+            const btn = document.getElementById("themeModeToggle");
+            btn.addEventListener("click", () => {
+                const current = document.documentElement.getAttribute("data-theme");
+                const next = current === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", next);
+                btn.innerHTML = next === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
+            });
+        }
+
+        // =========================================================================
+// 🔒 ULTRA SECURITY GUARD: SOURCE CODE, RIGHT-CLICK & KEYBOARD SHORTCUTS LOCK
+// =========================================================================
+
+// 1. Right-Click Poori Tarah Disable (Context Menu Lock)
+document.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+});
+
+// 2. Keyboard Keys, Shortcuts aur Inspect Element Lock
+document.onkeydown = function(e) {
+    // F12 Key Disable
+    if (e.keyCode == 123) { 
+        return false; 
+    }
+    
+    // Ctrl + Shift + I (Inspect Element)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { 
+        return false; 
+    }
+    
+    // Ctrl + Shift + C (Element Selector)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { 
+        return false; 
+    }
+    
+    // Ctrl + Shift + J (Console View)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { 
+        return false; 
+    }
+    
+    // Ctrl + U (View Source Code Lock)
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { 
+        return false; 
+    }
+    
+    // Ctrl + S (Website Pages Save Lock)
+    if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { 
+        return false; 
+    }
+    
+    // Ctrl + P (Print Page Lock)
+    if (e.ctrlKey && e.keyCode == 'P'.charCodeAt(0)) { 
+        return false; 
+    }
+};
+
+// 3. Text Selection aur Drag-Drop Block (Taaki koi text copy na kar sake)
+document.addEventListener('selectstart', (e) => e.preventDefault());
+document.addEventListener('dragstart', (e) => e.preventDefault());
+    </script>
+
+    <footer>
+        <div class="footer-center-container">
+            <p class="footer-copyright">&copy; 2026 BCA Resource Hub. All Rights Reserved.</p>
+            
+            <p class="footer-developer">
+                Developed with <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH</span>
+            </p>
+            <p class="footer-copyright">।। श्री राधा रमणों विजयते ।।</p>
+        </div>
+    </footer>
+</body>
+</html>
