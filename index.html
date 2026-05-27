@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCA Premium Student Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -51,9 +51,26 @@
         </div>
     </div>
 
+    <div id="premiumFileModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; animation: fadeIn 0.3s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #111; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <span id="modalFileTitle" style="color: #fff; font-weight: 600; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;">Document Viewer</span>
+            <button onclick="closePremiumModal()" style="background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                <i class="fa-solid fa-xmark"></i> Close
+            </button>
+        </div>
+        <div style="width: 100%; height: calc(100% - 55px); position: relative; background: #1a1a1a;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 56px; background: transparent; z-index: 999; pointer-events: auto;"></div>
+            <div style="position: absolute; top: 0; right: 0; width: 280px; height: 100px; background: transparent; z-index: 999; pointer-events: auto;"></div>
+            <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0" style="border: none;"></iframe>
+        </div>
+    </div>
+
+    <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+
     <script src="admin-data.js"></script>
     <script>
-        // Global variables for tracking engine states
         let isNoticesExpanded = false;
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -62,11 +79,9 @@
             setupThemeControl();
         });
 
-        // 1. Initial Load Layout
         function initDashboardSystem() {
             renderLiveNotices();
 
-            // Load Semesters
             const semGrid = document.getElementById("semestersGrid");
             semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
                 <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
@@ -77,7 +92,6 @@
             `).join('');
         }
 
-        // NOTICES ENGINE: Handles collapsing/expanding gracefully
         function renderLiveNotices() {
             const noticeBox = document.getElementById("noticesContainer");
             if (!noticeBox) return;
@@ -116,7 +130,6 @@
             renderLiveNotices();
         }
 
-        // 2. Open Selected Semester View
         function openSemesterView(semIndex) {
             const context = document.getElementById("dynamicContentContext");
             const data = ACADEMIC_DATABASE[semIndex];
@@ -160,7 +173,6 @@
             context.innerHTML = html;
         }
 
-        // 3. Open Categories (Clean & Seamless In-App Premium Viewer View)
         function openSubjectCategories(semIndex, subIndex) {
             const context = document.getElementById("dynamicContentContext");
             const subject = ACADEMIC_DATABASE[semIndex].subjects[subIndex];
@@ -180,8 +192,10 @@
                 return;
             }
 
+            // 1. FIXED CATEGORIES MAP (Added previousYearPapers & Removed Duplicate key)
             const categoriesMap = [
                 { key: 'notes', label: 'Subject Notes', icon: 'fa-file-lines' },
+                { key: 'previousYearPapers', label: 'Previous Year Papers', icon: 'fa-graduation-cap' },
                 { key: 'pdfs', label: 'PDF Textbooks', icon: 'fa-file-pdf' },
                 { key: 'guessPapers', label: 'Guess Papers', icon: 'fa-lightbulb' },
                 { key: 'assignments', label: 'Assignments', icon: 'fa-pen' },
@@ -211,30 +225,21 @@
                         <div class="accordion-body" style="display: none; padding: 1.2rem; border-top: 1px solid var(--border-glass); background: rgba(0,0,0,0.15);">
                             <div class="links-list">
                                 ${items.length === 0 ? '<p class="empty">No resource links uploaded yet.</p>' : 
-                                items.map((item, idx) => {
+                                items.map((item) => {
                                     const isLink = item.url.includes('.pdf') || item.url.includes('http') || item.url.includes('/');
                                     
                                     if (!isLink) {
                                         return `
-                                            <div class="link-item" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.03); flex-direction: column; align-items: flex-start; gap: 4px;">
+                                            <div class="link-item" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.03); flex-direction: column; align-items: flex-start; gap: 4px; width: 100%;">
                                                 <strong style="color: var(--text-main); font-size: 0.95rem;">${item.title}</strong>
                                                 <p style="color: #3b82f6; font-size: 0.85rem;"><i class="fa-solid fa-circle-info"></i> ${item.url}</p>
                                             </div>
                                         `;
                                     } else {
-                                        const viewerId = `github-viewer-${cat.key}-${idx}`;
                                         return `
-                                            <div class="link-item" style="flex-direction: column; align-items: flex-start; gap: 10px; width:100%;">
-                                                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                                                    <span>${item.title}</span>
-                                                    <button onclick="toggleFileViewer('${viewerId}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 6px 14px; border-radius: 6px; font-weight:600; cursor:pointer;">View</button>
-                                                </div>
-                                                
-                                                <div id="${viewerId}" style="display: none; width: 100%; height: 650px; position: relative; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background:#111;">
-                                                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 56px; background: transparent; z-index: 9999; pointer-events: auto;"></div>
-                                                    <div style="position: absolute; top: 0; right: 0; width: 280px; height: 100px; background: transparent; z-index: 9999; pointer-events: auto;"></div>
-                                                    <iframe src="${item.url}#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="100%" frameborder="0" style="border:none;"></iframe>
-                                                </div>
+                                            <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 15px;">
+                                                <span style="font-weight: 500;">${item.title}</span>
+                                                <button onclick="openPremiumModal('${item.title}', '${item.url}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 8px 16px; border-radius: 6px; font-weight:600; cursor:pointer; flex-shrink: 0;">View</button>
                                             </div>
                                         `;
                                     }
@@ -249,17 +254,6 @@
             context.innerHTML = html;
         }
 
-        // Toggle Framework for inline frame viewer engines
-        function toggleFileViewer(viewerId) {
-            const viewer = document.getElementById(viewerId);
-            if (viewer.style.display === "none" || viewer.style.display === "") {
-                viewer.style.display = "block";
-            } else {
-                viewer.style.display = "none";
-            }
-        }
-
-        // Accordion functionality engine
         function toggleAccordion(headerElement) {
             const body = headerElement.nextElementSibling;
             const arrow = headerElement.querySelector(".arrow-icon");
@@ -275,7 +269,7 @@
             }
         }
 
-        // 4. Live Global Filtering Search Engine
+        // 2. FIXED SEARCH ENGINE (Added 'previousYearPapers' into the loop)
         function setupSearchEngine() {
             const search = document.getElementById("liveSearchInput");
             search.addEventListener("input", (e) => {
@@ -298,26 +292,17 @@
                     if (sem.status === "under-development") return;
                     sem.subjects.forEach(sub => {
                         if (sub.status === "under-development") return;
-                        ['notes','pdfs','guessPapers','assignments','practicals','videoLinks'].forEach(key => {
-                            (sub[key] || []).forEach((item, idx) => {
+                        ['notes','pdfs','previousYearPapers','guessPapers','assignments','practicals','videoLinks'].forEach(key => {
+                            (sub[key] || []).forEach((item) => {
                                 if(item.title.toLowerCase().includes(term) || sub.name.toLowerCase().includes(term)) {
                                     found = true;
-                                    const searchViewerId = `search-viewer-${sem.semesterName.replace(/\s+/g, '')}-${key}-${idx}`;
                                     searchHTML += `
-                                        <div class="link-item" style="flex-direction: column; align-items: flex-start; gap: 10px; width:100%; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">
-                                            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                                                <div>
-                                                    <strong>${item.title}</strong>
-                                                    <small style="display:block; color:var(--text-muted);">${sem.semesterName} &bull; ${sub.name}</small>
-                                                </div>
-                                                <button onclick="toggleFileViewer('${searchViewerId}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 6px 14px; border-radius: 6px; font-weight:600; cursor:pointer;">View</button>
+                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width:100%; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; margin-bottom: 15px; gap: 15px;">
+                                            <div>
+                                                <strong style="color: var(--text-main);">${item.title}</strong>
+                                                <small style="display:block; color:var(--text-muted); margin-top: 4px;">${sem.semesterName} &bull; ${sub.name}</small>
                                             </div>
-                                            
-                                            <div id="${searchViewerId}" style="display: none; width: 100%; height: 550px; position: relative; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background:#111;">
-                                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 56px; background: transparent; z-index: 9999;"></div>
-                                                <div style="position: absolute; top: 0; right: 0; width: 280px; height: 100px; background: transparent; z-index: 9999;"></div>
-                                                <iframe src="${item.url}#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="100%" frameborder="0"></iframe>
-                                            </div>
+                                            <button onclick="openPremiumModal('${item.title}', '${item.url}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 8px 16px; border-radius: 6px; font-weight:600; cursor:pointer; flex-shrink: 0;">View</button>
                                         </div>
                                     `;
                                 }
@@ -332,7 +317,6 @@
             });
         }
 
-        // 5. Dark / Light Theme Toggle System
         function setupThemeControl() {
             const btn = document.getElementById("themeModeToggle");
             btn.addEventListener("click", () => {
@@ -343,9 +327,19 @@
             });
         }
 
-        // =========================================================================
-        // SOURCE CODE SECURITY, CONTEXT CLICKS & KEY EVENT INHIBITORS
-        // =========================================================================
+        function openPremiumModal(title, url) {
+            document.getElementById("modalFileTitle").innerText = title;
+            document.getElementById("modalIframeViewer").src = url + "#toolbar=0&navpanes=0&scrollbar=0";
+            document.getElementById("premiumFileModal").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closePremiumModal() {
+            document.getElementById("premiumFileModal").style.display = "none";
+            document.getElementById("modalIframeViewer").src = "";
+            document.body.style.overflow = "auto";
+        }
+
         document.addEventListener('contextmenu', (e) => e.preventDefault());
 
         document.onkeydown = function(e) {
