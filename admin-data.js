@@ -11,17 +11,24 @@
 const ADMIN_NOTICES = [
     {
         title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "UPDATE",
-        important: true
-    },
-    {
-        title: "Operating System notes and PYQ live now ",
-        date: "May 26, 2026",
+        date: "April 15, 2026",
         tag: "UPDATE",
         important: false
     },
+   {
+        title: "🔥 Sem 2nd Update: OS, DBMS & COA Notes & PYQs Are Now Live!",
+        date: "May 27, 2026",
+        tag: "UPDATE",
+        important: true // Isse red badge aayega taaki sabki nazar pade
+    },
     
+    
+    {
+        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 28",
+        date: "May 26, 2026",
+        tag: "Exam",
+        important: true
+    },
     {
         title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
         date: "May 20, 2026",
@@ -106,7 +113,7 @@ const ACADEMIC_DATABASE = [
                 previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
                      { title: "BCA sem 2nd Operating system PYQ 2018", url: "https://drive.google.com/file/d/1ZJkpp3cTqDP8QfwSSlCc0A89p69HIXlr/preview" },
                      { title: "BCA sem 2nd Operating system PYQ 2023", url: "https://drive.google.com/file/d/1gCLA7BXmjQiT1DlgR15sptQ35eHrpx1Z/preview" },
-                     { title: "Unit 2: Linked List (Single & Double) Implementation", url: "notes/sem2/ds-linkedlist.pdf" }
+                    
                 ],
                 pdfs: [],
                 guessPapers: [],       // <-- Guess Papers apni jagah alag se safe hai!
@@ -115,19 +122,33 @@ const ACADEMIC_DATABASE = [
                 videoLinks: []
             },
             {
-                name: "Database Management System (DBMS)",
-                icon: "fa-database",
-                notes: [{ title: "ER Diagrams & Normalization (1NF, 2NF, 3NF)", url: "notes/sem2/dbms-normal.pdf" }],
-                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], 
-                practicals: [{ title: "SQL Queries Lab Manual", url: "pdfs/sem2/dbms-sql.pdf" }], 
-                videoLinks: []
-            },
+    name: "Database Management System (DBMS)",
+    icon: "fa-database",
+    notes: [
+        { title: "DBMS NOTES", url: "https://drive.google.com/file/d/1ZvGFRYP4p7V1Ydqp3yG4TOk4Fo-3OPsv/preview" },
+        { title: "SQL DELETE & WHERE CLAUSE", url: "https://drive.google.com/file/d/1P6VmgadZzUcF4HGACw4XrVe-bgCD9QTe/preview" } // <-- Naya Notes Link ekdum sahi jagah par!
+    ],
+    previousYearPapers: [
+        { title: "r", url: "h" }
+    ], 
+    pdfs: [
+         { title: "DatabaseManagementSystemBook ", url: "https://drive.google.com/file/d/1wX6lZAQFsorm3iiQEQsBIE2bITrEPWP3/preview" }
+    ], 
+    guessPapers: [
+        { title: "D26", url: "h" }
+    ], 
+    assignments: [], 
+    practicals: [
+        { title: "SQL Queries Lab Manual", url: "pdfs/sem2/dbms-sql.pdf" }
+    ], 
+    videoLinks: []
+},
 
            {
     name: "Computer Organization & Architecture (COA)",
     icon: "fa-network-wired", // Premium architectural network icon
     notes: [
-        { title: "Logic Gates & K-Map Minimization Notes", url: "notes/sem2/digital.pdf" }
+        { title: "Computer Organization and Architecture-notes", url: "https://drive.google.com/file/d/1wQrcp_JIjYSeckKXLX7HwU8iTisBduWb/preview" }
     ],
     previousYearPapers: [], 
     pdfs: [], 
