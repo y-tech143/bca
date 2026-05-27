@@ -13,8 +13,15 @@ const ADMIN_NOTICES = [
         title: "Website Under Devlopment",
         date: "May 24, 2026",
         tag: "UPDATE",
+        important: true
+    },
+    {
+        title: "Operating System notes and PYQ live now ",
+        date: "May 26, 2026",
+        tag: "UPDATE",
         important: false
     },
+    
     {
         title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
         date: "May 20, 2026",
@@ -22,106 +29,7 @@ const ADMIN_NOTICES = [
         important: true
     },
    
-    {
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false,
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true,
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false,
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true,
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false,
-    },{
-        title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 25",
-        date: "May 20, 2026",
-        tag: "Exam",
-        important: true
-    },
-    {
-        title: "Website Under Devlopment",
-        date: "May 24, 2026",
-        tag: "Academic",
-        important: false
-    } // <-- Agla notice jodne se pehle yahan comma (,) zaroor lagayein
+   // <-- Agla notice jodne se pehle yahan comma (,) zaroor lagayein
 ];
 
 
@@ -155,6 +63,7 @@ const ACADEMIC_DATABASE = [
                     { title: "Unit 1: Input Output Devices & Memory Architecture", url: "notes/sem1/cfoa-u1.pdf" },
                     { title: "Unit 2: MS Office Tools (Word, Excel, PPT) Guide", url: "notes/sem1/ms-office.pdf" }
                 ],
+                previousYearPapers: [], // <-- Saare Semesters ke liye khali key ready hai
                 pdfs: [{ title: "Computer Fundamentals Textbook PDF", url: "pdfs/sem1/cfoa-book.pdf" }],
                 guessPapers: [],
                 assignments: [{ title: "Assignment 1: Component Block Diagram", url: "pdfs/sem1/cfoa-assign.pdf" }],
@@ -168,6 +77,7 @@ const ACADEMIC_DATABASE = [
                     { title: "Unit 1: Flowcharts, Algorithms & Intro to C", url: "notes/sem1/c-unit1.pdf" },
                     { title: "Unit 2: Functions, Arrays and Strings Concept", url: "notes/sem1/c-unit2.pdf" }
                 ],
+                previousYearPapers: [],
                 pdfs: [{ title: "Let Us C - Yashavant Kanetkar Reference Book", url: "pdfs/sem1/let-us-c.pdf" }],
                 guessPapers: [{ title: "C Language Most Important Guess Paper 2026", url: "pdfs/sem1/c-guess.pdf" }],
                 assignments: [],
@@ -178,24 +88,28 @@ const ACADEMIC_DATABASE = [
                 name: "Principle of Management",
                 icon: "fa-users",
                 notes: [{ title: "Planning & Organizing Strategy Notes", url: "notes/sem1/pom-u1.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             }
         ]
     },
 
     // ==================== BCA SEMESTER 2 ====================
     {
-        semesterName: "BCA Semester 2 <br> Work in progress",
+        semesterName: "BCA Semester 2 ",
         subjects: [
             {
-                name: "Oprating System",
+                name: "Operating System (OS)",
                 icon: "fa-sitemap",
                 notes: [
-                    { title: "BCA sem 2nd oprating system PYQ", url: "https://github.com/y-tech143/bca/blob/main/bca-part-2-operating-syaytems-233-2018.pdf" },
-                    { title: "Unit 2: Linked List (Single & Double) Implementation", url: "notes/sem2/ds-linkedlist.pdf" }
+                    { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" }
+                ],
+                previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
+                     { title: "BCA sem 2nd Operating system PYQ 2018", url: "https://drive.google.com/file/d/1ZJkpp3cTqDP8QfwSSlCc0A89p69HIXlr/preview" },
+                     { title: "BCA sem 2nd Operating system PYQ 2023", url: "https://drive.google.com/file/d/1gCLA7BXmjQiT1DlgR15sptQ35eHrpx1Z/preview" },
+                     { title: "Unit 2: Linked List (Single & Double) Implementation", url: "notes/sem2/ds-linkedlist.pdf" }
                 ],
                 pdfs: [],
-                guessPapers: [],
+                guessPapers: [],       // <-- Guess Papers apni jagah alag se safe hai!
                 assignments: [],
                 practicals: [],
                 videoLinks: []
@@ -204,16 +118,24 @@ const ACADEMIC_DATABASE = [
                 name: "Database Management System (DBMS)",
                 icon: "fa-database",
                 notes: [{ title: "ER Diagrams & Normalization (1NF, 2NF, 3NF)", url: "notes/sem2/dbms-normal.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], 
                 practicals: [{ title: "SQL Queries Lab Manual", url: "pdfs/sem2/dbms-sql.pdf" }], 
                 videoLinks: []
             },
-            {
-                name: "Digital Electronics",
-                icon: "fa-microchip",
-                notes: [{ title: "Logic Gates & K-Map Minimization Notes", url: "notes/sem2/digital.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
-            }
+
+           {
+    name: "Computer Organization & Architecture (COA)",
+    icon: "fa-network-wired", // Premium architectural network icon
+    notes: [
+        { title: "Logic Gates & K-Map Minimization Notes", url: "notes/sem2/digital.pdf" }
+    ],
+    previousYearPapers: [], 
+    pdfs: [], 
+    guessPapers: [], 
+    assignments: [], 
+    practicals: [], 
+    videoLinks: []
+}
         ]
     },
 
@@ -225,7 +147,7 @@ const ACADEMIC_DATABASE = [
                 name: "Object Oriented Programming Using C++",
                 icon: "fa-cubes",
                 notes: [{ title: "Polymorphism, Inheritance & Encapsulation Guide", url: "notes/sem3/cpp-oops.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], 
                 practicals: [{ title: "C++ Solved Program Lab File", url: "pdfs/sem3/cpp-file.pdf" }], 
                 videoLinks: []
             },
@@ -233,13 +155,13 @@ const ACADEMIC_DATABASE = [
                 name: "Operating System (OS)",
                 icon: "fa-sliders",
                 notes: [{ title: "CPU Scheduling Algorithms (FCFS, SJF, Round Robin)", url: "notes/sem3/os-scheduling.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             },
             {
                 name: "Web Technology - HTML, CSS & JS",
                 icon: "fa-html5",
                 notes: [{ title: "JavaScript Dom Manipulation Essentials", url: "notes/sem3/js-dom.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], 
                 practicals: [{ title: "Responsive Web Design Portfolio Practical", url: "pdfs/sem3/web-lab.pdf" }], 
                 videoLinks: []
             }
@@ -254,7 +176,7 @@ const ACADEMIC_DATABASE = [
                 name: "Java Programming Language",
                 icon: "fa-brands fa-java",
                 notes: [{ title: "Java Exception Handling & Multithreading Notes", url: "notes/sem4/java-core.pdf" }],
-                pdfs: [{ title: "Core Java Complete E-Book Standard Edition", url: "pdfs/sem4/java-book.pdf" }], 
+                previousYearPapers: [], pdfs: [{ title: "Core Java Complete E-Book Standard Edition", url: "pdfs/sem4/java-book.pdf" }], 
                 guessPapers: [], assignments: [], 
                 practicals: [{ title: "Java Core Programs Compilation File", url: "pdfs/sem4/java-lab.pdf" }], 
                 videoLinks: []
@@ -263,13 +185,13 @@ const ACADEMIC_DATABASE = [
                 name: "Computer Networks (CN)",
                 icon: "fa-network-wired",
                 notes: [{ title: "OSI Reference Model vs TCP/IP Layers Architecture", url: "notes/sem4/cn-osi.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             },
             {
                 name: "Software Engineering",
                 icon: "fa-diagram-project",
                 notes: [{ title: "SDLC Models (Waterfall, Spiral & Agile Methodology)", url: "notes/sem4/sdlc.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             }
         ]
     },
@@ -283,23 +205,23 @@ const ACADEMIC_DATABASE = [
                 icon: "fa-brands fa-python",
                 notes: [
                     { title: "Unit 1: Python Basics, Lists, Tuples & Dictionaries", url: "notes/sem5/python-basics.pdf" },
-                    { title: "Unit 2: Object Oriented Python & File Handling", url: "notes/sem5/python-oop.pdf" }
+                    { title: "Unit 2: Object Oriented Python & File Handling", url: "notes/sem5/python-oop.pdf" },
                 ],
-                pdfs: [], guessPapers: [], assignments: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], 
                 practicals: [{ title: "Python Lab Programs Complete File", url: "pdfs/sem5/python-lab.pdf" }], 
-                videoLinks: [{ title: "Python Full Course Walkthrough", url: "https://youtube.com/python-course" }]
+                videoLinks: [{ title: "Python Full Course Walkthrough", url: "https://youtube.com/python-course" }],
             },
             {
                 name: "Information Security & Cyber Laws",
                 icon: "fa-shield-halved",
                 notes: [{ title: "Cryptography, Firewalls & Indian IT Act 2000 Notes", url: "notes/sem5/cyber-security.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             },
             {
                 name: "Cloud Computing Technologies",
                 icon: "fa-cloud",
                 notes: [{ title: "SaaS, PaaS, IaaS Deployment Model Configurations", url: "notes/sem5/cloud.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
             }
         ]
     },
@@ -312,14 +234,14 @@ const ACADEMIC_DATABASE = [
                 name: "Artificial Intelligence & Machine Learning",
                 icon: "fa-brain",
                 notes: [{ title: "Introduction to Neural Networks & Expert Systems", url: "notes/sem6/ai-intro.pdf" }],
-                pdfs: [], guessPapers: [], assignments: [], practicals: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], 
                 videoLinks: [{ title: "AI Basics for Beginners Video Guide", url: "https://youtube.com/ai-basics" }]
             },
             {
                 name: "Major Capstone Project Viva Guide",
                 icon: "fa-file-zipper",
                 notes: [{ title: "How to Prepare Project Synopses and PPT Reports", url: "notes/sem6/project-guide.pdf" }],
-                pdfs: [], guessPapers: [], 
+                previousYearPapers: [], pdfs: [], guessPapers: [], 
                 assignments: [{ title: "Sample SRS Document (Software Requirement Specification)", url: "pdfs/sem6/sample-srs.pdf" }], 
                 practicals: [], videoLinks: []
             }
