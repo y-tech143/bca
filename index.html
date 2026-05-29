@@ -12,7 +12,7 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo" onclick="window.location.reload()">
+            <a href="#" class="logo" onclick="renderHomeDashboard(); return false;">
                 <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
             </a>
             <div class="search-box">
@@ -25,30 +25,7 @@
 
     <div class="main-wrapper">
         <div id="dynamicContentContext">
-            
-            <header class="hero-banner">
-                <h1>Elevate Your <span class="gradient-text">BCA Education</span></h1>
-                <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
-                <div class="quick-stats">
-                    <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
-                    <div class="stat-item"><h3>30+</h3><p>Subjects</p></div>
-                    <div class="stat-item"><h3>100%</h3><p>Free Resources</p></div>
-                </div>
-            </header>
-
-            <div class="dashboard-layout">
-                <section class="left-segment">
-                    <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Choose Semester</h2>
-                    <div class="grid-system" id="semestersGrid"></div>
-                </section>
-
-                <aside class="right-segment">
-                    <h2 class="section-title"><i class="fa-solid fa-bell"></i> Dynamic Updates</h2>
-                    <div class="notice-container" id="noticesContainer"></div>
-                </aside>
             </div>
-
-        </div>
     </div>
 
     <div id="premiumFileModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; animation: fadeIn 0.3s ease;">
@@ -69,20 +46,63 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 
+    <script src="sem1-data.js"></script>
+    <script src="sem2-data.js"></script>
+    <script src="sem3-data.js"></script>
+    <script src="sem4-data.js"></script>
+    <script src="sem5-data.js"></script>
+    <script src="sem6-data.js"></script>
+    
     <script src="admin-data.js"></script>
+
     <script>
         let isNoticesExpanded = false;
 
         document.addEventListener("DOMContentLoaded", () => {
-            initDashboardSystem();
-            setupSearchEngine();
             setupThemeControl();
+            renderHomeDashboard();
+            setupSearchEngine();
         });
+
+        // Function to render or return to the main Home Dashboard layout smoothly
+        function renderHomeDashboard() {
+            const context = document.getElementById("dynamicContentContext");
+            context.innerHTML = `
+                <header class="hero-banner">
+                    <h1>Elevate Your <span class="gradient-text">BCA Education</span></h1>
+                    <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
+                    <div class="quick-stats">
+                        <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
+                        <div class="stat-item"><h3>30+</h3><p>Subjects</p></div>
+                        <div class="stat-item"><h3>100%</h3><p>Free Resources</p></div>
+                    </div>
+                </header>
+
+                <div class="dashboard-layout">
+                    <section class="left-segment">
+                        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Choose Semester</h2>
+                        <div class="grid-system" id="semestersGrid"></div>
+                    </section>
+
+                    <aside class="right-segment">
+                        <h2 class="section-title"><i class="fa-solid fa-bell"></i> Dynamic Updates</h2>
+                        <div class="notice-container" id="noticesContainer"></div>
+                    </aside>
+                </div>
+            `;
+            initDashboardSystem();
+            
+            // Clear search input text when heading back home
+            const searchInput = document.getElementById("liveSearchInput");
+            if(searchInput) searchInput.value = "";
+        }
 
         function initDashboardSystem() {
             renderLiveNotices();
 
             const semGrid = document.getElementById("semestersGrid");
+            if (!semGrid) return;
+
             semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
                 <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
                     <i class="fa-solid fa-folder-open card-icon"></i>
@@ -137,14 +157,14 @@
             if (data.status === "under-development") {
                 context.innerHTML = `
                     <div class="action-bar">
-                        <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
+                        <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
                         <h2>${data.semesterName}</h2>
                     </div>
                     <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b; border-radius: 12px;">
-                        <i class="fa-solid fa-hourglass-start" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(245,158,11,0.4));"></i>
-                        <h3 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.7rem; font-weight: 700;">Semester Under Construction</h3>
+                       <i class="fa-solid fa-screwdriver-wrench" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px rgba(245,158,11,0.3));"></i>
+                        <h3 style="color: #RED; font-size: 1.8rem; margin-bottom: 0.7rem; font-weight: 700;">Semester Under Construction</h3>
                         <p style="color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">
-                            Yash bhai is pure semester ka premium content aur syllabus design kar rahe hain. Bahut jald saare subjects live honge!
+                           Work in progress! Keep an eye on this space—exclusive content will be uploaded shortly.
                         </p>
                     </div>
                 `;
@@ -153,7 +173,7 @@
 
             let html = `
                 <div class="action-bar">
-                    <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
+                    <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
                     <h2>${data.semesterName} Subjects</h2>
                 </div>
                 <div class="grid-system">
@@ -192,7 +212,6 @@
                 return;
             }
 
-            // 1. FIXED CATEGORIES MAP (Added previousYearPapers & Removed Duplicate key)
             const categoriesMap = [
                 { key: 'notes', label: 'Subject Notes', icon: 'fa-file-lines' },
                 { key: 'previousYearPapers', label: 'Previous Year Papers', icon: 'fa-graduation-cap' },
@@ -269,18 +288,22 @@
             }
         }
 
-        // 2. FIXED SEARCH ENGINE (Added 'previousYearPapers' into the loop)
         function setupSearchEngine() {
             const search = document.getElementById("liveSearchInput");
             search.addEventListener("input", (e) => {
                 const term = e.target.value.toLowerCase().trim();
                 const context = document.getElementById("dynamicContentContext");
 
-                if(term.length < 2) return;
+                if(term.length < 2) {
+                    if (term.length === 0) {
+                        renderHomeDashboard(); // Reset back to home when search is empty
+                    }
+                    return;
+                }
 
                 let searchHTML = `
                     <div class="action-bar">
-                        <button onclick="window.location.reload()" class="back-btn"><i class="fa-solid fa-xmark"></i> Clear Search</button>
+                        <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-xmark"></i> Clear Search</button>
                         <h2>Search Results for: "${e.target.value}"</h2>
                     </div>
                     <div class="links-list glassmorphism" style="padding:1.5rem;">
@@ -319,10 +342,17 @@
 
         function setupThemeControl() {
             const btn = document.getElementById("themeModeToggle");
+            
+            // Local Storage check for premium user persistence
+            const savedTheme = localStorage.getItem("bcaHubTheme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+            btn.innerHTML = savedTheme === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
+
             btn.addEventListener("click", () => {
                 const current = document.documentElement.getAttribute("data-theme");
                 const next = current === "dark" ? "light" : "dark";
                 document.documentElement.setAttribute("data-theme", next);
+                localStorage.setItem("bcaHubTheme", next);
                 btn.innerHTML = next === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
             });
         }
@@ -340,6 +370,7 @@
             document.body.style.overflow = "auto";
         }
 
+        // Inspection and Copyright protections
         document.addEventListener('contextmenu', (e) => e.preventDefault());
 
         document.onkeydown = function(e) {
@@ -360,7 +391,7 @@
         <div class="footer-center-container">
             <p class="footer-copyright">&copy; 2026 BCA Resource Hub. All Rights Reserved.</p>
             <p class="footer-developer">
-                Developed with <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH</span>
+                Developed with <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH SINGH</span>
             </p>
             <p class="footer-copyright">।। श्री राधा रमणों विजयते ।।</p>
         </div>
