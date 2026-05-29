@@ -15,13 +15,19 @@ const ADMIN_NOTICES = [
         tag: "UPDATE",
         important: false
     },
+
    {
         title: "🔥 Sem 2nd Update: OS, DBMS & COA Notes & PYQs Are Now Live!",
         date: "May 27, 2026",
         tag: "UPDATE",
         important: true // Isse red badge aayega taaki sabki nazar pade
     },
-    
+     {
+        title: "Syllabus for 1st 2nd Semesters ",
+        date: "May 27, 2026",
+        tag: "LIVE NOW",
+        important: true // Isse red badge aayega taaki sabki nazar pade
+    },
     
     {
         title: "BCA Sem 2nd Main Examination Forms 2026 Are Open - Last Date May 28",
@@ -62,6 +68,7 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 1 ====================
     {
         semesterName: "BCA Semester 1 <br> Work in progress",
+        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Computer Fundamentals & Office Automation",
@@ -103,11 +110,13 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 2 ====================
     {
         semesterName: "BCA Semester 2 ",
+        
         subjects: [
             {
                 name: "Operating System (OS)",
                 icon: "fa-sitemap",
                 notes: [
+                     { title: "Syllabus for 1st 2nd Semesters ", url: "https://docs.google.com/document/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
                     { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" }
                 ],
                 previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
@@ -125,6 +134,7 @@ const ACADEMIC_DATABASE = [
     name: "Database Management System (DBMS)",
     icon: "fa-database",
     notes: [
+         { title: "Syllabus for 1st 2nd Semesters ", url: "https://docs.google.com/document/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
         { title: "DBMS NOTES", url: "https://drive.google.com/file/d/1ZvGFRYP4p7V1Ydqp3yG4TOk4Fo-3OPsv/preview" },
         { title: "SQL DELETE & WHERE CLAUSE", url: "https://drive.google.com/file/d/1P6VmgadZzUcF4HGACw4XrVe-bgCD9QTe/preview" } // <-- Naya Notes Link ekdum sahi jagah par!
     ],
@@ -135,7 +145,7 @@ const ACADEMIC_DATABASE = [
          { title: "DatabaseManagementSystemBook ", url: "https://drive.google.com/file/d/1wX6lZAQFsorm3iiQEQsBIE2bITrEPWP3/preview" }
     ], 
     guessPapers: [
-        { title: "D26", url: "h" }
+        { title: "", url: "" }
     ], 
     assignments: [], 
     practicals: [
@@ -148,6 +158,9 @@ const ACADEMIC_DATABASE = [
     name: "Computer Organization & Architecture (COA)",
     icon: "fa-network-wired", // Premium architectural network icon
     notes: [
+         { title: "Syllabus for 1st 2nd Semesters ", url: "https://docs.google.com/document/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
+          { title: "COA unit 1 ", url: "https://docs.google.com/document/d/1Yv456bL3ft4UBgdTtGJOEnK6Amm1gvW2/preview" },
+         { title: "COA unit 2 ", url: "https://docs.google.com/document/d/15DztE0v38XnNeplo9cWiPL5vFBOpE7-l/preview" },
         { title: "Computer Organization and Architecture-notes", url: "https://drive.google.com/file/d/1wQrcp_JIjYSeckKXLX7HwU8iTisBduWb/preview" }
     ],
     previousYearPapers: [], 
@@ -163,6 +176,7 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 3 ====================
     {
         semesterName: "BCA Semester 3 <br> Work in progress ",
+        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Object Oriented Programming Using C++",
@@ -192,6 +206,7 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 4 ====================
     {
         semesterName: "BCA Semester 4 <br> Work in progress",
+        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Java Programming Language",
@@ -220,6 +235,7 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 5 ====================
     {
         semesterName: "BCA Semester 5 <br> Work in progress",
+        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Python Web Development & Programming",
@@ -250,6 +266,7 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 6 ====================
     {
         semesterName: "BCA Semester 6 <br> Work in progress",
+        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Artificial Intelligence & Machine Learning",
