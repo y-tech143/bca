@@ -179,17 +179,20 @@ const ACADEMIC_DATABASE = [
 {
             name: "Hindi",
             icon: "fa-pen-nib", // Hindi ke liye kalam (pen)
+             status: "under-development",
             notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
         {
             name: "English",
             icon: "fa-book-atlas", // English literature/books ke liye
+            status: "under-development",
             notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
 
         {
             name: "Digital Enhancement",
             icon: "fa-microchip", // Digital aur tech ke liye chip icon
+            status: "under-development",
             notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
 {
