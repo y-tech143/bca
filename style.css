@@ -89,6 +89,33 @@ body { background: var(--bg-main); color: var(--text-main); transition: backgrou
     .dashboard-layout { grid-template-columns: 1fr; }
     .search-box { display: none; }
 }
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    /* Dashboard wrapper ka margin kam karein taaki screen space bache */
+    .main-wrapper {
+        margin: 80px auto 20px;
+        padding: 0 1rem;
+    }
+
+    /* Grid layout ko phone par single column mein convert karein */
+    .dashboard-layout, 
+    .grid-system, 
+    .resources-layout {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    /* Cards ki padding kam karein taaki phone screen pe fit aayein */
+    .ui-card, .notice-card, .category-block {
+        padding: 1rem;
+    }
+
+    /* Text size adjustment */
+    .hero-banner h1 { font-size: 1.8rem; }
+    
+    /* Footer spacing */
+    footer { padding: 2rem 1rem; margin-top: 3rem; }
+}
 /* =========================================================================
    👑 CENTERED & THEME-MATCHED PREMIUM FOOTER
    ========================================================================= */
