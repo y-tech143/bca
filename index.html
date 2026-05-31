@@ -46,12 +46,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 
-    <script src="sem1-data.js"></script>
-    <script src="sem2-data.js"></script>
-    <script src="sem3-data.js"></script>
-    <script src="sem4-data.js"></script>
-    <script src="sem5-data.js"></script>
-    <script src="sem6-data.js"></script>
+   
     
     <script src="admin-data.js"></script>
 
@@ -98,19 +93,19 @@
         }
 
         function initDashboardSystem() {
-            renderLiveNotices();
+    renderLiveNotices();
 
-            const semGrid = document.getElementById("semestersGrid");
-            if (!semGrid) return;
+    const semGrid = document.getElementById("semestersGrid");
+    if (!semGrid) return;
 
-            semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
-                <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
-                    <i class="fa-solid fa-folder-open card-icon"></i>
-                    <h3>${sem.semesterName}</h3>
-                    <p>${sem.subjects.length} Core Subjects Added</p>
-                </div>
-            `).join('');
-        }
+    semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
+        <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
+            <i class="fa-solid fa-folder-open card-icon"></i>
+            <h3>${sem.semesterName}</h3>
+            <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to open resources</p>
+        </div>
+    `).join('');
+}
 
         function renderLiveNotices() {
             const noticeBox = document.getElementById("noticesContainer");
