@@ -120,6 +120,7 @@ const ACADEMIC_DATABASE = [
                     { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" }
                 ],
                 previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
+                       { title: "BCA Sem All Subject PYQ ", url: "https://drive.google.com/file/d/1X3MoycBM4-eCS6s2aad4jTmchXE0Uory/preview" },
                      { title: "BCA sem 2nd Operating system PYQ 2018", url: "https://drive.google.com/file/d/1ZJkpp3cTqDP8QfwSSlCc0A89p69HIXlr/preview" },
                      { title: "BCA sem 2nd Operating system PYQ 2023", url: "https://drive.google.com/file/d/1gCLA7BXmjQiT1DlgR15sptQ35eHrpx1Z/preview" },
                     
@@ -139,6 +140,7 @@ const ACADEMIC_DATABASE = [
         { title: "SQL DELETE & WHERE CLAUSE", url: "https://drive.google.com/file/d/1P6VmgadZzUcF4HGACw4XrVe-bgCD9QTe/preview" } // <-- Naya Notes Link ekdum sahi jagah par!
     ],
     previousYearPapers: [
+          { title: "BCA Sem All Subject PYQ ", url: "https://drive.google.com/file/d/1X3MoycBM4-eCS6s2aad4jTmchXE0Uory/preview" },
         { title: "r", url: "h" }
     ], 
     pdfs: [
@@ -164,7 +166,9 @@ const ACADEMIC_DATABASE = [
          { title: "COA unit 3 ", url: "https://docs.google.com/document/d/1UGHxz2So6rguE1eJyIkrQ8lx_qBpdbLS/preview" },
         { title: "Computer Organization and Architecture-notes", url: "https://drive.google.com/file/d/1wQrcp_JIjYSeckKXLX7HwU8iTisBduWb/preview" }
     ],
-    previousYearPapers: [], 
+    previousYearPapers: [
+          { title: "BCA Sem All Subject PYQ ", url: "https://drive.google.com/file/d/1X3MoycBM4-eCS6s2aad4jTmchXE0Uory/preview" },
+    ], 
     pdfs: [], 
     guessPapers: [], 
     assignments: [], 
