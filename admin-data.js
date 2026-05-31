@@ -174,7 +174,35 @@ const ACADEMIC_DATABASE = [
     assignments: [], 
     practicals: [], 
     videoLinks: []
-}
+    
+},
+{
+            name: "Hindi",
+            icon: "fa-pen-nib", // Hindi ke liye kalam (pen)
+            notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+        },
+        {
+            name: "English",
+            icon: "fa-book-atlas", // English literature/books ke liye
+            notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+        },
+
+        {
+            name: "Digital Enhancement",
+            icon: "fa-microchip", // Digital aur tech ke liye chip icon
+            notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+        },
+{
+            name: "Introduction to Office Productivity Software",
+            icon: "fa-file-excel", // Excel/Office tools ke liye
+            status: "under-development",
+            notes: [
+                { title: "MS Office Notes", url: "notes/sem1/ms-office.pdf" }
+            ],
+            previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+        }
+
+
         ]
     },
 
