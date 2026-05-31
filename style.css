@@ -97,13 +97,28 @@ body { background: var(--bg-main); color: var(--text-main); transition: backgrou
         padding: 0 1rem;
     }
 
-    /* Resilient Grid Structure - Optimized for ALL Screens */
+    /* Resilient Grid Structure */
 .grid-system {
     display: grid;
-    /* Yeh line PC par 3-4 columns rakhegi aur phone par automatic 1 column kar degi */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 1.5rem;
+    /* 150px ka matlab hai icons chote rahenge, 2 columns fit ho jayenge */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 1rem; /* Gap kam kar diya taaki space bache */
     width: 100%;
+}
+
+/* Icons aur Cards ko aur chota karne ke liye */
+.ui-card {
+    padding: 1rem; /* Padding kam ki */
+    text-align: center;
+}
+
+.card-icon {
+    font-size: 1.8rem; /* Icon ka size thoda chota */
+    margin-bottom: 0.5rem;
+}
+
+.ui-card h3 {
+    font-size: 0.9rem; /* Text chota */
 }
     /* Cards ki padding kam karein taaki phone screen pe fit aayein */
     .ui-card, .notice-card, .category-block {
