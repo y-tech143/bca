@@ -97,14 +97,14 @@ body { background: var(--bg-main); color: var(--text-main); transition: backgrou
         padding: 0 1rem;
     }
 
-    /* Grid layout ko phone par single column mein convert karein */
-    .dashboard-layout, 
-    .grid-system, 
-    .resources-layout {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-    }
-
+    /* Resilient Grid Structure - Optimized for ALL Screens */
+.grid-system {
+    display: grid;
+    /* Yeh line PC par 3-4 columns rakhegi aur phone par automatic 1 column kar degi */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 1.5rem;
+    width: 100%;
+}
     /* Cards ki padding kam karein taaki phone screen pe fit aayein */
     .ui-card, .notice-card, .category-block {
         padding: 1rem;
