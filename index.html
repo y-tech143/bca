@@ -7,6 +7,180 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* 🌟 THEME SYSTEM VARIABLES */
+        :root, [data-theme="dark"] {
+            --bg-main: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-card-surface: rgba(255, 255, 255, 0.03);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --navbar-bg: rgba(15, 23, 42, 0.85);
+            --footer-bg: #0b0f19;
+            --modal-bg: rgba(15, 23, 42, 0.98);
+        }
+        [data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-card-surface: rgba(59, 130, 246, 0.03);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: rgba(59, 130, 246, 0.15);
+            --navbar-bg: rgba(255, 255, 255, 0.9);
+            --footer-bg: #f1f5f9;
+            --modal-bg: rgba(255, 255, 255, 0.98);
+        }
+
+        /* 🌟 NAVBAR PREMIUM FIX */
+        .navbar {
+            background: var(--navbar-bg) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        [data-theme="light"] .navbar {
+            border-bottom: 3px solid #3b82f6 !important; /* Premium Navbar Bottom Line */
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+        }
+        .navbar .logo, .navbar #liveHeaderDate, .navbar #liveHeaderTime {
+            color: var(--text-main) !important;
+        }
+        .search-box {
+            background: var(--bg-card-surface) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        .search-box input {
+            color: var(--text-main) !important;
+            background: transparent !important;
+        }
+        .search-box i {
+            color: var(--text-muted) !important;
+        }
+
+        /* 🌟 CARDS & BOXES LIGHT MODE BLUE UNDERLINE CODES */
+        .ui-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        [data-theme="light"] .ui-card {
+            border: 1px solid rgba(59, 130, 246, 0.12) !important;
+            border-bottom: 4px solid #3b82f6 !important; /* Premium Card Underline */
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
+        }
+        [data-theme="light"] .ui-card:hover {
+            transform: translateY(-5px) !important;
+            border-bottom: 4px solid #1d4ed8 !important; /* Darker blue line on hover */
+            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.12) !important;
+        }
+
+       /* 🌟 NOTICE BOARD & ACCORDION CUSTOM THEMING FIX */
+.notice-section {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.notice-section h3 {
+    color: var(--text-main) !important;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Light Mode Specific Adjustments */
+[data-theme="light"] .notice-section {
+    border: 1px solid rgba(59, 130, 246, 0.15) !important;
+    border-bottom: 4px solid #8b5cf6 !important; /* Premium Purple/Blue bottom accent */
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
+}
+
+/* Notice Cards Handling for both themes */
+.notice-card {
+    background: var(--bg-card-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .notice-card {
+    background: rgba(59, 130, 246, 0.03) !important;
+    border: 1px solid rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Notice Card text color bindings */
+.notice-card h4 {
+    color: var(--text-main) !important;
+}
+
+.notice-footer span {
+    color: var(--text-muted) !important;
+}
+
+/* View More Button theme adjustment */
+.notice-section button.glassmorphism {
+    background: var(--bg-card-surface) !important;
+    color: hsl(217, 100%, 42%) !important;
+    border:2px dashed rgba(59, 130, 246, 0.4) !important;
+    transition: all 0.2s ease;
+}
+
+[data-theme="light"] .notice-section button.glassmorphism:hover {
+    background: rgba(59, 130, 246, 0.08) !important;
+}
+
+        /* FOOTER PREMIUM STYLE */
+        footer {
+            background: var(--footer-bg) !important;
+            border-top: 1px solid var(--border-color) !important;
+            transition: all 0.3s ease;
+        }
+        [data-theme="light"] footer {
+            border-top: 3px solid #3b82f6 !important; /* Footer Top Premium Line */
+        }
+        footer p, footer span, footer .yash-name {
+            color: var(--text-main) !important;
+        }
+        
+        /* PREMIUM BLUE BACK BUTTON STYLE */
+        .back-btn {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25)) !important;
+            border: 1px solid rgba(59, 130, 246, 0.4) !important;
+            color: #3b82f6 !important;
+            padding: 10px 20px !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15) !important;
+            text-transform: none !important;
+        }
+        [data-theme="light"] .back-btn {
+            color: #1d4ed8 !important;
+            background: rgba(59, 130, 246, 0.1) !important;
+        }
+        .back-btn:hover {
+            background: #3b82f6 !important;
+            color: #ffffff !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+            transform: translateY(-2px);
+        }
+        .back-btn i {
+            transition: transform 0.2s ease;
+        }
+        .back-btn:hover i {
+            transform: translateX(-3px);
+        }
+    </style>
 </head>
 <body>
 
@@ -15,6 +189,9 @@
             <a href="#" class="logo" onclick="renderHomeDashboard(); return false;">
                 <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
             </a>
+
+            <div id="liveHeaderDate" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px;"></div>
+            <div id="liveHeaderTime" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; min-width: 100px;"></div>
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
@@ -24,8 +201,7 @@
     </nav>
 
     <div class="main-wrapper">
-        <div id="dynamicContentContext">
-            </div>
+        <div id="dynamicContentContext"></div>
     </div>
 
     <div id="premiumFileModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; animation: fadeIn 0.3s ease;">
@@ -42,12 +218,6 @@
         </div>
     </div>
 
-    <style>
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-
-   
-    
     <script src="admin-data.js"></script>
 
     <script>
@@ -57,14 +227,15 @@
             setupThemeControl();
             renderHomeDashboard();
             setupSearchEngine();
+            updateLiveDateTime(); 
+            setInterval(updateLiveDateTime, 1000);
         });
 
-        // Function to render or return to the main Home Dashboard layout smoothly
         function renderHomeDashboard() {
             const context = document.getElementById("dynamicContentContext");
             context.innerHTML = `
                 <header class="hero-banner">
-                    <h1>Elevate Your <span class="gradient-text">BCA Education</span></h1>
+                    <h1>BCA Education</h1>
                     <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
                     <div class="quick-stats">
                         <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
@@ -81,64 +252,115 @@
 
                     <aside class="right-segment">
                         <h2 class="section-title"><i class="fa-solid fa-bell"></i> Dynamic Updates</h2>
-                        <div class="notice-container" id="noticesContainer"></div>
+                        <div class="notice-section">
+                            <h3>Live Notice Board</h3>
+                            <div id="noticesContainer"></div>
+                        </div>
                     </aside>
                 </div>
             `;
             initDashboardSystem();
             
-            // Clear search input text when heading back home
             const searchInput = document.getElementById("liveSearchInput");
             if(searchInput) searchInput.value = "";
         }
 
-        function initDashboardSystem() {
-    renderLiveNotices();
 
-    const semGrid = document.getElementById("semestersGrid");
-    if (!semGrid) return;
-
-    semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
-        <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
-            <i class="fa-solid fa-folder-open card-icon"></i>
-            <h3>${sem.semesterName}</h3>
-            <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to open resources</p>
-        </div>
-    `).join('');
+        // Function jo automatic theme variables check karke notice render karega
+function initializeDashboard() {
+    // 1. Pehle theme setup karo jo localstorage me bacha hua hai
+    if (typeof setupThemeControl === "function") {
+        setupThemeControl();
+    }
+    
+    // 2. Uske baad turant notices ko naye variables ke sath draw karo
+    if (typeof renderLiveNotices === "function") {
+        renderLiveNotices();
+    }
 }
 
-        function renderLiveNotices() {
-            const noticeBox = document.getElementById("noticesContainer");
-            if (!noticeBox) return;
+/* ⚡ Normal standard page load ke liye */
+document.addEventListener("DOMContentLoaded", initializeDashboard);
 
-            if (!ADMIN_NOTICES || ADMIN_NOTICES.length === 0) {
-                noticeBox.innerHTML = '<p class="empty">No active announcements.</p>';
-                return;
+/* ⚡ BACK BUTTON FIXED: Jab user dusre page se back aayega tab ye execute hoga */
+window.addEventListener("pageshow", function (event) {
+    // event.persisted true hota hai jab page back-forward cache se load ho
+    initializeDashboard();
+});
+        function updateLiveDateTime() {
+            const dateElement = document.getElementById("liveHeaderDate");
+            const timeElement = document.getElementById("liveHeaderTime");
+            
+            const today = new Date();
+
+            if (dateElement) {
+                const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+                dateElement.innerHTML = `<i class="fa-solid fa-calendar-day" style="color: #3b82f6;"></i> ${today.toLocaleDateString('en-GB', options)}`;
             }
 
-            const noticesToRender = isNoticesExpanded ? ADMIN_NOTICES : ADMIN_NOTICES.slice(0, 3);
+            if (timeElement) {
+                let hours = today.getHours();
+                const minutes = String(today.getMinutes()).padStart(2, '0');
+                const seconds = String(today.getSeconds()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                
+                hours = hours % 12;
+                hours = hours ? hours : 12; 
+                const formattedHours = String(hours).padStart(2, '0');
 
-            let html = noticesToRender.map(notice => `
-                <div class="notice-card glassmorphism" style="border-left: 3px solid ${notice.important ? '#ef4444' : '#3b82f6'};">
-                    <h4>${notice.title}</h4>
-                    <div class="notice-footer">
-                        <span><i class="fa-solid fa-calendar-day"></i> ${notice.date}</span>
-                        <span class="badge ${notice.important ? 'danger' : 'info'}">${notice.tag}</span>
-                    </div>
+                timeElement.innerHTML = `<i class="fa-regular fa-clock" style="color: #8b5cf6;"></i> ${formattedHours}:${minutes}:${seconds} ${ampm}`;
+            }
+        }
+
+        function initDashboardSystem() {
+            renderLiveNotices();
+
+            const semGrid = document.getElementById("semestersGrid");
+            if (!semGrid) return;
+
+            semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
+                <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
+                    <i class="fa-solid fa-folder-open card-icon"></i>
+                    <h3>${sem.semesterName}</h3>
+                    <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to open resources</p>
                 </div>
             `).join('');
-
-            if (ADMIN_NOTICES.length > 3) {
-                const btnText = isNoticesExpanded ? '- View Less' : `+ View More (${ADMIN_NOTICES.length - 3} More)`;
-                const btnColor = isNoticesExpanded ? '#ef4444' : '#3b82f6';
-                html += `
-                    <button onclick="toggleNoticesVisibility()" class="glassmorphism" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; color: ${btnColor}; border: 1px dashed ${btnColor}; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; text-align: center; background: rgba(255,255,255,0.01);">
-                        ${btnText}
-                    </button>
-                `;
-            }
-            noticeBox.innerHTML = html;
         }
+
+        function renderLiveNotices() {
+    const noticeBox = document.getElementById("noticesContainer");
+    if (!noticeBox) return;
+
+    if (!ADMIN_NOTICES || ADMIN_NOTICES.length === 0) {
+        noticeBox.innerHTML = '<p class="empty">No active announcements.</p>';
+        return;
+    }
+
+    const noticesToRender = isNoticesExpanded ? ADMIN_NOTICES : ADMIN_NOTICES.slice(0, 3);
+
+    let html = noticesToRender.map(notice => `
+        <div class="notice-card glassmorphism" style="border-left: 4px solid ${notice.important ? 'var(--notice-red-border)' : 'var(--notice-blue-border)'};">
+            <h4 style="color: var(--text-main); font-weight: 700;">${notice.title}</h4>
+            <div class="notice-footer" style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: var(--notice-date) !important; font-size: 0.85rem; font-weight: 600;">
+                    <i class="fa-solid fa-calendar-day"></i> ${notice.date}
+                </span>
+                <span class="badge ${notice.important ? 'danger' : 'info'}">${notice.tag}</span>
+            </div>
+        </div>
+    `).join('');
+
+    if (ADMIN_NOTICES.length > 3) {
+        const btnText = isNoticesExpanded ? '- View Less' : `+ View More (${ADMIN_NOTICES.length - 3} More)`;
+        const btnColor = isNoticesExpanded ? '#ef4444' : '#3b82f6';
+        html += `
+            <button onclick="toggleNoticesVisibility()" class="glassmorphism" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; color: ${btnColor}; border: 1px dashed ${btnColor}; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; text-align: center; background: rgba(255,255,255,0.01);">
+                ${btnText}
+            </button>
+        `;
+    }
+    noticeBox.innerHTML = html;
+}
 
         function toggleNoticesVisibility() {
             isNoticesExpanded = !isNoticesExpanded;
@@ -149,17 +371,120 @@
             const context = document.getElementById("dynamicContentContext");
             const data = ACADEMIC_DATABASE[semIndex];
 
-            if (data.status === "under-development") {
+            if (data.status === "under-development") { 
                 context.innerHTML = `
-                    <div class="action-bar">
-                        <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
-                        <h2>${data.semesterName}</h2>
+                    <div class="action-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <button onclick="renderHomeDashboard()" class="back-btn">
+                            <i class="fa-solid fa-arrow-left"></i> Home Dashboard
+                        </button>
+                        <div style="text-align: right;">
+                            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--text-main);">${data.semesterName}</h2>
+                        </div>
                     </div>
+                    
                     <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b; border-radius: 12px;">
-                       <i class="fa-solid fa-screwdriver-wrench" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px rgba(245,158,11,0.3));"></i>
-                        <h3 style="color: #RED; font-size: 1.8rem; margin-bottom: 0.7rem; font-weight: 700;">Semester Under Construction</h3>
+                        <i class="fa-solid fa-screwdriver-wrench" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem;"></i>
+                        <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Semester Under Construction</h3>
+                        <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                            Work in progress! Keep an eye on this space—exclusive content will be uploaded shortly.
+                        </p>
+                    </div>
+                `;
+                return; 
+            }
+
+            let html = `
+                <div class="action-bar">
+                    <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
+                    <h2 style="color: var(--text-main);">${data.semesterName} Resources</h2>
+                </div>
+
+                <div class="grid-system">
+                   ${data.semesterSyllabus ? `
+                        <div class="ui-card glassmorphism clickable" onclick="handleSyllabusClick(${semIndex})">
+                            <i class="fa-solid fa-book-open card-icon"></i>
+                            <h3 style="color: var(--text-main);">Semester Syllabus</h3>
+                            <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to view syllabus options</p>
+                        </div>
+                    ` : ''}
+
+                    ${data.subjects.map((sub, subIndex) => {
+                        const isUnderDev = sub.status === "under-development";
+                        return `
+                            <div class="ui-card glassmorphism clickable" onclick="openSubjectCategories(${semIndex}, ${subIndex})">
+                                <i class="fa-solid ${sub.icon || 'fa-book'} card-icon" style="${isUnderDev ? 'color: #f59e0b;' : ''}"></i>
+                                <h3 style="color: var(--text-main);">${sub.name}</h3>
+                                <p style="font-size: 0.8rem; color: ${isUnderDev ? '#f59e0b' : '#3b82f6'}; font-weight: 600; margin-top: 5px;">
+                                    ${isUnderDev ? '<i class="fa-solid fa-clock"></i> Coming Soon' : 'Click to open resources'}
+                                </p>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            context.innerHTML = html;
+        }
+
+        function handleSyllabusClick(semIndex) {
+            const data = ACADEMIC_DATABASE[semIndex];
+            const syllabusData = data.semesterSyllabus;
+            
+            if (!Array.isArray(syllabusData)) {
+                openPremiumModal('Semester Syllabus', syllabusData);
+                return;
+            }
+            
+            const modalHtml = `
+                <div id="syllabusChoiceModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 10, 18, 0.6); backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; z-index: 99999; animation: fadeInSyllabus 0.3s ease;">
+                    <style>
+                        @keyframes fadeInSyllabus { from { opacity: 0; } to { opacity: 1; } }
+                        @keyframes slideUpSyllabus { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                        .syl-choice-btn {
+                            background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; 
+                            padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; 
+                            display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; width: 100%;
+                        }
+                        .syl-choice-btn:hover {
+                            background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); transform: translateY(-2px);
+                        }
+                    </style>
+                    <div class="glassmorphism" style="background: var(--modal-bg); border: 1px solid var(--border-color); padding: 2.2rem; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; animation: slideUpSyllabus 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                        <button onclick="document.getElementById('syllabusChoiceModal').remove()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 1.3rem; cursor: pointer; transition: color 0.2s;"><i class="fa-solid fa-xmark"></i></button>
+                        <i class="fa-solid fa-book-open" style="font-size: 2.5rem; color: #3b82f6; margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--text-main); margin-bottom: 0.4rem; font-size: 1.4rem; font-weight: 700;">Select Syllabus</h3>
+                        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.8rem;">Which resource format do you want to view?</p>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            ${syllabusData.map(syl => `
+                                <button onclick="openPremiumModal('${syl.title}', '${syl.url}'); document.getElementById('syllabusChoiceModal').remove();" class="syl-choice-btn">
+                                    <i class="fa-solid fa-file-pdf" style="font-size: 1.1rem;"></i> ${syl.title}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        function openSubjectCategories(semIndex, subIndex) {
+            const context = document.getElementById("dynamicContentContext");
+            const semData = ACADEMIC_DATABASE[semIndex];
+            const subData = semData.subjects[subIndex];
+
+            if (subData.status === "under-development") {
+                context.innerHTML = `
+                    <div class="action-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <button onclick="openSemesterView(${semIndex})" class="back-btn">
+                            <i class="fa-solid fa-arrow-left"></i> Back to ${semData.semesterName}
+                        </button>
+                        <h2 style="margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--text-main);">${subData.name}</h2>
+                    </div>
+                    
+                    <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #3b82f6; border-radius: 12px; background: rgba(59, 130, 246, 0.02);">
+                        <i class="fa-solid fa-laptop-code" style="font-size: 3.5rem; color: #3b82f6; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.2));"></i>
+                        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">Content Coming Soon!</h3>
                         <p style="color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">
-                           Work in progress! Keep an eye on this space—exclusive content will be uploaded shortly.
+                            We are currently organizing high-quality premium notes, assignments, and university PYQs for <b>${subData.name}</b>. Stay tuned!
                         </p>
                     </div>
                 `;
@@ -168,101 +493,57 @@
 
             let html = `
                 <div class="action-bar">
-                    <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
-                    <h2>${data.semesterName} Subjects</h2>
+                    <button onclick="openSemesterView(${semIndex})" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to ${semData.semesterName}</button>
+                    <h2 style="color: var(--text-main);">${subData.name} Resources</h2>
                 </div>
-                <div class="grid-system">
+                <div class="subject-resources-container" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
             `;
 
-            data.subjects.forEach((sub, subIndex) => {
-                html += `
-                    <div class="ui-card glassmorphism clickable" onclick="openSubjectCategories(${semIndex}, ${subIndex})">
-                        <i class="fa-solid ${sub.icon || 'fa-book'} card-icon"></i>
-                        <h3>${sub.name}</h3>
-                        <p>Click to open resources</p>
-                    </div>
-                `;
-            });
-
-            html += `</div>`;
-            context.innerHTML = html;
-        }
-
-        function openSubjectCategories(semIndex, subIndex) {
-            const context = document.getElementById("dynamicContentContext");
-            const subject = ACADEMIC_DATABASE[semIndex].subjects[subIndex];
-
-            if (subject.status === "under-development") {
-                context.innerHTML = `
-                    <div class="action-bar">
-                        <button onclick="openSemesterView(${semIndex})" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                        <h2>${subject.name}</h2>
-                    </div>
-                    <div class="glassmorphism" style="padding: 3rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b;">
-                        <i class="fa-solid fa-hourglass-start" style="font-size: 3rem; color: #f59e0b; margin-bottom: 1.5rem;"></i>
-                        <h3>Coming Soon</h3>
-                        <p style="color: var(--text-muted);"> Work in progress! Keep an eye on content will be uploaded shortly!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const categoriesMap = [
-                { key: 'notes', label: 'Subject Notes', icon: 'fa-file-lines' },
-                { key: 'previousYearPapers', label: 'Previous Year Papers', icon: 'fa-graduation-cap' },
-                { key: 'pdfs', label: 'PDF Textbooks', icon: 'fa-file-pdf' },
-                { key: 'guessPapers', label: 'Guess Papers', icon: 'fa-lightbulb' },
-                { key: 'assignments', label: 'Assignments', icon: 'fa-pen' },
-                { key: 'practicals', label: 'Practical Files', icon: 'fa-flask' },
-                { key: 'videoLinks', label: 'Video Lectures', icon: 'fa-video' }
+            const categories = [
+                { key: 'notes', title: 'Premium Study Notes', icon: 'fa-file-lines' },
+                { key: 'previousYearPapers', title: 'Previous Year Papers (PYQs)', icon: 'fa-clock-rotate-left' },
+                { key: 'assignments', title: 'Solved Assignments', icon: 'fa-pen-to-square' },
+                { key: 'practicals', title: 'Practical Files & Lab Work', icon: 'fa-code' },
+                { key: 'videoLinks', title: 'Video Lectures & Tutorials', icon: 'fa-video' }
             ];
 
-            let html = `
-                <div class="action-bar">
-                    <button onclick="openSemesterView(${semIndex})" class="back-btn">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Subjects
-                    </button>
-                    <h2>${subject.name} Resources</h2>
-                </div>
-                <div class="accordion-container">
-            `;
+            let contentFound = false;
 
-            categoriesMap.forEach((cat) => {
-                const items = subject[cat.key] || [];
-                html += `
-                    <div class="accordion-item glassmorphism" style="margin-bottom: 1rem; overflow: hidden;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 1.2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); font-weight: 600;">
-                            <span><i class="fa-solid ${cat.icon}" style="margin-right: 0.75rem; color: #3b82f6;"></i> ${cat.label} (${items.length})</span>
-                            <i class="fa-solid fa-chevron-down arrow-icon" style="transition: transform 0.3s ease; color: var(--text-muted);"></i>
-                        </div>
-                        
-                        <div class="accordion-body" style="display: none; padding: 1.2rem; border-top: 1px solid var(--border-glass); background: rgba(0,0,0,0.15);">
-                            <div class="links-list">
-                                ${items.length === 0 ? '<p class="empty">No resource links uploaded yet.</p>' : 
-                                items.map((item) => {
-                                    const isLink = item.url.includes('.pdf') || item.url.includes('http') || item.url.includes('/');
-                                    
-                                    if (!isLink) {
-                                        return `
-                                            <div class="link-item" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.03); flex-direction: column; align-items: flex-start; gap: 4px; width: 100%;">
-                                                <strong style="color: var(--text-main); font-size: 0.95rem;">${item.title}</strong>
-                                                <p style="color: #3b82f6; font-size: 0.85rem;"><i class="fa-solid fa-circle-info"></i> ${item.url}</p>
-                                            </div>
-                                        `;
-                                    } else {
-                                        return `
-                                            <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 15px;">
-                                                <span style="font-weight: 500;">${item.title}</span>
-                                                <button onclick="openPremiumModal('${item.title}', '${item.url}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 8px 16px; border-radius: 6px; font-weight:600; cursor:pointer; flex-shrink: 0;">View</button>
-                                            </div>
-                                        `;
-                                    }
-                                }).join('')}
+            categories.forEach(cat => {
+                const items = subData[cat.key] || [];
+                if (items.length > 0) {
+                    contentFound = true;
+                    html += `
+                        <div class="accordion-item glassmorphism" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-card);">
+                            <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--bg-card-surface); transition: all 0.25s ease;">
+                                <span style="font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 12px; color: var(--text-main);">
+                                    <i class="fa-solid ${cat.icon}" style="color: #3b82f6; font-size: 1.2rem;"></i> ${cat.title} (${items.length})
+                                </span>
+                                <i class="fa-solid fa-chevron-down arrow-icon" style="transition: transform 0.3s ease; color: var(--text-muted);"></i>
+                            </div>
+                            <div class="accordion-body" style="display: none; padding: 15px; border-top: 1px solid var(--border-color);">
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    ${items.map(item => `
+                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-card-surface); border: 1px solid var(--border-color); border-radius: 8px;">
+                                            <span style="color: var(--text-main); font-weight: 500; font-size: 0.95rem;">${item.title}</span>
+                                            <button onclick="openPremiumModal('${item.title}', '${item.url}')" style="background: #3b82f6; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 0.85rem;">View</button>
+                                        </div>
+                                    `).join('')}
+                                </div>
                             </div>
                         </div>
+                    `;
+                }
+            });
+
+            if (!contentFound) {
+                html += `
+                    <div class="glassmorphism" style="padding: 3rem; text-align: center; border-radius: 12px;">
+                        <i class="fa-solid fa-folder-open" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                        <p style="color: var(--text-muted);">No resources uploaded yet for this subject.</p>
                     </div>
                 `;
-            });
+            }
 
             html += `</div>`;
             context.innerHTML = html;
@@ -279,7 +560,7 @@
             } else {
                 body.style.display = "none";
                 arrow.style.transform = "rotate(0deg)";
-                headerElement.style.background = "rgba(255,255,255,0.02)";
+                headerElement.style.background = "var(--bg-card-surface)";
             }
         }
 
@@ -291,7 +572,7 @@
 
                 if(term.length < 2) {
                     if (term.length === 0) {
-                        renderHomeDashboard(); // Reset back to home when search is empty
+                        renderHomeDashboard(); 
                     }
                     return;
                 }
@@ -299,7 +580,7 @@
                 let searchHTML = `
                     <div class="action-bar">
                         <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-xmark"></i> Clear Search</button>
-                        <h2>Search Results for: "${e.target.value}"</h2>
+                        <h2 style="color: var(--text-main);">Search Results for: "${e.target.value}"</h2>
                     </div>
                     <div class="links-list glassmorphism" style="padding:1.5rem;">
                 `;
@@ -315,7 +596,7 @@
                                 if(item.title.toLowerCase().includes(term) || sub.name.toLowerCase().includes(term)) {
                                     found = true;
                                     searchHTML += `
-                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width:100%; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; margin-bottom: 15px; gap: 15px;">
+                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width:100%; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px; gap: 15px;">
                                             <div>
                                                 <strong style="color: var(--text-main);">${item.title}</strong>
                                                 <small style="display:block; color:var(--text-muted); margin-top: 4px;">${sem.semesterName} &bull; ${sub.name}</small>
@@ -329,7 +610,7 @@
                     });
                 });
 
-                if(!found) searchHTML += `<p class="empty">No matches found for your search query keywords.</p>`;
+                if(!found) searchHTML += `<p class="empty" style="color: var(--text-muted);">No matches found for your search query keywords.</p>`;
                 searchHTML += `</div>`;
                 context.innerHTML = searchHTML;
             });
@@ -337,8 +618,6 @@
 
         function setupThemeControl() {
             const btn = document.getElementById("themeModeToggle");
-            
-            // Local Storage check for premium user persistence
             const savedTheme = localStorage.getItem("bcaHubTheme") || "dark";
             document.documentElement.setAttribute("data-theme", savedTheme);
             btn.innerHTML = savedTheme === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
@@ -384,11 +663,13 @@
 
     <footer>
         <div class="footer-center-container">
-            <p class="footer-copyright">&copy; 2026 BCA Resource Hub. All Rights Reserved.</p>
+             <p class="footer-copyright" style="font-weight: 400; font-size: 1.1rem; letter-spacing: 1.0px; margin-top: 8px;"> BCA Hub. All Rights Reserved.</p>
             <p class="footer-developer">
-                Developed with <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH SINGH</span>
+                Developed <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH </span>
             </p>
-            <p class="footer-copyright">।। श्री राधा रमणों विजयते ।।</p>
+           <p class="footer-copyright" style="color: #ca8a04 !important; font-weight: 900; font-size: 1.1rem; letter-spacing: 1.5px; margin-top: 8px;">
+                ।। श्री राधा रमणों विजयते ।।
+            </p>
         </div>
     </footer>
 </body>
