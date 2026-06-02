@@ -68,7 +68,11 @@ const ACADEMIC_DATABASE = [
     // ==================== BCA SEMESTER 1 ====================
     {
         semesterName: "BCA Semester 1 <br> Work in progress",
-        status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
+         status: "under-development", // Bas ye line likhte hi aapka custom UI show ho jayega
+         semesterSyllabus: [
+        { title: "All Subject", url: "https://drive.google.com/file/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
+    ],
+         // Bas ye line likhte hi aapka custom UI show ho jayega
         subjects: [
             {
                 name: "Computer Fundamentals & Office Automation",
@@ -108,11 +112,14 @@ const ACADEMIC_DATABASE = [
     },
 
     // ==================== BCA SEMESTER 2 ====================
-    {
-        semesterName: "BCA Semester 2 ",
-        
-        subjects: [
-            {
+    // ==================== BCA SEMESTER 2 ====================
+{
+    semesterName: "BCA Semester 2", // <--- Yahan niche add karein
+   semesterName: "BCA Semester 2", 
+    semesterSyllabus: "https://drive.google.com/file/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview", 
+   
+    subjects: [
+        {
                 name: "Operating System (OS)",
                 icon: "fa-sitemap",
                 notes: [
@@ -322,3 +329,93 @@ const ACADEMIC_DATABASE = [
         ]
     }
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+// Ye function aapke data array ko HTML mein badal kar container mein daal dega
+function renderNoticesToDashboard() {
+    const noticeContainer = document.getElementById("noticesContainer");
+    
+    // Agar HTML mein id="noticesContainer" nahi hai, toh ye function nahi chalega
+    if (!noticeContainer) {
+        console.log("Notice container nahi mila! Check karein ki HTML mein id='noticesContainer' hai ya nahi.");
+        return;
+    }
+
+    // Notices ko HTML format mein convert karna
+    noticeContainer.innerHTML = ADMIN_NOTICES.map(notice => `
+        <div class="notice-card glassmorphism" style="margin-bottom: 12px; padding: 15px; border-left: 4px solid ${notice.important ? '#ef4444' : '#3b82f6'}; border-radius: 8px; background: rgba(255,255,255,0.05);">
+            <h4 style="margin: 0; color: #fff;">${notice.title}</h4>
+            <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8; color: #ccc; display: flex; justify-content: space-between;">
+                <span><i class="fa-solid fa-calendar-day"></i> ${notice.date}</span>
+                <span style="background: ${notice.important ? '#ef4444' : '#3b82f6'}; padding: 2px 8px; border-radius: 4px; color: white;">${notice.tag}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Page load hone par function ko call karna
+window.addEventListener('load', renderNoticesToDashboard);
+
+
+
+
+
+// ... aapka purana code/functions pehle se jo hain ...
+
+function openSubjectCategories(semIndex, subIndex) {
+    // purana code...
+}
+
+function openPremiumModal(title, url) {
+    // purana code...
+}
+
+// 🌟 ISS NAYE FUNCTION KO BILKUL SAARE FUNCTIONS KE BAAD NEECHE PASTE KAR DO:
+function openSyllabusModal(element) {
+    const syllabusData = JSON.parse(element.getAttribute('data-syllabus'));
+    if (!Array.isArray(syllabusData)) {
+        openPremiumModal('Semester Syllabus', syllabusData);
+        return;
+    }
+    
+    const modalHtml = `
+        <div id="syllabusChoiceModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 10, 18, 0.6); backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; z-index: 99999; animation: fadeInSyllabus 0.3s ease;">
+            <style>
+                @keyframes fadeInSyllabus { from { opacity: 0; } to { opacity: 1; } }
+                @keyframes slideUpSyllabus { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                .syl-choice-btn {
+                    background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; 
+                    padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; 
+                    display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; width: 100%;
+                }
+                .syl-choice-btn:hover {
+                    background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); transform: translateY(-2px);
+                }
+            </style>
+            <div class="glassmorphism" style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.08); padding: 2.2rem; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7); position: relative; animation: slideUpSyllabus 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <button onclick="document.getElementById('syllabusChoiceModal').remove()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: #94a3b8; font-size: 1.3rem; cursor: pointer; transition: color 0.2s;"><i class="fa-solid fa-xmark"></i></button>
+                <i class="fa-solid fa-book-open" style="font-size: 2.5rem; color: #3b82f6; margin-bottom: 1rem;"></i>
+                <h3 style="color: #fff; margin-bottom: 0.4rem; font-size: 1.4rem; font-weight: 700;">Select Syllabus</h3>
+                <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.8rem;">Which resource format do you want to view?</p>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    ${syllabusData.map(syl => `
+                        <button onclick="openPremiumModal(\`${syl.title}\`, \`${syl.url}\`); document.getElementById('syllabusChoiceModal').remove();" class="syl-choice-btn">
+                            <i class="fa-solid fa-file-pdf" style="font-size: 1.1rem;"></i> ${syl.title}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
