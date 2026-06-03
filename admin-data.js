@@ -186,8 +186,10 @@ const ACADEMIC_DATABASE = [
 {
             name: "Hindi",
             icon: "fa-pen-nib", // Hindi ke liye kalam (pen)
-             status: "under-development",
-            notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+             
+            notes: [
+                  { title: "IMPORTANT QUESTION HINDI", url: "https://docs.google.com/document/d/1h5QkXM0-kQVSoFsvvQcgm5_buaifLDlw/preview" },
+            ], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
         {
             name: "English",
