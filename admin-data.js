@@ -15,7 +15,12 @@ const ADMIN_NOTICES = [
         tag: "UPDATE",
         important: false
     },
-
+  {
+        title: "IMPORTANT QUESTION HINDI SEM 2ND ",
+        date: "June 3, 2026",
+        tag: "Live now ",
+        important: true
+    },
    {
         title: "🔥 Sem 2nd Update: OS, DBMS & COA Notes & PYQs Are Now Live!",
         date: "May 27, 2026",
