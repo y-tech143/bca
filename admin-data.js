@@ -9,12 +9,7 @@
 // -> important: false (Likhne se notice par BLUE color ka "Syllabus/Update" badge aayega)
 
 const ADMIN_NOTICES = [
-    {
-        title: "Website Under Devlopment",
-        date: "April 15, 2026",
-        tag: "UPDATE",
-        important: false
-    },
+  ,
   {
         title: "IMPORTANT QUESTION HINDI SEM 2ND ",
         date: "June 3, 2026",
@@ -46,7 +41,12 @@ const ADMIN_NOTICES = [
         tag: "Exam",
         important: true
     },
-   
+     {
+        title: "Website Under Devlopment",
+        date: "April 15, 2026",
+        tag: "UPDATE",
+        important: false
+    }
    // <-- Agla notice jodne se pehle yahan comma (,) zaroor lagayein
 ];
 
