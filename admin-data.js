@@ -77,7 +77,8 @@ const ACADEMIC_DATABASE = [
          semesterSyllabus: [
         { title: "All Subject", url: "https://drive.google.com/file/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
     ],
-         // Bas ye line likhte hi aapka custom UI show ho jayega
+         // Bas ye line likhte hi aapka custom UI show ho jayega  
+      //   { title: "", url: "" },
         subjects: [
             {
                 name: "Computer Fundamentals & Office Automation",
@@ -130,11 +131,16 @@ const ACADEMIC_DATABASE = [
                 notes: [
                      { title: "Syllabus for 1st 2nd Semesters ", url: "https://docs.google.com/document/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
                     { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" }
+                    { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" }
+                    { title: "UNIT NO: - 4  MEMORY MANAGEMENT  ", url: "https://drive.google.com/file/d/1wsjn0DRSFwfONDF0RxY28UqCDllSOrLa/preview" }
+                    { title: "File Concepts — Operations & Attributes", url: "https://docs.google.com/document/d/14wgZgyKyCZ6pGcPHwcjz7PUbph7MepKA/preview" },
+                    { title: "os unit 3rd Device Management ", url: "https://docs.google.com/document/d/1ogRPjAjea1s3UEWRlArP9sumV7KzCWSZ/preview" },
+                  https://drive.google.com/file/d/1wsjn0DRSFwfONDF0RxY28UqCDllSOrLa/view?usp=sharing  { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" }
                 ],
                 previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
                        { title: "BCA Sem All Subject PYQ ", url: "https://drive.google.com/file/d/1X3MoycBM4-eCS6s2aad4jTmchXE0Uory/preview" },
                      { title: "BCA sem 2nd Operating system PYQ 2018", url: "https://drive.google.com/file/d/1ZJkpp3cTqDP8QfwSSlCc0A89p69HIXlr/preview" },
-                     { title: "BCA sem 2nd Operating system PYQ 2023", url: "https://drive.google.com/file/d/1gCLA7BXmjQiT1DlgR15sptQ35eHrpx1Z/preview" },
+                     { title: "", url: "" },
                     
                 ],
                 pdfs: [],
@@ -194,7 +200,10 @@ const ACADEMIC_DATABASE = [
              
             notes: [
                   { title: "IMPORTANT QUESTION HINDI", url: "https://docs.google.com/document/d/1h5QkXM0-kQVSoFsvvQcgm5_buaifLDlw/preview" },
-            ], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+            ], 
+  previousYearPapers: [
+      { title: "संपूर्ण हल प्रश्न-पत्र अनिवार्य हिंदी (साहित्य) — सेमेस्टर II (परीक्षा 2025)", url: "https://docs.google.com/document/d/17yW5YZIFaQDqgDsK2_8uFRD_yfekdRvo/preview" },
+  ], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
         {
             name: "English",
