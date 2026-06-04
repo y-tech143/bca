@@ -130,12 +130,12 @@ const ACADEMIC_DATABASE = [
                 icon: "fa-sitemap",
                 notes: [
                      { title: "Syllabus for 1st 2nd Semesters ", url: "https://docs.google.com/document/d/1B1Qkak_kw08hrVx8qUEa42IFIAr4UYut/preview" },
-                    { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" }
-                    { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" }
-                    { title: "UNIT NO: - 4  MEMORY MANAGEMENT  ", url: "https://drive.google.com/file/d/1wsjn0DRSFwfONDF0RxY28UqCDllSOrLa/preview" }
+                    { title: "Operating System ", url: "https://drive.google.com/file/d/1QW3PKe2-8ay2DOO2v9kWqZ0yzMVyuTf0/preview" },
+                    { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" },
+                    { title: "UNIT NO: - 4  MEMORY MANAGEMENT  ", url: "https://drive.google.com/file/d/1wsjn0DRSFwfONDF0RxY28UqCDllSOrLa/preview" },
                     { title: "File Concepts — Operations & Attributes", url: "https://docs.google.com/document/d/14wgZgyKyCZ6pGcPHwcjz7PUbph7MepKA/preview" },
                     { title: "os unit 3rd Device Management ", url: "https://docs.google.com/document/d/1ogRPjAjea1s3UEWRlArP9sumV7KzCWSZ/preview" },
-                  https://drive.google.com/file/d/1wsjn0DRSFwfONDF0RxY28UqCDllSOrLa/view?usp=sharing  { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" }
+                   { title: "LINUX OPERATING SYSTEM  ", url: "https://docs.google.com/document/d/15ENbzIvsj5gnNVjCThGorlVFocx7hqmz/preview" },
                 ],
                 previousYearPapers: [  // <-- FIXED: 'PYQQuestions' ko badal kar hamari nayi key 'previousYearPapers' kar diya hai!
                        { title: "BCA Sem All Subject PYQ ", url: "https://drive.google.com/file/d/1X3MoycBM4-eCS6s2aad4jTmchXE0Uory/preview" },
