@@ -651,3 +651,21 @@ footer {
 .links-scroll-box::-webkit-scrollbar-thumb:hover {
     background: rgba(59, 130, 246, 0.45);
 }
+
+
+/* Logo photo ko perfect aesthetic circle me lane ke liye */
+.site-logo {
+    width: 38px;          /* Size aap apne hisab se chota-bada kar sakte ho */
+    height: 38px;
+    border-radius: 50%;    /* Isse square photo ekdum gol circle ban jayegi */
+    object-fit: cover;     /* Photo stretch nahi hogi */
+    border: 2px solid #3b82f6; /* Side me premium blue border vibe */
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); /* Glowing effect */
+}
+
+/* Logo container ko alignment dene ke liye */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;            /* Photo aur text ke beech ka gap */
+}
