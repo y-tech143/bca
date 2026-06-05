@@ -219,6 +219,7 @@
     </div>
 
     <script src="admin-data.js"></script>
+    <script src="bca sem 1st.js"></script>
 
     <script>
         let isNoticesExpanded = false;
@@ -235,7 +236,7 @@
             const context = document.getElementById("dynamicContentContext");
             context.innerHTML = `
                 <header class="hero-banner">
-                    <h1>BCA Education</h1>
+                   <h2 class="dashboard-heading">BCA Education</h2>
                     <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
                     <div class="quick-stats">
                         <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
@@ -258,6 +259,11 @@
                         </div>
                     </aside>
                 </div>
+                <div class="links-box-wrapper" style="margin-top: 15px;">
+    <h3 class="links-box-title"><i class="fa-solid fa-link"></i> Important Links</h3>
+    <div id="linksContainer" class="links-scroll-box">
+        </div>
+</div>
             `;
             initDashboardSystem();
             
@@ -659,7 +665,39 @@ window.addEventListener("pageshow", function (event) {
 
         document.addEventListener('selectstart', (e) => e.preventDefault());
         document.addEventListener('dragstart', (e) => e.preventDefault());
+
     </script>
+
+<script src="admin.js"></script> <script>
+        // ... aapka pehle se likha hua purana JS code (theme toggle, notice render wagera) ...
+        
+        // ------------- YAHAN PASTE KAREIN (Important Links Logic) -------------
+        let isLinksExpanded = false;
+
+function renderImportantLinks() {
+    const container = document.getElementById("linksContainer");
+    if (!container) return;
+
+    if (!IMPORTANT_LINKS || IMPORTANT_LINKS.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No links available.</p>';
+        return;
+    }
+
+    // Saare links ek sath render honge, scroll automatic chalega
+    container.innerHTML = IMPORTANT_LINKS.map(link => `
+        <a href="${link.url}" class="link-row glassmorphism" target="_blank">
+            <span>${link.title}</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+    `).join('');
+}
+
+// Dom aur Pageshow dono par call taaki cache glitch na ho
+document.addEventListener("DOMContentLoaded", renderImportantLinks);
+window.addEventListener("pageshow", renderImportantLinks);
+    </script>
+</body>
+
 
     <footer>
         <div class="footer-center-container">
@@ -672,5 +710,10 @@ window.addEventListener("pageshow", function (event) {
             </p>
         </div>
     </footer>
+
+    <a href="https://chat.whatsapp.com/IzRAswcbKYF2nsx2sCtGEd" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span></span>
+</a>
 </body>
 </html>
