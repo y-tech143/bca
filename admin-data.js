@@ -435,3 +435,21 @@ function openSyllabusModal(element) {
     `;
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 }
+
+
+
+const IMPORTANT_LINKS = [
+   { 
+        title: "Join BCA WhatsApp Group for Updates", 
+        url: "https://chat.whatsapp.com/IzRAswcbKYF2nsx2sCtGEd" 
+    },
+      { 
+        title: "Rajasthan University Exam Portal", 
+        url: "https://erp.univraj.org/" 
+    },
+      { 
+        title: "BCA SEM 2ND EXAM 2026 TIME TABLE ", 
+        url: "https://del1.vultrobjects.com/ruptdata/newsDocs/newsDocs_1780489744.pdf" 
+    },
+    
+];
