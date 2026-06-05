@@ -272,30 +272,25 @@
         }
 
 
-// 🌟 INITIALIZE DASHBOARD FUNCTION
+        // Function jo automatic theme variables check karke notice render karega
 function initializeDashboard() {
-    // 1. Theme controls setup karein
+    // 1. Pehle theme setup karo jo localstorage me bacha hua hai
     if (typeof setupThemeControl === "function") {
         setupThemeControl();
     }
     
-    // 2. Notice board ko load karein
+    // 2. Uske baad turant notices ko naye variables ke sath draw karo
     if (typeof renderLiveNotices === "function") {
         renderLiveNotices();
-    }
-
-    // 3. 🚀 BACK BUTTON FIXED FOR LINKS: Important links ko force load karein
-    if (typeof renderImportantLinks === "function") {
-        renderImportantLinks();
     }
 }
 
 /* ⚡ Normal standard page load ke liye */
 document.addEventListener("DOMContentLoaded", initializeDashboard);
 
-/* ⚡ BACK BUTTON GLITCH REMOVER: Jab user subject se back aayega tab ye chalega */
+/* ⚡ BACK BUTTON FIXED: Jab user dusre page se back aayega tab ye execute hoga */
 window.addEventListener("pageshow", function (event) {
-    // Isse page cache hone par bhi sab kuch fresh render hoga
+    // event.persisted true hota hai jab page back-forward cache se load ho
     initializeDashboard();
 });
         function updateLiveDateTime() {
