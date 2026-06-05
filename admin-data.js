@@ -11,6 +11,17 @@
 const ADMIN_NOTICES = [
   ,
   {
+        title: "JOIN WHATSAAP FOR UPDATES ",
+        tag: "Live now ",
+        important: true
+    },
+   {
+        title: "IMPORTANT DIGITAL ENHANCMENET SEM 2ND ",
+        date: "June 5, 2026",
+        tag: "Live now ",
+        important: true
+    },
+  {
         title: "IMPORTANT QUESTION HINDI SEM 2ND ",
         date: "June 3, 2026",
         tag: "Live now ",
@@ -354,7 +365,7 @@ const ACADEMIC_DATABASE = [
 const IMPORTANT_LINKS = [
    { 
         title: "Join BCA WhatsApp Group for Updates", 
-        url: "https://chat.whatsapp.com/IzRAswcbKYF2nsx2sCtGEd" 
+        url: "https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" 
     },
       { 
         title: "Rajasthan University Exam Portal", 
