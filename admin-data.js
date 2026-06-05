@@ -215,8 +215,12 @@ const ACADEMIC_DATABASE = [
         {
             name: "Digital Enhancement",
             icon: "fa-microchip", // Digital aur tech ke liye chip icon
-            status: "under-development",
-            notes: [], previousYearPapers: [], pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
+            
+            notes: [{ title: "DIGITAL ENHACMENT QUESTIONS BANK ", url: "https://docs.google.com/document/d/1ZZsTDAYF5W_N7oV28toX9FLiEjXu8DKX/preview" },], 
+            previousYearPapers: [  { title: "previousYearPapers 2025", url: "https://rrbmuniv.cespl.co.in/uploads/file/VAC-52T-002-Digital%20Enhancement%20SET%20-%20A.pdf" },
+                 { title: "previousYearPapers 2025 SET 2", url: "https://rrbmuniv.cespl.co.in/uploads/file/VAC-52T-002-Digital%20Enhancement%20SET%20-%20A.pdf" },
+            ],
+             pdfs: [], guessPapers: [], assignments: [], practicals: [], videoLinks: []
         },
 {
             name: "Introduction to Office Productivity Software",
