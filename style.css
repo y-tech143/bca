@@ -330,3 +330,324 @@ footer {
     --notice-blue-border: #1e40af !important;
     --notice-red-border: #991b1b !important;
 }
+
+
+
+/* 🌟 DASHBOARD HEADING THEME FIX */
+
+/* Default / Dark Mode state (Jaisa pehle se tha) */
+.dashboard-heading {
+    color: var(--text-main, #ffffff) !important;
+    transition: color 0.3s ease;
+}
+
+/* Light Mode active hote hi Heading Blue ho jayegi */
+[data-theme="light"] .dashboard-heading {
+    color: #1e40af !important; /* Premium Dark Blue Color */
+}
+
+/* 🌟 IMPORTANT LINKS LINE FORMAT STYLING */
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Har line ke beech ka gap */
+    margin-top: 20px;
+}
+
+.link-line {
+    background: var(--bg-card-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Icon ko ekdum right me push karne ke liye */
+    transition: all 0.2s ease;
+}
+
+.link-line span {
+    color: var(--text-main) !important;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.link-line i {
+    color: #3b82f6; /* Modern Blue Arrow */
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+/* Hover Effect: Line halki si right side slide hogi */
+.link-line:hover {
+    border-color: #3b82f6 !important;
+    padding-left: 25px; /* Premium smooth sliding effect */
+    background: rgba(59, 130, 246, 0.02) !important;
+}
+
+.link-line:hover i {
+    transform: translateX(3px); /* Arrow thoda sa aage move hoga */
+}
+
+/* Light Mode Core Overrides */
+[data-theme="light"] .link-line {
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+}
+[data-theme="light"] .link-line span {
+    color: #000000 !important;
+}
+
+/* Outer Box Wrapper - Notice board ke matching rules */
+.links-box-wrapper {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 1.2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    width: 100%; /* Column ke hisaab se automatic width lega */
+    box-sizing: border-box;
+}
+
+.links-box-title {
+    color: var(--text-main) !important;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Scrollable Container (Notice Board ke andar ka scroll mechanism) */
+.links-scroll-box {
+    max-height: 220px; /* Chota box height taaki screen se bahar na jaye */
+    overflow-y: auto;  
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 5px;
+}
+
+/* Single Link Row */
+.link-row {
+    background: var(--bg-card-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+.link-row span {
+    color: var(--text-main) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.link-row i {
+    color: #3b82f6;
+    font-size: 0.8rem;
+}
+
+/* Hover Effect */
+.link-row:hover {
+    border-color: #3b82f6 !important;
+    background: rgba(59, 130, 246, 0.04) !important;
+}
+
+/* Light Mode Specific Adjustment */
+[data-theme="light"] .links-box-wrapper {
+    border: 1px solid rgba(59, 130, 246, 0.15) !important;
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
+}
+[data-theme="light"] .link-row {
+    background: rgba(59, 130, 246, 0.02) !important;
+}
+[data-theme="light"] .link-row span {
+    color: #000000 !important;
+}
+
+/* Premium Thin Scrollbar */
+.links-scroll-box::-webkit-scrollbar {
+    width: 4px;
+}
+.links-scroll-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.links-scroll-box::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 10px;
+}
+
+.link-row {
+    background: var(--bg-card-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 12px 14px; /* Desktop aur Mobile dono ke liye perfect touch target padding */
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+/* 🟢 WHATSAPP FLOATING BUTTON STYLING */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366; /* Official WhatsApp Green */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.whatsapp-float i {
+    font-size: 1.5rem;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+    background-color: #20ba5a;
+    color: white;
+}
+
+/* Mobile par sirf icon dikhe (agar space kam ho) */
+@media screen and (max-width: 480px) {
+    .whatsapp-float span {
+        display: none; /* Mobile par text hide ho jayega, sirf icon dikhega */
+    }
+    .whatsapp-float {
+        padding: 15px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* 🌟 PREMIUM IMPORTANT LINKS CONTAINER */
+.links-box-wrapper {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 1.5rem !important; /* Spacing badha di hai */
+    border-radius: 16px !important; /* Smooth rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 24px !important; /* Notice board se proper gap */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.links-box-title {
+    color: var(--text-main) !important;
+    margin-bottom: 1.2rem !important; /* Title ke niche jyada space */
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+}
+
+.links-box-title i {
+    color: #3b82f6; /* Modern dynamic blue icon */
+}
+
+/* Scrollable Inner Box */
+.links-scroll-box {
+    max-height: 240px; /* Sahi compact height */
+    overflow-y: auto;  
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Har line ke beech behtareen gap */
+    padding-right: 6px;
+}
+
+/* 🚀 NEXT-LEVEL LINK ROW DESIGN */
+.link-row {
+    background: var(--bg-card-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 14px 18px !important; /* Premium thick target zone */
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.link-row span {
+    color: var(--text-main) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.3px;
+}
+
+.link-row i {
+    color: var(--text-muted, #64748b);
+    font-size: 0.85rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Premium Hover State */
+.link-row:hover {
+    border-color: #3b82f6 !important;
+    background: rgba(59, 130, 246, 0.06) !important;
+    transform: translateY(-2px); /* Halki si lift milegi button ko */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.link-row:hover i {
+    color: #3b82f6 !important;
+    transform: translateX(4px); /* Arrow smoothly right slide hoga */
+}
+
+/* ☀️ Light Mode Aesthetic Overrides */
+[data-theme="light"] .links-box-wrapper {
+    background: #ffffff !important;
+    border: 1px solid rgba(30, 64, 175, 0.1) !important;
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04) !important;
+}
+
+[data-theme="light"] .links-box-title {
+    color: #1e40af !important; /* Dashboard premium heading match blue */
+}
+
+[data-theme="light"] .link-row {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .link-row span {
+    color: #1e293b !important;
+}
+
+[data-theme="light"] .link-row:hover {
+    background: rgba(30, 64, 175, 0.04) !important;
+    border-color: #1e40af !important;
+}
+
+/* Custom Smooth Webkit Scrollbar */
+.links-scroll-box::-webkit-scrollbar {
+    width: 5px;
+}
+.links-scroll-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.links-scroll-box::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.25);
+    border-radius: 10px;
+}
+.links-scroll-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.45);
+}
