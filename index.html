@@ -575,91 +575,114 @@ window.addEventListener("pageshow", function (event) {
 function openAiAssistantView() {
     const context = document.getElementById("dynamicContentContext");
     
-    // Injecting responsive styles directly so you don't have to change external CSS files
     context.innerHTML = `
         <style>
-            /* Base Mobile-First Styles */
-            .ai-warning-card {
+            /* Reset & Core Mobile constraints */
+            .ai-container {
                 width: 100%;
-                max-width: 550px;
-                margin: 15px auto;
-                padding: 15px; /* Reduced for mobile */
-                border-radius: 12px;
-                border: 1px solid var(--border-color);
-                background: rgba(255,255,255,0.03);
-                backdrop-filter: blur(10px);
-                text-align: center;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+                max-width: 100%;
                 box-sizing: border-box;
+                padding: 4px;
             }
-            .ai-warning-info {
-                text-align: left;
-                color: #a1a1aa;
-                font-size: 0.85rem;
-                line-height: 1.5;
-                margin-bottom: 20px;
+            .ai-header-bar {
                 display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .ai-iframe-container {
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                gap: 8px;
                 width: 100%;
-                height: 78vh; /* Uses viewport height instead of fixed pixels for perfect mobile fitting */
-                max-height: 600px;
-                border-radius: 12px;
-                overflow: hidden;
+                box-sizing: border-box;
+            }
+            .ai-title-badge {
+                background: rgba(59, 130, 246, 0.1);
+                color: #3b82f6;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .ai-compact-warning {
+                background: rgba(239, 68, 68, 0.08); 
+                border: 1px solid rgba(239, 68, 68, 0.15);
+                border-left: 3px solid #ef4444; 
+                padding: 8px 12px; 
+                border-radius: 6px;
+                margin-bottom: 10px;
+                text-align: left;
+                box-sizing: border-box;
+            }
+            .ai-iframe-wrapper {
+                width: 100%; 
+                /* Mobile optimized: dynamic viewport calc minus upper UI blocks to prevent push-out */
+                height: calc(100vh - 220px); 
+                min-height: 400px;
+                max-height: 560px;
+                border-radius: 12px; 
+                overflow: hidden; 
                 border: 1px solid var(--border-color);
                 box-sizing: border-box;
+                -webkit-overflow-scrolling: touch; /* Smooth mobile scroll */
             }
 
-            /* Desktop Adjustments (PC me badal jayega automatically) */
+            /* PC Layout Fine-tuning */
             @media (min-width: 768px) {
-                .ai-warning-card {
-                    margin: 40px auto;
-                    padding: 30px;
+                .ai-container {
+                    padding: 10px;
                 }
-                .ai-warning-info {
-                    font-size: 0.9rem;
-                    gap: 15px;
+                .ai-header-bar {
+                    margin-bottom: 12px;
                 }
-                .ai-iframe-container {
-                    height: 600px;
+                .ai-title-badge {
+                    font-size: 0.8rem;
+                    padding: 6px 12px;
+                }
+                .ai-compact-warning {
+                    padding: 10px 14px;
+                    margin-bottom: 12px;
+                }
+                .ai-iframe-wrapper {
+                    height: 550px;
+                    max-height: none;
                 }
             }
         </style>
 
-        <div class="action-bar" style="margin-bottom: 15px;">
-            <button onclick="renderHomeDashboard()" class="back-btn" style="cursor:pointer; padding: 8px 14px; border-radius: 8px; background: var(--bg-card-surface); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.85rem;"><i class="fa-solid fa-arrow-left"></i> Back</button>
-        </div>
-        
-        <div id="aiWarningBlock" class="ai-warning-card glassmorphism">
-            <div style="font-size: 2.5rem; color: #ef4444; margin-bottom: 10px;">
-                <i class="fa-solid fa-user-shield"></i>
-            </div>
-            <h3 style="color: var(--text-main); font-size: 1.3rem; margin-bottom: 12px; font-weight: 700;">AI Copilot: Privacy Advisory</h3>
-            
-            <div class="ai-warning-info">
-                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 10px; border-radius: 6px;">
-                    <strong style="color: #f87171; font-size: 0.85rem;"><i class="fa-solid fa-triangle-exclamation"></i> PRIVACY NOTE:</strong>
-                    <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #fca5a5;">Do not type or upload personal data, phone numbers, passwords, or official documents in this chat.</p>
+        <div class="ai-container">
+            <div class="ai-header-bar">
+                <button onclick="renderHomeDashboard()" class="back-btn" style="cursor:pointer; padding: 6px 12px; border-radius: 8px; background: var(--bg-card-surface); color: var(--text-main); border: 1px solid var(--border-color); font-size: 0.8rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+                <div class="ai-title-badge">
+                    <i class="fa-solid fa-robot"></i> AI Copilot Active
                 </div>
-                <p style="margin: 0;"><i class="fa-solid fa-robot" style="color: #3b82f6; margin-right: 6px;"></i> Automated AI agent. Verify important blueprints independently.</p>
+            </div>
+            
+            <div class="ai-compact-warning">
+                <strong style="color: #f87171; font-size: 0.8rem; display: block; margin-bottom: 2px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Privacy Advisory:
+                </strong>
+                <p style="margin: 0; font-size: 0.75rem; color: #fca5a5; line-height: 1.35;">
+                    Our website never tracks you. However, since this uses an external AI engine, third-party processing is active. **Do not type or upload personal data, phone numbers, passwords, or official documents.**
+                </p>
             </div>
 
-            <button onclick="loadActualAiAgent()" style="background: #3b82f6; color: white; border: none; padding: 12px 20px; font-size: 0.95rem; font-weight: 600; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center;">
-                Accept & Start Chatting <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <div class="ai-iframe-wrapper glassmorphism">
+                <iframe src="https://www.jotform.com/agent/019ee5219662765a812afde3152c0c6d222c" width="100%" height="100%" style="border:none; display:block;"></iframe>
+            </div>
         </div>
     `;
 }
-
 function loadActualAiAgent() {
     const warningBlock = document.getElementById("aiWarningBlock");
     if (warningBlock) {
         warningBlock.outerHTML = `
-            <!-- Responsive Container that scales based on device screen -->
-            <div class="ai-iframe-container glassmorphism">
-                <iframe src="https://www.jotform.com/agent/019ee5219662765a812afde3152c0c6d222c" width="100%" height="100%" style="border:none; display:block;"></iframe>
+            <div class="glassmorphism" style="width: 100%; height: 600px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+                <!-- Jotform Agent Embedded Frame -->
+                <iframe src="https://www.jotform.com/agent/019ee5219662765a812afde3152c0c6d222c" width="100%" height="100%" style="border:none;"></iframe>
             </div>
         `;
     }
