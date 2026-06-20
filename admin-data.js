@@ -11,17 +11,6 @@
 const ADMIN_NOTICES = [
   ,
   {
-        title: "JOIN WHATSAAP FOR UPDATES ",
-        tag: "Live now ",
-        important: true
-    },
-   {
-        title: "IMPORTANT DIGITAL ENHANCMENET SEM 2ND ",
-        date: "June 5, 2026",
-        tag: "Live now ",
-        important: true
-    },
-  {
         title: "IMPORTANT QUESTION HINDI SEM 2ND ",
         date: "June 3, 2026",
         tag: "Live now ",
@@ -365,7 +354,7 @@ const ACADEMIC_DATABASE = [
 const IMPORTANT_LINKS = [
    { 
         title: "Join BCA WhatsApp Group for Updates", 
-        url: "https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" 
+        url: "https://chat.whatsapp.com/IzRAswcbKYF2nsx2sCtGEd" 
     },
       { 
         title: "Rajasthan University Exam Portal", 
@@ -432,3 +421,24 @@ setInterval(ultimateLinksEngine, 500);
 // Background safety triggers
 window.addEventListener("pageshow", ultimateLinksEngine);
 document.addEventListener("DOMContentLoaded", ultimateLinksEngine);
+
+
+
+
+// --- Existing functions ke niche ya upar kahin bhi paste karein ---
+
+function openAiAssistantView() {
+    const context = document.getElementById("dynamicContentContext");
+    
+    // UI Layout clean karne ke liye aur embedded framework inject karne ke liye
+    context.innerHTML = `
+        <div class="action-bar" style="margin-bottom: 20px;">
+            <button onclick="renderHomeDashboard()" class="back-btn" style="cursor:pointer; padding: 8px 16px; border-radius: 8px; background: var(--bg-card-surface); color: var(--text-main); border: 1px solid var(--border-color);"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+        </div>
+        
+        <div class="glassmorphism" style="width: 100%; height: 600px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+            <!-- Jotform Agent Embedded Container -->
+            <iframe src="https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.html" width="100%" height="100%" style="border:none;"></iframe>
+        </div>
+    `;
+}
