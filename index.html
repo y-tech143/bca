@@ -184,23 +184,38 @@
     </style>
 </head>
 <body>
+<nav class="navbar">
+        <div class="nav-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 15px;">
+            
+            <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+                <a href="#" class="logo" onclick="renderHomeDashboard(); return false;" style="text-decoration: none;">
+                    <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
+                </a>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="renderHomeDashboard(); return false;">
-                <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
-            </a>
-
-            <div id="liveHeaderDate" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px;"></div>
-            <div id="liveHeaderTime" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; min-width: 100px;"></div>
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+                    <button onclick="openAiAssistantView()" class="back-btn" style="padding: 6px 14px !important; font-size: 0.85rem !important; display: flex; align-items: center; gap: 6px; cursor: pointer; margin: 0;">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: #3b82f6;"></i> AI Copilot
+                    </button>
+                    <span style="font-size: 0.65rem; color: #a1a1aa; display: flex; align-items: center; gap: 3px; padding-left: 4px;">
+                        <i class="fa-solid fa-lock" style="font-size: 0.6rem; color: #10b981;"></i> Sessions clear on refresh
+                    </span>
+                </div>
             </div>
-            <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
+
+            <div style="display: flex; align-items: center; gap: 20px; flex-grow: 1; justify-content: flex-end;">
+                <div id="liveHeaderDate" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; color: var(--text-main);"></div>
+                <div id="liveHeaderTime" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; min-width: 80px; color: var(--text-main);"></div>
+                
+                <div class="search-box" style="max-width: 300px; flex-grow: 1;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
+                </div>
+                
+                <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
+            </div>
+
         </div>
     </nav>
-
     <div class="main-wrapper">
         <div id="dynamicContentContext"></div>
     </div>
@@ -557,6 +572,54 @@ window.addEventListener("pageshow", function (event) {
             context.innerHTML = html;
         }
 
+function openAiAssistantView() {
+    const context = document.getElementById("dynamicContentContext");
+    
+    // Completely English Warning Screen focusing on User Actions and AI Data Limits
+    context.innerHTML = `
+        <div class="action-bar" style="margin-bottom: 20px;">
+            <button onclick="renderHomeDashboard()" class="back-btn" style="cursor:pointer; padding: 8px 16px; border-radius: 8px; background: var(--bg-card-surface); color: var(--text-main); border: 1px solid var(--border-color);"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+        </div>
+        
+        <div id="aiWarningBlock" class="glassmorphism" style="max-width: 550px; margin: 40px auto; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); text-align: center; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+            <div style="font-size: 3rem; color: #ef4444; margin-bottom: 15px;">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h3 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 15px; font-weight: 700;">AI Copilot: Security & Privacy Advisory</h3>
+            
+            <div style="text-align: left; color: #a1a1aa; font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; display: flex; flex-direction: column; gap: 15px;">
+                
+                <!-- 🚨 CRITICAL AI DATA ADVICE -->
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 14px; border-radius: 6px;">
+                    <strong style="color: #f87171;"><i class="fa-solid fa-triangle-exclamation"></i> PRIVACY IS IN YOUR HANDS:</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #fca5a5;">Our website **never** collects, tracks, or shares your personal information with anyone. However, because this feature connects to an external AI engine, third-party processing is active. Data leaks are possible if you share sensitive items. **Do not type or upload personal data, phone numbers, passwords, or official documents in this chat.**</p>
+                </div>
+
+                <p style="margin: 0;"><i class="fa-solid fa-robot" style="color: #3b82f6; margin-right: 8px;"></i> <strong>AI Platform Disclaimer:</strong> You are interacting with an automated artificial intelligence agent, not a human. Always verify important academic or code blueprints independently.</p>
+                
+                <p style="margin: 0;"><i class="fa-solid fa-shield-halved" style="color: #10b981; margin-right: 8px;"></i> <strong>Safe Platform Usage:</strong> This assistant is strictly built to help you with core BCA subjects, study notes summaries, and programming doubts.</p>
+            </div>
+
+            <button onclick="loadActualAiAgent()" style="background: #3b82f6; color: white; border: none; padding: 12px 24px; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center; transition: background 0.2s;">
+                I Accept the Risks & Start Chatting <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    `;
+}
+
+function loadActualAiAgent() {
+    const warningBlock = document.getElementById("aiWarningBlock");
+    if (warningBlock) {
+        warningBlock.outerHTML = `
+            <div class="glassmorphism" style="width: 100%; height: 600px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+                <!-- Jotform Agent Embedded Frame -->
+                <iframe src="https://www.jotform.com/agent/019ee5219662765a812afde3152c0c6d222c" width="100%" height="100%" style="border:none;"></iframe>
+            </div>
+        `;
+    }
+}
+        
+
         function toggleAccordion(headerElement) {
             const body = headerElement.nextElementSibling;
             const arrow = headerElement.querySelector(".arrow-icon");
@@ -713,9 +776,14 @@ window.addEventListener("pageshow", renderImportantLinks);
         </div>
     </footer>
 
-   <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" class="whatsapp-float" target="_blank">
+    <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
     <span></span>
 </a>
+<!-- Baki saara HTML code yahan rahega -->
+
+    <!-- Jotform AI Agent Embedded Script -->
+    <script src='https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.js'></script>
+</body>
 </body>
 </html>
