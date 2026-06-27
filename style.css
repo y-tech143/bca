@@ -889,26 +889,29 @@ footer {
     width: 100%; 
 }
 
+/* Mobile ke liye responsive nav */
 @media (max-width: 768px) {
-    /* 1. Menu container ko scrollable banayein */
+    /* Menu ko card se bahar aur top par display karo */
     .nav-links {
         display: flex !important;
         flex-direction: row !important;
-        flex-wrap: nowrap !important; /* Wrap band kar diya taaki ek line mein rahe */
-        overflow-x: auto !important;  /* Horizontal scroll allow kiya */
-        justify-content: flex-start !important;
-        gap: 10px !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important; 
         padding: 10px !important;
-        width: 100% !important;
-        -webkit-overflow-scrolling: touch; /* Mobile par smooth scroll ke liye */
+        margin-bottom: 20px !important;
     }
 
-    /* 2. Buttons ka size set karein */
+    /* Buttons ka size chhota aur uniform karo */
     .nav-links a {
-        flex: 0 0 auto !important;   /* Buttons apni original width maintain karenge */
-        padding: 8px 15px !important;
-        font-size: 0.8rem !important;
-        white-space: nowrap !important; /* Text ek line mein rahega */
+        flex: 0 0 calc(33.33% - 8px) !important; /* 3 buttons per row */
+        padding: 8px 4px !important;
+        font-size: 0.75rem !important;
+        text-align: center;
+        background: #3b82f6 !important; /* Proper highlight */
+        color: white !important;
+        border-radius: 6px !important;
+        text-decoration: none;
     }
 }
 
