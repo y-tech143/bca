@@ -889,7 +889,7 @@ footer {
     width: 100%; 
 }
 
-/* Mobile (Phone) Layout */
+/* Mobile (Phone) Layout - Final Consolidated Version */
 @media (max-width: 768px) {
     .navbar { padding: 10px; }
     
@@ -899,12 +899,24 @@ footer {
     /* Search box mobile par full width lega */
     .search-box { width: 90%; margin: 10px 0; }
     
-    /* Links button stack ho jayenge */
-    .bottom-row { flex-direction: column; gap: 10px; }
-    .nav-links { flex-direction: column; width: 100%; text-align: center; }
-    .nav-links a { width: 80%; }
-}
+    /* Links ko stack karne ke bajaye wrap karein */
+    .nav-links { 
+        display: flex;             /* Ensure display flex hai */
+        flex-direction: row;       /* Row mein rakhein */
+        flex-wrap: wrap;           /* Buttons ko wrap hone dein */
+        justify-content: center;   /* Center align */
+        width: 100%; 
+    }
 
+    /* Buttons ki width kam karein */
+    .nav-links a { 
+        width: auto;               /* Fixed 80% hata diya */
+        padding: 8px 12px;         /* Size thoda adjust kiya */
+        margin: 5px;               /* Space */
+        flex: 0 0 calc(30% - 10px); /* Ek line mein max 3 button aayenge */
+        text-align: center;
+    }
+}
 
 .main-content-wrapper {
     max-width: 900px; /* Content ko center mein rakhega */
