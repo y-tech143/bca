@@ -889,32 +889,26 @@ footer {
     width: 100%; 
 }
 
-/* Mobile (Phone) Layout - Final Consolidated Version */
 @media (max-width: 768px) {
-    .navbar { padding: 10px; }
-    
-    /* Top row elements stack ho jayenge */
-    .top-row { flex-wrap: wrap; gap: 10px; justify-content: center; }
-    
-    /* Search box mobile par full width lega */
-    .search-box { width: 90%; margin: 10px 0; }
-    
-    /* Links ko stack karne ke bajaye wrap karein */
-    .nav-links { 
-        display: flex;             /* Ensure display flex hai */
-        flex-direction: row;       /* Row mein rakhein */
-        flex-wrap: wrap;           /* Buttons ko wrap hone dein */
-        justify-content: center;   /* Center align */
-        width: 100%; 
+    /* 1. Menu container ko scrollable banayein */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important; /* Wrap band kar diya taaki ek line mein rahe */
+        overflow-x: auto !important;  /* Horizontal scroll allow kiya */
+        justify-content: flex-start !important;
+        gap: 10px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch; /* Mobile par smooth scroll ke liye */
     }
 
-    /* Buttons ki width kam karein */
-    .nav-links a { 
-        width: auto;               /* Fixed 80% hata diya */
-        padding: 8px 12px;         /* Size thoda adjust kiya */
-        margin: 5px;               /* Space */
-        flex: 0 0 calc(30% - 10px); /* Ek line mein max 3 button aayenge */
-        text-align: center;
+    /* 2. Buttons ka size set karein */
+    .nav-links a {
+        flex: 0 0 auto !important;   /* Buttons apni original width maintain karenge */
+        padding: 8px 15px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important; /* Text ek line mein rahega */
     }
 }
 
