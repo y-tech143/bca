@@ -7,200 +7,42 @@
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* 🌟 THEME SYSTEM VARIABLES */
-        :root, [data-theme="dark"] {
-            --bg-main: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --bg-card-surface: rgba(255, 255, 255, 0.03);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --navbar-bg: rgba(15, 23, 42, 0.85);
-            --footer-bg: #0b0f19;
-            --modal-bg: rgba(15, 23, 42, 0.98);
-        }
-        [data-theme="light"] {
-            --bg-main: #f8fafc;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --bg-card-surface: rgba(59, 130, 246, 0.03);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: rgba(59, 130, 246, 0.15);
-            --navbar-bg: rgba(255, 255, 255, 0.9);
-            --footer-bg: #f1f5f9;
-            --modal-bg: rgba(255, 255, 255, 0.98);
-        }
-
-        /* 🌟 NAVBAR PREMIUM FIX */
-        .navbar {
-            background: var(--navbar-bg) !important;
-            border-bottom: 1px solid var(--border-color) !important;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-        }
-        [data-theme="light"] .navbar {
-            border-bottom: 3px solid #3b82f6 !important; /* Premium Navbar Bottom Line */
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
-        }
-        .navbar .logo, .navbar #liveHeaderDate, .navbar #liveHeaderTime {
-            color: var(--text-main) !important;
-        }
-        .search-box {
-            background: var(--bg-card-surface) !important;
-            border: 1px solid var(--border-color) !important;
-        }
-        .search-box input {
-            color: var(--text-main) !important;
-            background: transparent !important;
-        }
-        .search-box i {
-            color: var(--text-muted) !important;
-        }
-
-        /* 🌟 CARDS & BOXES LIGHT MODE BLUE UNDERLINE CODES */
-        .ui-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-        [data-theme="light"] .ui-card {
-            border: 1px solid rgba(59, 130, 246, 0.12) !important;
-            border-bottom: 4px solid #3b82f6 !important; /* Premium Card Underline */
-            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
-        }
-        [data-theme="light"] .ui-card:hover {
-            transform: translateY(-5px) !important;
-            border-bottom: 4px solid #1d4ed8 !important; /* Darker blue line on hover */
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.12) !important;
-        }
-
-       /* 🌟 NOTICE BOARD & ACCORDION CUSTOM THEMING FIX */
-.notice-section {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.notice-section h3 {
-    color: var(--text-main) !important;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-/* Light Mode Specific Adjustments */
-[data-theme="light"] .notice-section {
-    border: 1px solid rgba(59, 130, 246, 0.15) !important;
-    border-bottom: 4px solid #8b5cf6 !important; /* Premium Purple/Blue bottom accent */
-    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
-}
-
-/* Notice Cards Handling for both themes */
-.notice-card {
-    background: var(--bg-card-surface) !important;
-    border: 1px solid var(--border-color) !important;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="light"] .notice-card {
-    background: rgba(59, 130, 246, 0.03) !important;
-    border: 1px solid rgba(59, 130, 246, 0.1) !important;
-}
-
-/* Notice Card text color bindings */
-.notice-card h4 {
-    color: var(--text-main) !important;
-}
-
-.notice-footer span {
-    color: var(--text-muted) !important;
-}
-
-/* View More Button theme adjustment */
-.notice-section button.glassmorphism {
-    background: var(--bg-card-surface) !important;
-    color: hsl(217, 100%, 42%) !important;
-    border:2px dashed rgba(59, 130, 246, 0.4) !important;
-    transition: all 0.2s ease;
-}
-
-[data-theme="light"] .notice-section button.glassmorphism:hover {
-    background: rgba(59, 130, 246, 0.08) !important;
-}
-
-        /* FOOTER PREMIUM STYLE */
-        footer {
-            background: var(--footer-bg) !important;
-            border-top: 1px solid var(--border-color) !important;
-            transition: all 0.3s ease;
-        }
-        [data-theme="light"] footer {
-            border-top: 3px solid #3b82f6 !important; /* Footer Top Premium Line */
-        }
-        footer p, footer span, footer .yash-name {
-            color: var(--text-main) !important;
-        }
-        
-        /* PREMIUM BLUE BACK BUTTON STYLE */
-        .back-btn {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25)) !important;
-            border: 1px solid rgba(59, 130, 246, 0.4) !important;
-            color: #3b82f6 !important;
-            padding: 10px 20px !important;
-            border-radius: 10px !important;
-            font-weight: 600 !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15) !important;
-            text-transform: none !important;
-        }
-        [data-theme="light"] .back-btn {
-            color: #1d4ed8 !important;
-            background: rgba(59, 130, 246, 0.1) !important;
-        }
-        .back-btn:hover {
-            background: #3b82f6 !important;
-            color: #ffffff !important;
-            border-color: #3b82f6 !important;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
-            transform: translateY(-2px);
-        }
-        .back-btn i {
-            transition: transform 0.2s ease;
-        }
-        .back-btn:hover i {
-            transform: translateX(-3px);
-        }
-    </style>
+    
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="renderHomeDashboard(); return false;">
-                <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
-            </a>
-
-            <div id="liveHeaderDate" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px;"></div>
-            <div id="liveHeaderTime" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; min-width: 100px;"></div>
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
-            </div>
-            <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
+<nav class="navbar">
+    
+    <div class="nav-row top-row">
+        <a href="#" class="logo">BCA<span class="gradient-text">Hub</span></a>
+        
+        <div id="liveHeaderDate"><i class="fa-solid fa-calendar"></i> Friday, 26 June 2026</div>
+        <div id="liveHeaderTime"><i class="fa-solid fa-clock"></i> 09:32:15 PM</div>
+        
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="liveSearchInput" placeholder="Type to search notes...">
         </div>
-    </nav>
+        <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
+    </div>
+<div class="nav-links-container">
+    <div class="nav-links">
+        <a href="#" class="home-btn">Home</a>
+        <a href="#about">About</a>
+        <a href="#stand-out">We Stand Out</a>
+        <a href="#focus">Key Focus</a>
+        <a href="#different">Difference</a>
+        <a href="#contact-unique">Contact</a>
 
+    </div>
+    
+</div>
+</nav>
+
+<br>
+<br>
     <div class="main-wrapper">
         <div id="dynamicContentContext"></div>
     </div>
@@ -222,7 +64,12 @@
 
     <script src="admin-data.js"></script>
     <script src="bca sem 1st.js"></script>
-
+<div class="news-ticker" style="background: #3b82f6; color: white; padding: 10px; overflow: hidden; white-space: nowrap; border-radius: 10px; margin-bottom: 20px;">
+    <marquee behavior="scroll" direction="left">
+        🚀 BCAHub 2026 Edition is live! Your ultimate academic companion. Access comprehensive <strong>Notes, PDFs, and Previous Year Questions (PYQs)</strong> 
+        all at one platform—completely free and accessible to everyone.
+    </marquee>
+</div>
     <script>
         let isNoticesExpanded = false;
 
@@ -238,6 +85,7 @@
             const context = document.getElementById("dynamicContentContext");
             context.innerHTML = `
                 <header class="hero-banner">
+                    <br><br><br><br>
                    <h2 class="dashboard-heading">BCA Education</h2>
                     <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
                     <div class="quick-stats">
@@ -814,8 +662,146 @@ function toggleAiPopupView() {
     }
 }
     </script>
-    
+   <section id="about" class="global-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>About BCAHub</h2>
+            <p>Welcome to <strong>BCAHub</strong>, your ultimate academic companion. Designed by student for students, we aim to bridge the gap between complex syllabus materials and easy-to-access resources.</p>
+            <p>From curated subject notes to previous year university papers, our mission is to empower your BCA journey with a seamless, modern, and zero-clutter experience.</p>
+            <div class="about-features">
+                <p><i class="fa-solid fa-check-circle"></i> Premium Subject Notes</p>
+                <p><i class="fa-solid fa-check-circle"></i> Solved Assignments</p>
+                <p><i class="fa-solid fa-check-circle"></i> Simplified Exam Portal</p>
+            </div>
+        </div>
+
+        <div class="about-images">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" alt="Coding">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c" alt="Teamwork">
+        </div>
+    </div>
+</section>
+
+<section id="stand-out" class="global-section">
+    <h2>We Stand Out</h2>
+    <div class="stand-out-grid">
+        <div class="feature-card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Lightning Fast</h3>
+            <p>Optimized for speed so you spend less time searching and more time learning.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-layer-group"></i>
+            <h3>Structured Data</h3>
+            <p>Everything is organized semester-wise, making navigation effortless for you.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Verified Content</h3>
+            <p>Quality resources checked by seniors to ensure you get accurate information.</p>
+        </div>
+    </div>
+</section>
+
+<section id="focus" class="global-section">
+    <h2>Key Focus Areas</h2>
+    <div class="focus-timeline">
+        <div class="focus-item">
+            <div class="number">01</div>
+            <h3>Core Concepts</h3>
+            <p>Building strong foundations for programming and logic building.</p>
+        </div>
+        <div class="focus-item">
+            <div class="number">02</div>
+            <h3>Practical Labs</h3>
+            <p>Hands-on coding experience with real-time assignment solutions.</p>
+        </div>
+        <div class="focus-item">
+            <div class="number">03</div>
+            <h3>Exam Mastery</h3>
+            <p>Strategic approach to previous year papers and university pattern analysis.</p>
+        </div>
+    </div>
+</section>
+<section id="different" class="global-section">
+    <h2>Why Choose Us?</h2>
+    <div class="diff-container">
+        <div class="diff-box others">
+            <h3>Other Platforms</h3>
+            <ul>
+                <li>❌ Scattered Resources</li>
+                <li>❌ Outdated Syllabus</li>
+                <li>❌ No Community Support</li>
+                <li>❌ Paid Access Only</li>
+            </ul>
+        </div>
+        <div class="diff-box bca-hub">
+            <h3>BCAHub</h3>
+            <ul>
+                <li>✅ Centralized Dashboard</li>
+                <li>✅ Updated 2026 Curriculum</li>
+                <li>✅ Peer-to-Peer Support</li>
+                <li>✅ Completely Free</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section id="faq" class="global-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-grid">
+        <div class="faq-item"><h3>1. What is BCAHub?</h3><p>It is a centralized dashboard built specifically for BCA students to access study resources easily.</p></div>
+        <div class="faq-item"><h3>2. Are these resources free?</h3><p>Yes, all notes and materials are 100% free for everyone.</p></div>
+        <div class="faq-item"><h3>3. When are the notes updated?</h3><p>We update our resources at the start of every semester and whenever there is a syllabus change.</p></div>
+        <div class="faq-item"><h3>4. Do you provide solved assignments?</h3><p>Yes, we have compiled top-quality assignments solved by seniors to help you understand the format.</p></div>
+        <div class="faq-item"><h3>5. Where can I find previous year papers?</h3><p>All previous year university papers are organized year-wise in the Exam Portal section.</p></div>
+        <div class="faq-item"><h3>6. Is offline access available?</h3><p>Currently, offline access is not available as the platform is web-based. You can bookmark the pages for quick access.</p></div>
+        <div class="faq-item"><h3>7. Is there a download button?</h3><p>We do not currently have a direct download button for files; resources are meant to be viewed directly on our dashboard.</p></div>
+        <div class="faq-item"><h3>8. Why should I join the WhatsApp group?</h3><p>Join for instant exam updates, study discussions, and doubt-clearing sessions.</p></div>
+        <div class="faq-item"><h3>9. Is this platform for all universities?</h3><p>We are currently focused on Rajasthan University, but we plan to expand our reach soon.</p></div>
+        <div class="faq-item"><h3>10. Where can I view the syllabus?</h3><p>You can find the detailed PDF for each subject under the Syllabus section.</p></div>
+        <div class="faq-item"><h3>11. Do you help with project work?</h3><p>Yes, we provide project ideas and sample structures to guide you through your practical work.</p></div>
+        <div class="faq-item"><h3>12. Is the website secure?</h3><p>Absolutely. We prioritize your privacy and do not store any sensitive personal data.</p></div>
+        <div class="faq-item"><h3>13. How can I provide feedback?</h3><p>You can reach out to us via email or our social media handles with your suggestions.</p></div>
+        <div class="faq-item"><h3>14. Any tips for exam preparation?</h3><p>Focus on solving previous year papers and revising core concepts consistently.</p></div>
+        <div class="faq-item"><h3>15. Is a login required?</h3><p>No, you do not need to log in. All resources are open for public access.</p></div>
+    </div>
+</section>
 </body>
+<section id="collaborate" class="global-section" style="background: linear-gradient(135deg, #f0f7ff, #ffffff); border: 2px solid #3b82f6;">
+    <div style="text-align: center; padding: 20px;">
+        <h2 style="color: #3b82f6; font-size: 2.5rem; margin-bottom: 20px;">Collaborate With Me</h2>
+        <p style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto 30px;">
+            Are you passionate about coding, design, or content creation? 
+            Join our core team at <strong>BCA hub</strong>. Let's contribute, 
+            share knowledge, and build something extraordinary for BCA students together.
+        </p>
+        
+        <div style="margin-top: 30px;">
+            <a href="mailto:bca24by7@gmail.com" 
+               style="background: #3b82f6; color: #ffffff; padding: 18px 40px; border-radius: 50px; 
+                      text-decoration: none; font-weight: bold; font-size: 1.1rem; 
+                      transition: 0.3s; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);">
+                Join the Core Team: bca24by7@gmail.com
+            </a>
+        </div>
+        
+        <p style="margin-top: 25px; font-style: italic; color: #777;">
+            connect us now
+        </p>
+    </div>
+</section>
+<section id="contact-unique" class="global-section" style="border: 2px dashed #3b82f6; background: rgba(59, 130, 246, 0.05); text-align: center; padding: 40px;">
+    <h2 style="color: #3b82f6;">Got Questions?</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">We are here to help! If you have any queries or need assistance, feel free to reach out to us anytime.</p>
+    <a href="mailto:bca24by7@gmail.com" style="display: inline-block; padding: 15px 30px; background: #3b82f6; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s;">
+        Email Us: bca24by7@gmail.com
+    </a>
+</section>
+<div class="copyright-ticker" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 12px; overflow: hidden; white-space: nowrap; border-radius: 12px; margin: 20px 0; border: 1px solid #ef4444; font-weight: bold;">
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+        ⚠️ COPYRIGHT NOTICE: All content on BCAHub is protected. Unauthorized reproduction, distribution, or commercial use of notes, PDFs, or materials is strictly prohibited. All Rights Reserved ©  BCA Hub. All Rights Reserved
+    </marquee>
+</div>
 
 
     <footer>
@@ -830,9 +816,11 @@ function toggleAiPopupView() {
         </div>
     </footer>
 
-    <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" class="whatsapp-float" target="_blank">
-    <i class="fa-brands fa-whatsapp"></i>
-    <span></span>
+    <!-- गोल व्हाट्सएप फ्लोटिंग बटन -->
+<a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="glow-whatsapp-round" aria-label="Join WhatsApp Group">
+    <!-- व्हाट्सएप आइकन (इमेज पाथ अपने अनुसार बदलें) -->
+   <!-- पुराना <img> हटाकर इसे पेस्ट करें -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="round-wa-icon" />
 </a>
 <!-- Baki saara HTML code yahan rahega -->
 
@@ -841,3 +829,5 @@ function toggleAiPopupView() {
 </body>
 </body>
 </html>
+
+
