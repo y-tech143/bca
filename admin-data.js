@@ -441,4 +441,15 @@ function openAiAssistantView() {
             <iframe src="https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.html" width="100%" height="100%" style="border:none;"></iframe>
         </div>
     `;
+}async function loadContent() {
+    try {
+        const response = await fetch('content.html'); // File ka naam
+        const data = await response.text();
+        document.getElementById('main-content-container').innerHTML = data;
+    } catch (error) {
+        console.error("Content load karne mein error aaya:", error);
+    }
 }
+
+// Page load hote hi content mangwa lo
+window.onload = loadContent;
