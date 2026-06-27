@@ -889,29 +889,24 @@ footer {
     width: 100%; 
 }
 
-/* Mobile ke liye responsive nav */
 @media (max-width: 768px) {
-    /* Menu ko card se bahar aur top par display karo */
+    /* Isse tumhare button wala container "Flex" ban jayega aur buttons line mein aa jayenge */
     .nav-links {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 6px !important; 
-        padding: 10px !important;
-        margin-bottom: 20px !important;
+        gap: 5px !important;
+        margin-top: 20px !important;
     }
 
-    /* Buttons ka size chhota aur uniform karo */
+    /* Isse buttons ka size auto set hoga aur overlap band ho jayega */
     .nav-links a {
-        flex: 0 0 calc(33.33% - 8px) !important; /* 3 buttons per row */
-        padding: 8px 4px !important;
-        font-size: 0.75rem !important;
-        text-align: center;
-        background: #3b82f6 !important; /* Proper highlight */
-        color: white !important;
-        border-radius: 6px !important;
-        text-decoration: none;
+        flex: 1 1 20% !important; /* Ye ek line mein 4-5 buttons fit kar dega */
+        min-width: 60px !important;
+        padding: 5px !important;
+        font-size: 10px !important;
+        text-align: center !important;
     }
 }
 
