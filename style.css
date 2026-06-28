@@ -1412,47 +1412,42 @@ body:not(.home-page) .nav-links-container {
     display: none !important;
 }
 @media (max-width: 768px) {
+    /* 1. Wrapper ko force karo ki wo left se start ho */
+    .home-nav-wrapper {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        text-align: left !important;
+    }
+
+    /* 2. Scroll container ko force karo */
     .horizontal-scroll-nav {
         display: flex !important;
         flex-direction: row !important;
-        /* Scroll ko start (Left) se shuru karne ke liye */
-        justify-content: flex-start !important; 
+        justify-content: flex-start !important; /* Ye Home button ko left layega */
         align-items: center !important;
         
+        width: 100vw !important; /* Screen ki poori width */
         overflow-x: auto !important;
-        width: 100% !important;
         
-        /* Padding aur margin ko zero ya minimum kiya */
         margin: 0 !important;
-        padding: 5px !important;
-        gap: 6px !important;
+        padding: 5px 10px !important; /* Sirf thoda sa side space */
+        gap: 5px !important;
         
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
     }
 
-    .horizontal-scroll-nav::-webkit-scrollbar {
-        display: none;
-    }
-
+    /* 3. Button sizing */
     .horizontal-scroll-nav a {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        
-        /* Size chhota aur compact */
-        padding: 4px 10px !important;
-        font-size: 10px !important;
+        display: inline-block !important;
+        padding: 5px 10px !important;
+        font-size: 11px !important;
         height: 25px !important;
-        
+        white-space: nowrap !important;
         background: #3b82f6 !important;
         color: white !important;
         border-radius: 12px !important;
+        flex: 0 0 auto !important; /* Button ki width fix */
         text-decoration: none !important;
-        white-space: nowrap !important;
-        
-        /* Button stretch na ho */
-        flex: 0 0 auto !important;
-        margin: 0 !important;
     }
 }
