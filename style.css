@@ -1303,41 +1303,48 @@ html {
 }
 
 
-/* PC Layout (Default) */
-.menu-toggle-btn { display: none; } /* PC par button hide rahega */
-
 @media (max-width: 768px) {
-    /* Mobile Layout */
+    /* Menu Button ko chhota aur stylish banaya */
     .menu-toggle-btn {
         display: block !important;
-        width: 100%;
-        padding: 12px;
+        width: 120px; /* Chhota button */
+        padding: 8px 15px;
         background: #3b82f6;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 20px; /* Rounded look */
         font-weight: bold;
         cursor: pointer;
+        margin: 10px auto; /* Center align */
     }
 
+    /* Links container (Dropdown) */
     .nav-links {
-        display: none; /* Default hidden on mobile */
+        display: none; /* Default hidden */
+        position: absolute;
+        top: 60px; /* Button ke thoda niche */
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(31, 41, 55, 0.95); /* Dark Glass look */
+        padding: 15px;
+        border-radius: 12px;
+        width: 80%;
         flex-direction: column;
-        gap: 5px;
-        margin-top: 10px;
-        width: 100%;
+        gap: 10px;
+        z-index: 1000; /* Sabse upar dikhega */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .nav-links.show {
-        display: flex; /* Button click par show hoga */
+        display: flex !important; /* Click par dikhega */
     }
 
+    /* Links ki styling */
     .nav-links a {
-        background: #f3f4f6;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
+        color: white;
         text-decoration: none;
-        color: #333;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #4b5563;
     }
 }
