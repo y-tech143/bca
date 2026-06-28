@@ -1303,48 +1303,44 @@ html {
 }
 
 
+/* PC/Desktop Layout (Default) - Jo tumne abhi banaya hai waisa hi rahega */
+.nav-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Mobile Screen Layout (Horizontal Scroll) */
 @media (max-width: 768px) {
-    /* Menu Button ko chhota aur stylish banaya */
-    .menu-toggle-btn {
-        display: block !important;
-        width: 120px; /* Chhota button */
-        padding: 8px 15px;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        border-radius: 20px; /* Rounded look */
-        font-weight: bold;
-        cursor: pointer;
-        margin: 10px auto; /* Center align */
-    }
-
-    /* Links container (Dropdown) */
     .nav-links {
-        display: none; /* Default hidden */
-        position: absolute;
-        top: 60px; /* Button ke thoda niche */
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(31, 41, 55, 0.95); /* Dark Glass look */
-        padding: 15px;
-        border-radius: 12px;
-        width: 80%;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1000; /* Sabse upar dikhega */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important; /* Wrap band kiya taaki line mein rahe */
+        overflow-x: auto !important;  /* Horizontal scroll chalu */
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 10px !important;
+        width: 100% !important;
+        
+        /* Ye line background image/cards se overlap hone se bachayegi */
+        position: relative !important;
+        z-index: 5 !important;
+        
+        /* Smooth scrolling */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Scrollbar chupane ke liye */
     }
 
-    .nav-links.show {
-        display: flex !important; /* Click par dikhega */
+    /* Scrollbar hide chrome/safari ke liye */
+    .nav-links::-webkit-scrollbar {
+        display: none;
     }
 
-    /* Links ki styling */
+    /* Buttons ka size mobile ke liye fix */
     .nav-links a {
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-        text-align: center;
-        border-bottom: 1px solid #4b5563;
+        flex: 0 0 auto !important; /* Button ki size kam nahi hogi */
+        padding: 8px 16px !important;
+        white-space: nowrap !important; /* Text ek line mein rahega */
+        font-size: 14px !important;
     }
 }
