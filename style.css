@@ -1492,3 +1492,19 @@ body:not(.home-page) .nav-links-container {
         text-align: center;
     }
 }
+
+/* By default, pura nav-container hide kardo */
+.nav-container { display: none; }
+
+/* Sirf agar body par 'home-page' class hai, tabhi show karo */
+body.home-page .nav-container { display: block; }
+
+/* Ye rule sabhi pages se in buttons ko gayab kar dega */
+.home-nav-wrapper {
+    display: none !important;
+}
+
+/* Ye rule sirf tab kaam karega jab body par 'home-page' class hogi */
+body.home-page .home-nav-wrapper {
+    display: block !important;
+}
