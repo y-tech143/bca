@@ -1303,3 +1303,41 @@ html {
 }
 
 
+/* PC Layout (Default) */
+.menu-toggle-btn { display: none; } /* PC par button hide rahega */
+
+@media (max-width: 768px) {
+    /* Mobile Layout */
+    .menu-toggle-btn {
+        display: block !important;
+        width: 100%;
+        padding: 12px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: none; /* Default hidden on mobile */
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .nav-links.show {
+        display: flex; /* Button click par show hoga */
+    }
+
+    .nav-links a {
+        background: #f3f4f6;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+    }
+}
