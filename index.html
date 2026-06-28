@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="style.css">
     
 </head>
-<body class="home-page">
-    <div class="home-nav-wrapper">
+<body>
 
 <nav class="navbar">
     
@@ -28,22 +27,20 @@
         </div>
         <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
     </div>
-<div class="nav-container">
-    <button class="mobile-menu-btn" onclick="toggleKeys()">Shortkeys</button>
-    
-    <div id="shortKeys" class="nav-links">
-        <a href="#">Home</a>
+<div class="nav-links-container">
+    <div class="nav-links">
+        <a href="#" class="home-btn">Home</a>
         <a href="#about">About</a>
         <a href="#stand-out">We Stand Out</a>
         <a href="#focus">Key Focus</a>
         <a href="#different">Difference</a>
         <a href="#contact-unique">Contact</a>
+
     </div>
-</div>
+    
 </div>
 </nav>
-</div>
-</body>
+
 <br>
 <br>
     <div class="main-wrapper">
@@ -828,27 +825,15 @@ function toggleAiPopupView() {
 <!-- Baki saara HTML code yahan rahega -->
 
     <!-- Jotform AI Agent Embedded Script -->
-   
-</body><script>
-    window.addEventListener('load', function() {
-        var toHide = [
-            '.nav-white-bar', 
-            '.horizontal-scroll-nav', 
-            '.nav-links', 
-            '.nav-links-container', 
-            '.home-nav-wrapper'
-        ];
-        
-        if (window.innerWidth <= 768) {
-            toHide.forEach(function(selector) {
-                var elements = document.querySelectorAll(selector);
-                elements.forEach(function(el) {
-                    el.style.display = 'none';
-                    el.remove(); // Ye force-delete karega
-                });
-            });
+    <script src='https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.js'></script>
+</body>
+<script>
+    if (window.innerWidth <= 768) {
+        var buttons = document.querySelector('.horizontal-scroll-nav');
+        if (buttons) {
+            buttons.style.display = 'none';
         }
-    });
+    }
 </script>
 </body>
 </html>
