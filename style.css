@@ -1412,34 +1412,31 @@ body:not(.home-page) .nav-links-container {
     display: none !important;
 }
 @media (max-width: 768px) {
-    /* 1. Scrollable Container */
+    /* Container ko force karo ki wo start se shuru ho */
     .horizontal-scroll-nav {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         width: 100% !important;
-        padding: 8px 5px !important;
-        gap: 6px !important; /* Button ke beech kam gap */
+        padding: 5px 10px !important; /* Start se thoda gap */
+        gap: 8px !important;
+        justify-content: flex-start !important; /* Yahan se scroll fix hoga */
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; 
     }
 
-    .horizontal-scroll-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* 2. Compact Buttons (Chhote aur neat) */
+    /* Buttons ka size chhota aur compact */
     .horizontal-scroll-nav a {
-        display: inline-block !important;
-        padding: 6px 12px !important; /* Size chhota kiya */
-        font-size: 12px !important;    /* Text size chhota kiya */
+        display: inline-flex !important;
+        align-items: center;
+        padding: 6px 12px !important; /* Size kam kiya */
+        font-size: 11px !important;    /* Text size chhota kiya */
+        height: 30px !important;      /* Button ki height fix ki */
         background: #3b82f6 !important;
         color: white !important;
-        border-radius: 15px !important; /* Rounded corners */
+        border-radius: 15px !important;
         text-decoration: none !important;
         white-space: nowrap !important;
         flex: 0 0 auto !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
 }
