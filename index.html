@@ -829,7 +829,27 @@ function toggleAiPopupView() {
 
     <!-- Jotform AI Agent Embedded Script -->
    
-</body>
+</body><script>
+    window.addEventListener('load', function() {
+        var toHide = [
+            '.nav-white-bar', 
+            '.horizontal-scroll-nav', 
+            '.nav-links', 
+            '.nav-links-container', 
+            '.home-nav-wrapper'
+        ];
+        
+        if (window.innerWidth <= 768) {
+            toHide.forEach(function(selector) {
+                var elements = document.querySelectorAll(selector);
+                elements.forEach(function(el) {
+                    el.style.display = 'none';
+                    el.remove(); // Ye force-delete karega
+                });
+            });
+        }
+    });
+</script>
 </body>
 </html>
 
