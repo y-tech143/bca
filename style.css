@@ -1412,31 +1412,47 @@ body:not(.home-page) .nav-links-container {
     display: none !important;
 }
 @media (max-width: 768px) {
-    /* Container ko force karo ki wo start se shuru ho */
     .horizontal-scroll-nav {
         display: flex !important;
         flex-direction: row !important;
-        flex-wrap: nowrap !important;
+        /* Scroll ko start (Left) se shuru karne ke liye */
+        justify-content: flex-start !important; 
+        align-items: center !important;
+        
         overflow-x: auto !important;
         width: 100% !important;
-        padding: 5px 10px !important; /* Start se thoda gap */
-        gap: 8px !important;
-        justify-content: flex-start !important; /* Yahan se scroll fix hoga */
+        
+        /* Padding aur margin ko zero ya minimum kiya */
+        margin: 0 !important;
+        padding: 5px !important;
+        gap: 6px !important;
+        
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
     }
 
-    /* Buttons ka size chhota aur compact */
+    .horizontal-scroll-nav::-webkit-scrollbar {
+        display: none;
+    }
+
     .horizontal-scroll-nav a {
         display: inline-flex !important;
         align-items: center;
-        padding: 6px 12px !important; /* Size kam kiya */
-        font-size: 11px !important;    /* Text size chhota kiya */
-        height: 30px !important;      /* Button ki height fix ki */
+        justify-content: center;
+        
+        /* Size chhota aur compact */
+        padding: 4px 10px !important;
+        font-size: 10px !important;
+        height: 25px !important;
+        
         background: #3b82f6 !important;
         color: white !important;
-        border-radius: 15px !important;
+        border-radius: 12px !important;
         text-decoration: none !important;
         white-space: nowrap !important;
+        
+        /* Button stretch na ho */
         flex: 0 0 auto !important;
+        margin: 0 !important;
     }
 }
