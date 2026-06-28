@@ -12,6 +12,7 @@
     
 </head>
 <body class="home-page">
+    <div class="home-nav-wrapper">
 
 <nav class="navbar">
     
@@ -30,7 +31,7 @@
 <div class="nav-container">
     <button class="mobile-menu-btn" onclick="toggleKeys()">Shortkeys</button>
     
-    <div id="shortKeys" class="nav-links">
+   <div id="home-nav" class="nav-links-container">
         <a href="#">Home</a>
         <a href="#about">About</a>
         <a href="#stand-out">We Stand Out</a>
@@ -41,7 +42,8 @@
 </div>
 </div>
 </nav>
-
+</div>
+</body>
 <br>
 <br>
     <div class="main-wrapper">
@@ -832,6 +834,18 @@ function toggleKeys() {
     var x = document.getElementById("shortKeys");
     x.classList.toggle("show");
 }
+</script>
+<script>
+    function openSemester() {
+        // Body ki ID change kardo, CSS apne aap menu hide kar degi
+        document.body.id = "semester-page"; 
+        // ... tumhara baki ka code jo semester open karta hai
+    }
+
+    function goHome() {
+        // Wapas home-page id set kardo
+        document.body.id = "home-page";
+    }
 </script>
 </body>
 </body>
