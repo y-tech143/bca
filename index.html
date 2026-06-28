@@ -28,16 +28,16 @@
         <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
     </div>
 <div class="nav-links-container">
-    <div class="nav-links">
+    <button class="menu-toggle-btn" onclick="toggleNav()">☰ Menu</button>
+    
+    <div class="nav-links" id="myNavLinks">
         <a href="#" class="home-btn">Home</a>
         <a href="#about">About</a>
         <a href="#stand-out">We Stand Out</a>
         <a href="#focus">Key Focus</a>
         <a href="#different">Difference</a>
         <a href="#contact-unique">Contact</a>
-
     </div>
-    
 </div>
 </nav>
 
@@ -826,6 +826,12 @@ function toggleAiPopupView() {
 
     <!-- Jotform AI Agent Embedded Script -->
     <script src='https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.js'></script>
+    <script>
+        function toggleNav() {
+            var x = document.getElementById("myNavLinks");
+            x.classList.toggle("show");
+        }
+    </script>
 </body>
 </body>
 </html>
