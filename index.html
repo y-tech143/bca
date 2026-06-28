@@ -27,8 +27,10 @@
         </div>
         <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
     </div>
-<div class="home-nav-wrapper" style="width: 100%; margin: 0; padding: 0;">
-    <div class="horizontal-scroll-nav">
+<div class="nav-container">
+    <button class="mobile-menu-btn" onclick="toggleKeys()">Shortkeys</button>
+    
+    <div id="shortKeys" class="nav-links">
         <a href="#">Home</a>
         <a href="#about">About</a>
         <a href="#stand-out">We Stand Out</a>
@@ -826,11 +828,11 @@ function toggleAiPopupView() {
     <!-- Jotform AI Agent Embedded Script -->
     <script src='https://cdn.jotfor.ms/agent/embedjs/019ee5219662765a812afde3152c0c6d222c/embed.js'></script>
     <script>
-        function toggleNav() {
-            var x = document.getElementById("myNavLinks");
-            x.classList.toggle("show");
-        }
-    </script>
+function toggleKeys() {
+    var x = document.getElementById("shortKeys");
+    x.classList.toggle("show");
+}
+</script>
 </body>
 </body>
 </html>
