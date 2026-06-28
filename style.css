@@ -1302,201 +1302,23 @@ html {
     color: #60a5fa; /* Thoda light blue taaki dark pe chamke */
 }
 
-
-/* PC/Desktop Layout (Default) - Jo tumne abhi banaya hai waisa hi rahega */
-.nav-links {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-/* Mobile Screen Layout (Horizontal Scroll) */
+/* Mobile screen (768px se choti) ke liye */
 @media (max-width: 768px) {
-    .nav-links {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important; /* Wrap band kiya taaki line mein rahe */
-        overflow-x: auto !important;  /* Horizontal scroll chalu */
-        overflow-y: hidden !important;
-        justify-content: flex-start !important;
-        padding-bottom: 10px !important;
-        width: 100% !important;
-        
-        /* Ye line background image/cards se overlap hone se bachayegi */
-        position: relative !important;
-        z-index: 5 !important;
-        
-        /* Smooth scrolling */
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Scrollbar chupane ke liye */
-    }
-
-    /* Scrollbar hide chrome/safari ke liye */
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Buttons ka size mobile ke liye fix */
-    .nav-links a {
-        flex: 0 0 auto !important; /* Button ki size kam nahi hogi */
-        padding: 8px 16px !important;
-        white-space: nowrap !important; /* Text ek line mein rahega */
-        font-size: 14px !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        width: 100% !important;
-        padding-bottom: 15px !important; /* Last button ke liye space */
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Important: Container ko batao ki wo stretch ho sake */
-    .nav-links-container {
-        width: 100%;
-        max-width: 100vw;
-    }
-}
-
-/* By default hide kardo */
-.nav-links-container {
-    display: none;
-}
-
-/* Sirf agar body par 'home-page' class hai, tabhi show karo */
-body.home-page .nav-links-container {
-    display: block;
-}
-
-/* PC Ke liye */
-.nav-links {
-    display: flex !important;
-    gap: 15px;
-    justify-content: center;
-    padding: 10px;
-}
-
-/* Mobile Scroll Fix */
-@media (max-width: 768px) {
-    .nav-links {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        width: 100% !important;
-        -webkit-overflow-scrolling: touch;
-        padding: 10px 5px !important;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto !important;
-        padding: 10px 20px !important;
-        background: #3b82f6 !important;
-        color: white !important;
-        border-radius: 8px !important;
-        margin-right: 10px !important;
-        text-decoration: none;
-        white-space: nowrap !important;
-    }
-}
-
-/* Sirf Home Page par dikhane ka logic */
-/* Agar page home nahi hai, toh ye hide ho jayega */
-body:not(.home-page) .nav-links-container {
-    display: none !important;
-}
-@media (max-width: 768px) {
-    /* 1. Wrapper ko force karo ki wo left se start ho */
-    .home-nav-wrapper {
-        width: 100% !important;
-        margin-left: 0 !important;
-        padding-left: 0 !important;
-        text-align: left !important;
-    }
-
-    /* 2. Scroll container ko force karo */
-    .horizontal-scroll-nav {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important; /* Ye Home button ko left layega */
-        align-items: center !important;
-        
-        width: 100vw !important; /* Screen ki poori width */
-        overflow-x: auto !important;
-        
-        margin: 0 !important;
-        padding: 5px 10px !important; /* Sirf thoda sa side space */
-        gap: 5px !important;
-        
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* 3. Button sizing */
-    .horizontal-scroll-nav a {
-        display: inline-block !important;
-        padding: 5px 10px !important;
-        font-size: 11px !important;
-        height: 25px !important;
-        white-space: nowrap !important;
-        background: #3b82f6 !important;
-        color: white !important;
-        border-radius: 12px !important;
-        flex: 0 0 auto !important; /* Button ki width fix */
-        text-decoration: none !important;
-    }
-}
-
-/* PC par button hide rahega */
-.mobile-menu-btn { display: none; }
-
-@media (max-width: 768px) {
-    /* Button ko show karo */
-    .mobile-menu-btn {
-        display: block !important;
-        background: #3b82f6;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 20px;
-        margin: 10px auto;
-        font-weight: bold;
-    }
-
-    /* Links ko default hide karo */
-    .nav-links {
-        display: none; 
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    /* Jab 'show' class lagegi, tabhi dikhega */
-    .nav-links.show {
-        display: flex !important;
-    }
+    /* Yahan apni us class ka naam likho jo tumhare buttons ko wrap kar rahi hai */
+    /* Example: Agar tumne .home-nav-wrapper use kiya hai, toh ye likho: */
     
-    .nav-links a {
-        background: #f3f4f6;
-        padding: 8px 20px;
-        border-radius: 15px;
-        text-decoration: none;
-        color: #333;
-        width: 80%;
-        text-align: center;
+    .home-nav-wrapper {
+        display: none !important;
     }
 }
 
 @media (max-width: 768px) {
-    /* Mobile par patti aur buttons dono gayab ho jayenge */
+    /* Ye sabhi possible class names ko hide kar dega */
     .nav-white-bar, 
-    .horizontal-scroll-nav {
+    .horizontal-scroll-nav, 
+    .nav-links, 
+    .home-nav-wrapper,
+    #home-only-nav {
         display: none !important;
     }
 }
