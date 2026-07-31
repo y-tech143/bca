@@ -1,721 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCA Premium Student Hub</title>
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCA Hub — Notes, PYQs, Syllabus & Assignments</title>
+<meta name="description" content="Free BCA semester-wise notes, previous year question papers, solved assignments, practicals and syllabus in one modern dashboard.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
+<script>
+    // Applied before the stylesheet paints anything, so there's no flash of the wrong theme
+    (function () {
+        try {
+            var saved = localStorage.getItem('bcaHubTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+    })();
+</script>
 
-        /* 🌟 THEME SYSTEM VARIABLES */
-        :root, [data-theme="dark"] {
-            --bg-main: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --bg-card-surface: rgba(255, 255, 255, 0.03);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --navbar-bg: rgba(15, 23, 42, 0.85);
-            --footer-bg: #0b0f19;
-            --modal-bg: rgba(15, 23, 42, 0.98);
-        }
-        [data-theme="light"] {
-            --bg-main: #f8fafc;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --bg-card-surface: rgba(59, 130, 246, 0.03);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: rgba(59, 130, 246, 0.15);
-            --navbar-bg: rgba(255, 255, 255, 0.9);
-            --footer-bg: #f1f5f9;
-            --modal-bg: rgba(255, 255, 255, 0.98);
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 
-        /* 🌟 NAVBAR PREMIUM FIX */
-        .navbar {
-            background: var(--navbar-bg) !important;
-            border-bottom: 1px solid var(--border-color) !important;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-        }
-        [data-theme="light"] .navbar {
-            border-bottom: 3px solid #3b82f6 !important; /* Premium Navbar Bottom Line */
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
-        }
-        .navbar .logo, .navbar #liveHeaderDate, .navbar #liveHeaderTime {
-            color: var(--text-main) !important;
-        }
-        .search-box {
-            background: var(--bg-card-surface) !important;
-            border: 1px solid var(--border-color) !important;
-        }
-        .search-box input {
-            color: var(--text-main) !important;
-            background: transparent !important;
-        }
-        .search-box i {
-            color: var(--text-muted) !important;
-        }
-
-        /* 🌟 CARDS & BOXES LIGHT MODE BLUE UNDERLINE CODES */
-        .ui-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-        [data-theme="light"] .ui-card {
-            border: 1px solid rgba(59, 130, 246, 0.12) !important;
-            border-bottom: 4px solid #3b82f6 !important; /* Premium Card Underline */
-            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
-        }
-        [data-theme="light"] .ui-card:hover {
-            transform: translateY(-5px) !important;
-            border-bottom: 4px solid #1d4ed8 !important; /* Darker blue line on hover */
-            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.12) !important;
-        }
-
-       /* 🌟 NOTICE BOARD & ACCORDION CUSTOM THEMING FIX */
-.notice-section {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.notice-section h3 {
-    color: var(--text-main) !important;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-/* Light Mode Specific Adjustments */
-[data-theme="light"] .notice-section {
-    border: 1px solid rgba(59, 130, 246, 0.15) !important;
-    border-bottom: 4px solid #8b5cf6 !important; /* Premium Purple/Blue bottom accent */
-    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.04) !important;
-}
-
-/* Notice Cards Handling for both themes */
-.notice-card {
-    background: var(--bg-card-surface) !important;
-    border: 1px solid var(--border-color) !important;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="light"] .notice-card {
-    background: rgba(59, 130, 246, 0.03) !important;
-    border: 1px solid rgba(59, 130, 246, 0.1) !important;
-}
-
-/* Notice Card text color bindings */
-.notice-card h4 {
-    color: var(--text-main) !important;
-}
-
-.notice-footer span {
-    color: var(--text-muted) !important;
-}
-
-/* View More Button theme adjustment */
-.notice-section button.glassmorphism {
-    background: var(--bg-card-surface) !important;
-    color: hsl(217, 100%, 42%) !important;
-    border:2px dashed rgba(59, 130, 246, 0.4) !important;
-    transition: all 0.2s ease;
-}
-
-[data-theme="light"] .notice-section button.glassmorphism:hover {
-    background: rgba(59, 130, 246, 0.08) !important;
-}
-
-        /* FOOTER PREMIUM STYLE */
-        footer {
-            background: var(--footer-bg) !important;
-            border-top: 1px solid var(--border-color) !important;
-            transition: all 0.3s ease;
-        }
-        [data-theme="light"] footer {
-            border-top: 3px solid #3b82f6 !important; /* Footer Top Premium Line */
-        }
-        footer p, footer span, footer .yash-name {
-            color: var(--text-main) !important;
-        }
-        
-        /* PREMIUM BLUE BACK BUTTON STYLE */
-        .back-btn {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25)) !important;
-            border: 1px solid rgba(59, 130, 246, 0.4) !important;
-            color: #3b82f6 !important;
-            padding: 10px 20px !important;
-            border-radius: 10px !important;
-            font-weight: 600 !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15) !important;
-            text-transform: none !important;
-        }
-        [data-theme="light"] .back-btn {
-            color: #1d4ed8 !important;
-            background: rgba(59, 130, 246, 0.1) !important;
-        }
-        .back-btn:hover {
-            background: #3b82f6 !important;
-            color: #ffffff !important;
-            border-color: #3b82f6 !important;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
-            transform: translateY(-2px);
-        }
-        .back-btn i {
-            transition: transform 0.2s ease;
-        }
-        .back-btn:hover i {
-            transform: translateX(-3px);
-        }
-    </style>
+<!-- GSAP powers only the hero stagger-reveal; every other motion (reveals, tilt,
+     magnetic buttons, cursor, marquee) is vanilla JS so nothing depends on it loading. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="renderHomeDashboard(); return false;">
-                <i class="fa-solid fa-graduation-cap"></i> BCA<span class="gradient-text">Hub</span>
-            </a>
-
-            <div id="liveHeaderDate" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px;"></div>
-            <div id="liveHeaderTime" style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; min-width: 100px;"></div>
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="liveSearchInput" placeholder="Type to search notes, subjects, papers...">
-            </div>
-            <button id="themeModeToggle" class="circle-btn"><i class="fa-solid fa-moon"></i></button>
-        </div>
-    </nav>
-
-    <div class="main-wrapper">
-        <div id="dynamicContentContext"></div>
-    </div>
-
-    <div id="premiumFileModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; animation: fadeIn 0.3s ease;">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #111; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <span id="modalFileTitle" style="color: #fff; font-weight: 600; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;">Document Viewer</span>
-            <button onclick="closePremiumModal()" style="background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.9rem;">
-                <i class="fa-solid fa-xmark"></i> Close
-            </button>
-        </div>
-        <div style="width: 100%; height: calc(100% - 55px); position: relative; background: #1a1a1a;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 56px; background: transparent; z-index: 999; pointer-events: auto;"></div>
-            <div style="position: absolute; top: 0; right: 0; width: 280px; height: 100px; background: transparent; z-index: 999; pointer-events: auto;"></div>
-            <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0" style="border: none;"></iframe>
-        </div>
-        
-    </div>
-
-    <script src="admin-data.js"></script>
-    <script src="bca sem 1st.js"></script>
-
-    <script>
-        let isNoticesExpanded = false;
-
-        document.addEventListener("DOMContentLoaded", () => {
-            setupThemeControl();
-            renderHomeDashboard();
-            setupSearchEngine();
-            updateLiveDateTime(); 
-            setInterval(updateLiveDateTime, 1000);
-        });
-
-        function renderHomeDashboard() {
-            const context = document.getElementById("dynamicContentContext");
-            context.innerHTML = `
-                <header class="hero-banner">
-                   <h2 class="dashboard-heading">BCA Education</h2>
-                    <p>All premium subject notes, solved assignments, and previous year university papers in one modern dashboard.</p>
-                    <div class="quick-stats">
-                        <div class="stat-item"><h3>6</h3><p>Semesters</p></div>
-                        <div class="stat-item"><h3>30+</h3><p>Subjects</p></div>
-                        <div class="stat-item"><h3>100%</h3><p>Free Resources</p></div>
-                    </div>
-                </header>
-
-                <div class="dashboard-layout">
-                    <section class="left-segment">
-                        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Choose Semester</h2>
-                        <div class="grid-system" id="semestersGrid"></div>
-                    </section>
-
-                    <aside class="right-segment">
-                        <h2 class="section-title"><i class="fa-solid fa-bell"></i> Dynamic Updates</h2>
-                        <div class="notice-section">
-                            <h3>Live Notice Board</h3>
-                            <div id="noticesContainer"></div>
-                        </div>
-                    </aside>
-                </div>
-                <div class="links-box-wrapper" style="margin-top: 15px;">
-    <h3 class="links-box-title"><i class="fa-solid fa-link"></i> Important Links</h3>
-    <div id="linksContainer" class="links-scroll-box">
-        </div>
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-hidden="true">
+    <span class="preloader-mark">BCA<span class="gradient-text">HUB</span></span>
+    <span class="preloader-count" id="preloaderCount">0</span>
 </div>
-            `;
-            initDashboardSystem();
-            
-            const searchInput = document.getElementById("liveSearchInput");
-            if(searchInput) searchInput.value = "";
-        }
 
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"><span id="cursorLabel"></span></div>
 
-        // Function jo automatic theme variables check karke notice render karega
-function initializeDashboard() {
-    // 1. Pehle theme setup karo jo localstorage me bacha hua hai
-    if (typeof setupThemeControl === "function") {
-        setupThemeControl();
-    }
-    
-    // 2. Uske baad turant notices ko naye variables ke sath draw karo
-    if (typeof renderLiveNotices === "function") {
-        renderLiveNotices();
-    }
-}
+<!-- ============ AMBIENT BACKGROUND ============ -->
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
 
-/* ⚡ Normal standard page load ke liye */
-document.addEventListener("DOMContentLoaded", initializeDashboard);
-
-/* ⚡ BACK BUTTON FIXED: Jab user dusre page se back aayega tab ye execute hoga */
-window.addEventListener("pageshow", function (event) {
-    // event.persisted true hota hai jab page back-forward cache se load ho
-    initializeDashboard();
-});
-        function updateLiveDateTime() {
-            const dateElement = document.getElementById("liveHeaderDate");
-            const timeElement = document.getElementById("liveHeaderTime");
-            
-            const today = new Date();
-
-            if (dateElement) {
-                const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-                dateElement.innerHTML = `<i class="fa-solid fa-calendar-day" style="color: #3b82f6;"></i> ${today.toLocaleDateString('en-GB', options)}`;
-            }
-
-            if (timeElement) {
-                let hours = today.getHours();
-                const minutes = String(today.getMinutes()).padStart(2, '0');
-                const seconds = String(today.getSeconds()).padStart(2, '0');
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                
-                hours = hours % 12;
-                hours = hours ? hours : 12; 
-                const formattedHours = String(hours).padStart(2, '0');
-
-                timeElement.innerHTML = `<i class="fa-regular fa-clock" style="color: #8b5cf6;"></i> ${formattedHours}:${minutes}:${seconds} ${ampm}`;
-            }
-        }
-
-        function initDashboardSystem() {
-            renderLiveNotices();
-
-            const semGrid = document.getElementById("semestersGrid");
-            if (!semGrid) return;
-
-            semGrid.innerHTML = ACADEMIC_DATABASE.map((sem, index) => `
-                <div class="ui-card glassmorphism clickable" onclick="openSemesterView(${index})">
-                    <i class="fa-solid fa-folder-open card-icon"></i>
-                    <h3>${sem.semesterName}</h3>
-                    <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to open resources</p>
-                </div>
-            `).join('');
-        }
-
-        function renderLiveNotices() {
-    const noticeBox = document.getElementById("noticesContainer");
-    if (!noticeBox) return;
-
-    if (!ADMIN_NOTICES || ADMIN_NOTICES.length === 0) {
-        noticeBox.innerHTML = '<p class="empty">No active announcements.</p>';
-        return;
-    }
-
-    const noticesToRender = isNoticesExpanded ? ADMIN_NOTICES : ADMIN_NOTICES.slice(0, 3);
-
-    let html = noticesToRender.map(notice => `
-        <div class="notice-card glassmorphism" style="border-left: 4px solid ${notice.important ? 'var(--notice-red-border)' : 'var(--notice-blue-border)'};">
-            <h4 style="color: var(--text-main); font-weight: 700;">${notice.title}</h4>
-            <div class="notice-footer" style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: var(--notice-date) !important; font-size: 0.85rem; font-weight: 600;">
-                    <i class="fa-solid fa-calendar-day"></i> ${notice.date}
-                </span>
-                <span class="badge ${notice.important ? 'danger' : 'info'}">${notice.tag}</span>
-            </div>
-        </div>
-    `).join('');
-
-    if (ADMIN_NOTICES.length > 3) {
-        const btnText = isNoticesExpanded ? '- View Less' : `+ View More (${ADMIN_NOTICES.length - 3} More)`;
-        const btnColor = isNoticesExpanded ? '#ef4444' : '#3b82f6';
-        html += `
-            <button onclick="toggleNoticesVisibility()" class="glassmorphism" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem; color: ${btnColor}; border: 1px dashed ${btnColor}; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem; text-align: center; background: rgba(255,255,255,0.01);">
-                ${btnText}
-            </button>
-        `;
-    }
-    noticeBox.innerHTML = html;
-}
-
-        function toggleNoticesVisibility() {
-            isNoticesExpanded = !isNoticesExpanded;
-            renderLiveNotices();
-        }
-
-        function openSemesterView(semIndex) {
-            const context = document.getElementById("dynamicContentContext");
-            const data = ACADEMIC_DATABASE[semIndex];
-
-            if (data.status === "under-development") { 
-                context.innerHTML = `
-                    <div class="action-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <button onclick="renderHomeDashboard()" class="back-btn">
-                            <i class="fa-solid fa-arrow-left"></i> Home Dashboard
-                        </button>
-                        <div style="text-align: right;">
-                            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--text-main);">${data.semesterName}</h2>
-                        </div>
-                    </div>
-                    
-                    <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #f59e0b; border-radius: 12px;">
-                        <i class="fa-solid fa-screwdriver-wrench" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 1.5rem;"></i>
-                        <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Semester Under Construction</h3>
-                        <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                            Work in progress! Keep an eye on this space—exclusive content will be uploaded shortly.
-                        </p>
-                    </div>
-                `;
-                return; 
-            }
-
-            let html = `
-                <div class="action-bar">
-                    <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Home Dashboard</button>
-                    <h2 style="color: var(--text-main);">${data.semesterName} Resources</h2>
-                </div>
-
-                <div class="grid-system">
-                   ${data.semesterSyllabus ? `
-                        <div class="ui-card glassmorphism clickable" onclick="handleSyllabusClick(${semIndex})">
-                            <i class="fa-solid fa-book-open card-icon"></i>
-                            <h3 style="color: var(--text-main);">Semester Syllabus</h3>
-                            <p style="font-size: 0.8rem; color: #3b82f6; font-weight: 600; margin-top: 5px;">Click to view syllabus options</p>
-                        </div>
-                    ` : ''}
-
-                    ${data.subjects.map((sub, subIndex) => {
-                        const isUnderDev = sub.status === "under-development";
-                        return `
-                            <div class="ui-card glassmorphism clickable" onclick="openSubjectCategories(${semIndex}, ${subIndex})">
-                                <i class="fa-solid ${sub.icon || 'fa-book'} card-icon" style="${isUnderDev ? 'color: #f59e0b;' : ''}"></i>
-                                <h3 style="color: var(--text-main);">${sub.name}</h3>
-                                <p style="font-size: 0.8rem; color: ${isUnderDev ? '#f59e0b' : '#3b82f6'}; font-weight: 600; margin-top: 5px;">
-                                    ${isUnderDev ? '<i class="fa-solid fa-clock"></i> Coming Soon' : 'Click to open resources'}
-                                </p>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-            context.innerHTML = html;
-        }
-
-        function handleSyllabusClick(semIndex) {
-            const data = ACADEMIC_DATABASE[semIndex];
-            const syllabusData = data.semesterSyllabus;
-            
-            if (!Array.isArray(syllabusData)) {
-                openPremiumModal('Semester Syllabus', syllabusData);
-                return;
-            }
-            
-            const modalHtml = `
-                <div id="syllabusChoiceModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8, 10, 18, 0.6); backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; z-index: 99999; animation: fadeInSyllabus 0.3s ease;">
-                    <style>
-                        @keyframes fadeInSyllabus { from { opacity: 0; } to { opacity: 1; } }
-                        @keyframes slideUpSyllabus { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-                        .syl-choice-btn {
-                            background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; 
-                            padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; 
-                            display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; width: 100%;
-                        }
-                        .syl-choice-btn:hover {
-                            background: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); transform: translateY(-2px);
-                        }
-                    </style>
-                    <div class="glassmorphism" style="background: var(--modal-bg); border: 1px solid var(--border-color); padding: 2.2rem; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; animation: slideUpSyllabus 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
-                        <button onclick="document.getElementById('syllabusChoiceModal').remove()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 1.3rem; cursor: pointer; transition: color 0.2s;"><i class="fa-solid fa-xmark"></i></button>
-                        <i class="fa-solid fa-book-open" style="font-size: 2.5rem; color: #3b82f6; margin-bottom: 1rem;"></i>
-                        <h3 style="color: var(--text-main); margin-bottom: 0.4rem; font-size: 1.4rem; font-weight: 700;">Select Syllabus</h3>
-                        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.8rem;">Which resource format do you want to view?</p>
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            ${syllabusData.map(syl => `
-                                <button onclick="openPremiumModal('${syl.title}', '${syl.url}'); document.getElementById('syllabusChoiceModal').remove();" class="syl-choice-btn">
-                                    <i class="fa-solid fa-file-pdf" style="font-size: 1.1rem;"></i> ${syl.title}
-                                </button>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-        }
-
-        function openSubjectCategories(semIndex, subIndex) {
-            const context = document.getElementById("dynamicContentContext");
-            const semData = ACADEMIC_DATABASE[semIndex];
-            const subData = semData.subjects[subIndex];
-
-            if (subData.status === "under-development") {
-                context.innerHTML = `
-                    <div class="action-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <button onclick="openSemesterView(${semIndex})" class="back-btn">
-                            <i class="fa-solid fa-arrow-left"></i> Back to ${semData.semesterName}
-                        </button>
-                        <h2 style="margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--text-main);">${subData.name}</h2>
-                    </div>
-                    
-                    <div class="glassmorphism" style="padding: 4rem 2rem; text-align: center; margin-top: 2rem; border-left: 4px solid #3b82f6; border-radius: 12px; background: rgba(59, 130, 246, 0.02);">
-                        <i class="fa-solid fa-laptop-code" style="font-size: 3.5rem; color: #3b82f6; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.2));"></i>
-                        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">Content Coming Soon!</h3>
-                        <p style="color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.6;">
-                            We are currently organizing high-quality premium notes, assignments, and university PYQs for <b>${subData.name}</b>. Stay tuned!
-                        </p>
-                    </div>
-                `;
-                return;
-            }
-
-            let html = `
-                <div class="action-bar">
-                    <button onclick="openSemesterView(${semIndex})" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to ${semData.semesterName}</button>
-                    <h2 style="color: var(--text-main);">${subData.name} Resources</h2>
-                </div>
-                <div class="subject-resources-container" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-            `;
-
-            const categories = [
-                { key: 'notes', title: 'Premium Study Notes', icon: 'fa-file-lines' },
-                { key: 'previousYearPapers', title: 'Previous Year Papers (PYQs)', icon: 'fa-clock-rotate-left' },
-                { key: 'assignments', title: 'Solved Assignments', icon: 'fa-pen-to-square' },
-                { key: 'practicals', title: 'Practical Files & Lab Work', icon: 'fa-code' },
-                { key: 'videoLinks', title: 'Video Lectures & Tutorials', icon: 'fa-video' }
-            ];
-
-            let contentFound = false;
-
-            categories.forEach(cat => {
-                const items = subData[cat.key] || [];
-                if (items.length > 0) {
-                    contentFound = true;
-                    html += `
-                        <div class="accordion-item glassmorphism" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-card);">
-                            <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--bg-card-surface); transition: all 0.25s ease;">
-                                <span style="font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 12px; color: var(--text-main);">
-                                    <i class="fa-solid ${cat.icon}" style="color: #3b82f6; font-size: 1.2rem;"></i> ${cat.title} (${items.length})
-                                </span>
-                                <i class="fa-solid fa-chevron-down arrow-icon" style="transition: transform 0.3s ease; color: var(--text-muted);"></i>
-                            </div>
-                            <div class="accordion-body" style="display: none; padding: 15px; border-top: 1px solid var(--border-color);">
-                                <div style="display: flex; flex-direction: column; gap: 10px;">
-                                    ${items.map(item => `
-                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-card-surface); border: 1px solid var(--border-color); border-radius: 8px;">
-                                            <span style="color: var(--text-main); font-weight: 500; font-size: 0.95rem;">${item.title}</span>
-                                            <button onclick="openPremiumModal('${item.title}', '${item.url}')" style="background: #3b82f6; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 0.85rem;">View</button>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            if (!contentFound) {
-                html += `
-                    <div class="glassmorphism" style="padding: 3rem; text-align: center; border-radius: 12px;">
-                        <i class="fa-solid fa-folder-open" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
-                        <p style="color: var(--text-muted);">No resources uploaded yet for this subject.</p>
-                    </div>
-                `;
-            }
-
-            html += `</div>`;
-            context.innerHTML = html;
-        }
-
-        function toggleAccordion(headerElement) {
-            const body = headerElement.nextElementSibling;
-            const arrow = headerElement.querySelector(".arrow-icon");
-            
-            if (body.style.display === "none" || body.style.display === "") {
-                body.style.display = "block";
-                arrow.style.transform = "rotate(180deg)";
-                headerElement.style.background = "rgba(59, 130, 246, 0.08)";
-            } else {
-                body.style.display = "none";
-                arrow.style.transform = "rotate(0deg)";
-                headerElement.style.background = "var(--bg-card-surface)";
-            }
-        }
-
-        function setupSearchEngine() {
-            const search = document.getElementById("liveSearchInput");
-            search.addEventListener("input", (e) => {
-                const term = e.target.value.toLowerCase().trim();
-                const context = document.getElementById("dynamicContentContext");
-
-                if(term.length < 2) {
-                    if (term.length === 0) {
-                        renderHomeDashboard(); 
-                    }
-                    return;
-                }
-
-                let searchHTML = `
-                    <div class="action-bar">
-                        <button onclick="renderHomeDashboard()" class="back-btn"><i class="fa-solid fa-xmark"></i> Clear Search</button>
-                        <h2 style="color: var(--text-main);">Search Results for: "${e.target.value}"</h2>
-                    </div>
-                    <div class="links-list glassmorphism" style="padding:1.5rem;">
-                `;
-
-                let found = false;
-
-                ACADEMIC_DATABASE.forEach(sem => {
-                    if (sem.status === "under-development") return;
-                    sem.subjects.forEach(sub => {
-                        if (sub.status === "under-development") return;
-                        ['notes','pdfs','previousYearPapers','guessPapers','assignments','practicals','videoLinks'].forEach(key => {
-                            (sub[key] || []).forEach((item) => {
-                                if(item.title.toLowerCase().includes(term) || sub.name.toLowerCase().includes(term)) {
-                                    found = true;
-                                    searchHTML += `
-                                        <div class="link-item" style="display: flex; justify-content: space-between; align-items: center; width:100%; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px; gap: 15px;">
-                                            <div>
-                                                <strong style="color: var(--text-main);">${item.title}</strong>
-                                                <small style="display:block; color:var(--text-muted); margin-top: 4px;">${sem.semesterName} &bull; ${sub.name}</small>
-                                            </div>
-                                            <button onclick="openPremiumModal('${item.title}', '${item.url}')" class="download-btn" style="background:#f59e0b; color:#000; border:none; padding: 8px 16px; border-radius: 6px; font-weight:600; cursor:pointer; flex-shrink: 0;">View</button>
-                                        </div>
-                                    `;
-                                }
-                            });
-                        });
-                    });
-                });
-
-                if(!found) searchHTML += `<p class="empty" style="color: var(--text-muted);">No matches found for your search query keywords.</p>`;
-                searchHTML += `</div>`;
-                context.innerHTML = searchHTML;
-            });
-        }
-
-        function setupThemeControl() {
-            const btn = document.getElementById("themeModeToggle");
-            const savedTheme = localStorage.getItem("bcaHubTheme") || "dark";
-            document.documentElement.setAttribute("data-theme", savedTheme);
-            btn.innerHTML = savedTheme === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
-
-            btn.addEventListener("click", () => {
-                const current = document.documentElement.getAttribute("data-theme");
-                const next = current === "dark" ? "light" : "dark";
-                document.documentElement.setAttribute("data-theme", next);
-                localStorage.setItem("bcaHubTheme", next);
-                btn.innerHTML = next === "dark" ? `<i class="fa-solid fa-moon"></i>` : `<i class="fa-solid fa-sun"></i>`;
-            });
-        }
-
-        function openPremiumModal(title, url) {
-            document.getElementById("modalFileTitle").innerText = title;
-            document.getElementById("modalIframeViewer").src = url + "#toolbar=0&navpanes=0&scrollbar=0";
-            document.getElementById("premiumFileModal").style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closePremiumModal() {
-            document.getElementById("premiumFileModal").style.display = "none";
-            document.getElementById("modalIframeViewer").src = "";
-            document.body.style.overflow = "auto";
-        }
-
-        // Inspection and Copyright protections
-        document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123) { return false; }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.keyCode == 'P'.charCodeAt(0)) { return false; }
-        };
-
-        document.addEventListener('selectstart', (e) => e.preventDefault());
-        document.addEventListener('dragstart', (e) => e.preventDefault());
-
-    </script>
-
-<script src="admin.js"></script> <script>
-        // ... aapka pehle se likha hua purana JS code (theme toggle, notice render wagera) ...
-        
-        // ------------- YAHAN PASTE KAREIN (Important Links Logic) -------------
-        let isLinksExpanded = false;
-
-function renderImportantLinks() {
-    const container = document.getElementById("linksContainer");
-    if (!container) return;
-
-    if (!IMPORTANT_LINKS || IMPORTANT_LINKS.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No links available.</p>';
-        return;
-    }
-
-    // Saare links ek sath render honge, scroll automatic chalega
-    container.innerHTML = IMPORTANT_LINKS.map(link => `
-        <a href="${link.url}" class="link-row glassmorphism" target="_blank">
-            <span>${link.title}</span>
-            <i class="fa-solid fa-chevron-right"></i>
+<!-- ============ NAVBAR ============ -->
+<header class="navbar glass">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo" onclick="renderHomeDashboard(); return false;" data-cursor-label="Home">
+            BCA<span class="gradient-text">HUB</span>
         </a>
-    `).join('');
-}
 
-// Dom aur Pageshow dono par call taaki cache glitch na ho
-document.addEventListener("DOMContentLoaded", renderImportantLinks);
-window.addEventListener("pageshow", renderImportantLinks);
-    </script>
-</body>
-
-
-    <footer>
-        <div class="footer-center-container">
-             <p class="footer-copyright" style="font-weight: 400; font-size: 1.1rem; letter-spacing: 1.0px; margin-top: 8px;"> BCA Hub. All Rights Reserved.</p>
-            <p class="footer-developer">
-                Developed <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH </span>
-            </p>
-           <p class="footer-copyright" style="color: #ca8a04 !important; font-weight: 900; font-size: 1.1rem; letter-spacing: 1.5px; margin-top: 8px;">
-                ।। श्री राधा रमणों विजयते ।।
-            </p>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)">
         </div>
-    </footer>
 
-   <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" class="whatsapp-float" target="_blank">
-    <i class="fa-brands fa-whatsapp"></i>
-    <span></span>
-</a>
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#" onclick="renderHomeDashboard(); return false;" class="magnetic" data-cursor-label="">Semesters</a>
+            <a href="#" onclick="scrollToNotices(); return false;" class="magnetic" data-cursor-label="">Notices</a>
+        </nav>
+
+        
+
+        <button id="themeToggle" class="circle-btn" title="Toggle theme" aria-label="Toggle dark or light theme">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+        <a href="#" onclick="renderHomeDashboard(); document.getElementById('navMobile').classList.remove('open'); return false;">Semesters</a>
+        <a href="#" onclick="scrollToNotices(); document.getElementById('navMobile').classList.remove('open'); return false;">Notices</a>
+        <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
+        <button id="themeToggleMobile" class="btn-ghost"><i class="fa-solid fa-moon"></i> <span>Toggle theme</span></button>
+    </div>
+</header>
+
+<!-- ============ LIVE NOTICE TICKER (persistent, thin, always visible) ============ -->
+<div class="ticker glass" id="tickerBar">
+    <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="main-wrapper">
+    <div id="dynamicContentContext"></div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <span class="footer-logo">BCA<span class="gradient-text">HUB</span></span>
+        <div class="footer-time">
+            <i class="fa-regular fa-clock"></i>
+            <span id="footerTime">--:--</span>
+            <span class="footer-time-label">Your local time</span>
+        </div>
+        <div class="footer-socials">
+            <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://erp.univraj.org/" target="_blank" class="social-glow magnetic" aria-label="University Exam Portal"><i class="fa-solid fa-graduation-cap"></i></a>
+        </div>
+    </div>
+    <p class="footer-copy">
+        © <span id="footerYear"></span> BCA Hub. Developed <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH</span>
+    </p>
+    <p class="footer-copy footer-blessing">।। श्री राधा रमणों विजयते ।।</p>
+</footer>
+
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="toastContainer" aria-live="polite"></div>
+
+<!-- ============ FILE PREVIEW MODAL ============ -->
+<div class="modal-overlay" id="premiumFileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass">
+        <div class="modal-header">
+            <span id="modalFileTitle">Document Viewer</span>
+            <button onclick="closePremiumModal()" class="modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+</div>
+
+<script src="admin-data.js"></script>
 </body>
 </html>
