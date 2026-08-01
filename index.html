@@ -22,6 +22,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 
+<script type="application/ld+json">
+
+</script>
+
 <!-- GSAP powers only the hero stagger-reveal; every other motion (reveals, tilt,
      magnetic buttons, cursor, marquee) is vanilla JS so nothing depends on it loading. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -53,19 +57,42 @@
 
         <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)">
+            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)" autocomplete="off">
+            <button id="searchClearBtn" class="search-clear" title="Clear" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
+            <div class="quick-search-dropdown glass" id="quickSearchDropdown"></div>
         </div>
 
         <nav class="nav-links" aria-label="Primary">
             <a href="#" onclick="renderHomeDashboard(); return false;" class="magnetic" data-cursor-label="">Semesters</a>
             <a href="#" onclick="scrollToNotices(); return false;" class="magnetic" data-cursor-label="">Notices</a>
+            <a href="#" onclick="scrollToImportantLinks(); return false;" class="magnetic" data-cursor-label="">Links</a>
+            <a href="#" onclick="scrollToTeam(); return false;" class="magnetic" data-cursor-label="">Our Team</a>
+            <a href="#" onclick="scrollToSavedResources(); return false;" class="magnetic" data-cursor-label="">Saved</a>
         </nav>
 
         
 
-        <button id="themeToggle" class="circle-btn" title="Toggle theme" aria-label="Toggle dark or light theme">
-            <i class="fa-solid fa-moon"></i>
-        </button>
+        <div class="theme-panel-wrap">
+            <button id="themeToggle" class="circle-btn" title="Change theme" aria-label="Change theme" aria-expanded="false">
+                <i class="fa-solid fa-palette"></i>
+            </button>
+            <div class="theme-panel glass" id="themePanel">
+                <p class="theme-panel-label">Theme</p>
+                <div class="theme-swatches">
+                    <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+                    <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+                    <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+                    <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+                    <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+                    <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+                </div>
+                <p class="theme-panel-label">Custom accent</p>
+                <div class="custom-accent-row">
+                    <input type="color" id="customAccentPicker" value="#a6b8ff" aria-label="Pick a custom accent color">
+                    <button id="resetAccentBtn" class="btn-ghost" style="padding:0.5rem 0.9rem;font-size:0.78rem;">Reset</button>
+                </div>
+            </div>
+        </div>
 
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
             <span></span><span></span>
@@ -74,8 +101,18 @@
     <div class="nav-mobile" id="navMobile">
         <a href="#" onclick="renderHomeDashboard(); document.getElementById('navMobile').classList.remove('open'); return false;">Semesters</a>
         <a href="#" onclick="scrollToNotices(); document.getElementById('navMobile').classList.remove('open'); return false;">Notices</a>
+        <a href="#" onclick="scrollToImportantLinks(); document.getElementById('navMobile').classList.remove('open'); return false;">Important Links</a>
+        <a href="#" onclick="scrollToTeam(); document.getElementById('navMobile').classList.remove('open'); return false;">Our Team</a>
+        <a href="#" onclick="scrollToSavedResources(); document.getElementById('navMobile').classList.remove('open'); return false;">Saved Resources</a>
         <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
-        <button id="themeToggleMobile" class="btn-ghost"><i class="fa-solid fa-moon"></i> <span>Toggle theme</span></button>
+        <div class="theme-swatches">
+            <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+            <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+            <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+            <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+            <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+            <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+        </div>
     </div>
 </header>
 
@@ -88,14 +125,68 @@
     <div id="dynamicContentContext"></div>
 </div>
 
+<!-- ============ MEET OUR TEAM ============ -->
+<section class="team-section" id="team">
+    <div class="team-particles" aria-hidden="true" id="teamParticles"></div>
+
+    <div class="team-header">
+        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> The People Behind BCA Hub</p>
+        <h2 class="team-heading reveal-up">Meet Our Team</h2>
+        <p class="team-subhead reveal-up">A small student-run crew keeping BCA Hub 100% free, organized, and up to date.</p>
+
+        <div class="team-stats reveal-up">
+            <div class="team-stat"><span class="stat-number" data-target="10">0</span><span class="stat-label">Team Members</span></div>
+            <div class="team-stat"><span class="stat-number" data-target="5">0</span><span class="stat-label">Departments</span></div>
+        </div>
+
+        <div class="team-dept-legend reveal-up" id="teamDeptLegend"></div>
+    </div>
+
+    <div class="team-controls reveal-up">
+        <div class="search-box team-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="teamSearchInput" placeholder="Search by name or position..." autocomplete="off">
+        </div>
+        <div class="filter-bar" id="teamFilterBar" role="tablist" aria-label="Filter team by department">
+            <button class="filter-pill active" data-dept="all">All</button>
+            <button class="filter-pill" data-dept="leadership">Leadership</button>
+            <button class="filter-pill" data-dept="tech">Tech</button>
+            <button class="filter-pill" data-dept="academics">Academics</button>
+            <button class="filter-pill" data-dept="content">Content &amp; Design</button>
+            <button class="filter-pill" data-dept="support">Support</button>
+        </div>
+    </div>
+
+    <div class="team-grid" id="teamGrid">
+        <!-- Cards are lazy-rendered by script.js once this section nears the viewport -->
+    </div>
+    <p class="empty" id="teamEmptyState" style="display:none;">No team members match that search.</p>
+</section>
+
+<button class="join-team-float glass" id="joinTeamBtn" data-cursor-label="Join">
+    <i class="fa-solid fa-hand-sparkles"></i><span>Join Our Team</span>
+</button>
+
+<!-- ============ TEAM PROFILE MODAL ============ -->
+<div class="modal-overlay" id="teamProfileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass team-modal-panel">
+        <button class="modal-close" id="teamModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="team-modal-body" id="teamModalBody"></div>
+    </div>
+</div>
+
+<!-- ============ ROTATING DISCLAIMER STRIP ============ -->
+<div class="disclaimer-strip glass">
+    <i class="fa-solid fa-shield-halved"></i>
+    <span id="disclaimerText"></span>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
     <div class="footer-inner">
         <span class="footer-logo">BCA<span class="gradient-text">HUB</span></span>
-        <div class="footer-time">
-            <i class="fa-regular fa-clock"></i>
-            <span id="footerTime">--:--</span>
-            <span class="footer-time-label">Your local time</span>
+        <
+            
         </div>
         <div class="footer-socials">
             <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
