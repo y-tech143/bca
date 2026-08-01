@@ -171,7 +171,7 @@ const TEAM_MEMBERS = [
     { name: "", gender: "female", role: "Graphic Designer", dept: "content", icon: "fa-palette",
         intro: "Designs banners, posters, certificates, thumbnails, and branding assets.",
         bio: "Designs everything visual — banners, certificates, social posts — and keeps BCA Hub's look consistent across every platform." },
-    { name: "r", gender: "female", role: "Social Media Manager", dept: "content", icon: "fa-hashtag",
+    { name: "", gender: "female", role: "Social Media Manager", dept: "content", icon: "fa-hashtag",
         intro: "Handles promotions, social media platforms, and student engagement.",
         bio: "Runs BCA Hub's social presence, shares updates the moment they go live, and keeps students engaged between semesters." },
     { name: "", gender: "female", role: "Student Support", dept: "support", icon: "fa-comments",
