@@ -1,465 +1,238 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cosmic">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Friendship Day 2026 — A Journey</title>
+<title>BCA Hub — Notes, PYQs, Syllabus & Assignments</title>
+<meta name="description" content="Free BCA semester-wise notes, previous year question papers, solved assignments, practicals and syllabus in one modern dashboard.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
+<script>
+    // Applied before the stylesheet paints anything, so there's no flash of the wrong theme
+    (function () {
+        try {
+            var saved = localStorage.getItem('bcaHubTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+    })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BCA Hub",
+  "description": "A 100% free student-run BCA learning community offering notes, PYQs, syllabus and assignments.",
+  "url": "https://example.com/",
+  "member": [
+    { "@type": "Person", "name": "Yash Sharma", "jobTitle": "Founder" },
+    { "@type": "Person", "name": "Priya Verma", "jobTitle": "Co-Founder" },
+    { "@type": "Person", "name": "Arjun Mehta", "jobTitle": "Technical Head" },
+    { "@type": "Person", "name": "Rohit Deshmukh", "jobTitle": "Academic Head" },
+    { "@type": "Person", "name": "Ananya Singh", "jobTitle": "Notes Manager" },
+    { "@type": "Person", "name": "Karan Malhotra", "jobTitle": "Content Manager" },
+    { "@type": "Person", "name": "Ishita Kapoor", "jobTitle": "Graphic Designer" },
+    { "@type": "Person", "name": "Simran Kaur", "jobTitle": "Social Media Manager" },
+    { "@type": "Person", "name": "Neha Joshi", "jobTitle": "Student Support" },
+    { "@type": "Person", "name": "Aditya Rao", "jobTitle": "PYQ & Resources Manager" }
+  ]
+}
+</script>
+
+<!-- GSAP powers only the hero stagger-reveal; every other motion (reveals, tilt,
+     magnetic buttons, cursor, marquee) is vanilla JS so nothing depends on it loading. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
 
-<div id="progress"><div id="progressFill"></div></div>
-
-<div id="sky"></div>
-<canvas id="stars"></canvas>
-<canvas id="themeCanvas"></canvas>
-<canvas id="confetti-canvas"></canvas>
-
-<!-- THEME SWITCHER -->
-<div id="themePanel">
-  <button id="themeToggle" aria-label="Choose a theme">🎨</button>
-  <div id="themeList">
-    <span class="theme-title">Choose a sky</span>
-    <button class="theme-opt" data-theme="cosmic"><i class="swatch-dot" data-t="cosmic"></i>Cosmic Aurora</button>
-    <button class="theme-opt" data-theme="ocean"><i class="swatch-dot" data-t="ocean"></i>Ocean Serenity</button>
-    <button class="theme-opt" data-theme="sakura"><i class="swatch-dot" data-t="sakura"></i>Sakura Garden</button>
-    <button class="theme-opt" data-theme="neon"><i class="swatch-dot" data-t="neon"></i>Neon City</button>
-    <button class="theme-opt" data-theme="cloud"><i class="swatch-dot" data-t="cloud"></i>Cloud Kingdom</button>
-    <button class="theme-opt" data-theme="sunset"><i class="swatch-dot" data-t="sunset"></i>Golden Sunset</button>
-  </div>
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-hidden="true">
+    <span class="preloader-mark">BCA<span class="gradient-text">HUB</span></span>
+    <span class="preloader-count" id="preloaderCount">0</span>
 </div>
 
-<div id="sectionCounter"><span id="secNow">01</span> / <span id="secTotal">32</span></div>
-
-<main>
-
-  <!-- 01 HERO -->
-  <section id="hero" data-count>
-    <div class="intro-line" id="line1">Every smile has a story.</div>
-    <div class="intro-line" id="line2">Every memory has a reason.</div>
-    <div class="intro-line" id="line3">Every journey becomes special — because of the people who walk beside us.</div>
-    <h1 class="hero-title" id="heroTitle">Happy Friendship Day</h1>
-    <p class="hero-sub" id="heroSub">A slow, wandering little world built for every friend who made life brighter. Take your time — this one's meant to be walked through, not scrolled past. About fifteen quiet minutes, if you let it.</p>
-    <div class="scroll-cue" id="scrollCue"><span>Scroll to begin</span><div class="stem"></div></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 02 WHAT IS FRIENDSHIP -->
-  <section class="reveal" data-count>
-    <div class="split">
-      <div class="orb-wrap"><div class="ring"></div><div class="ring"></div><div class="orb"></div></div>
-      <div>
-        <span class="eyebrow">01 — A definition, sort of</span>
-        <h2 class="title">Friendship isn't just a word.</h2>
-        <p class="lede">It isn't measured in years known, or messages sent, or photos posted. It's what's left when none of that is happening — and you're still remembered anyway.</p>
-        <p>It's being there when it's inconvenient. Laughing for no good reason. Turning an ordinary Tuesday into something you'll bring up years later. It's the person who knows your order, your worries, and your worst jokes, and stays anyway.</p>
-        <p>It grows in the smallest, most unphotographed moments — a shared silence in a car, a text at 2am, a seat saved without being asked.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 03 LITTLE THINGS -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">02 — The little things</span>
-    <h2 class="title">What it actually looks like</h2>
-    <p class="lede">Tap a card. Friendship rarely announces itself — it shows up as something small, repeated, until it becomes a whole relationship.</p>
-    <div class="card-grid" id="cardGrid"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 04 QUOTE WALL -->
-  <section id="quote-wall" class="reveal" data-count>
-    <span class="eyebrow">03 — Words worth keeping</span>
-    <h2 class="title">A slow quote wall</h2>
-    <p class="lede">Fifty small thoughts on friendship. Let them rotate, or click through at your own pace.</p>
-    <div class="quote-box" id="quoteBox"></div>
-    <div class="quote-nav" id="quoteNav">
-      <button class="mini-btn" id="quotePrev">← Prev</button>
-      <span id="quoteCount"></span>
-      <button class="mini-btn" id="quoteNext">Next →</button>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 05 STORY -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">04 — A story you already know</span>
-    <h2 class="title" style="margin-bottom:2.2rem;">Once upon a time, two strangers met.</h2>
-    <div class="story-lines" id="storyLines"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 06 COLORS -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">05 — In color</span>
-    <h2 class="title">If friendship had a palette</h2>
-    <p class="lede">Click a color to see what it stands for.</p>
-    <div class="color-wheel" id="colorWheel"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 07 NO BOUNDARIES -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">06 — No boundaries</span>
-    <h2 class="title">It doesn't care where you found it</h2>
-    <p class="lede">School. College. Office. A group chat that never sleeps. A neighbor you've known since before you could talk. Every kind counts.</p>
-    <div class="tag-cloud" id="tagCloud"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 08 KINDNESS GARDEN -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">07 — A garden that grows on kindness</span>
-    <h2 class="title">The Kindness Garden</h2>
-    <p class="lede">Every flower is something small someone once did. Click one to watch it bloom.</p>
-    <div class="garden" id="garden"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 09 CONSTELLATION -->
-  <section id="constellation" class="reveal" data-count>
-    <span class="eyebrow">08 — Appreciation, mapped to the sky</span>
-    <h2 class="title">A constellation of thank-yous</h2>
-    <p class="lede" style="margin:0.8rem auto 0;">Click a star.</p>
-    <div class="constellation-wrap" id="constellationWrap"></div>
-    <div class="star-msg" id="starMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 10 WAVES OF POSITIVITY -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">09 — Waves of positivity</span>
-    <h2 class="title">Five things worth choosing today</h2>
-    <div class="wave-cards" id="waveCards"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 11 RAINBOW OF EMOTIONS -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">10 — A rainbow of emotions</span>
-    <h2 class="title">Seven feelings friendship gives you</h2>
-    <div class="rainbow" id="rainbow"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 12 CLOUDS OF GRATITUDE -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">11 — Clouds of gratitude</span>
-    <h2 class="title">Soft things worth saying out loud</h2>
-    <p class="lede">Tap a cloud as it drifts by.</p>
-    <div class="cloud-field" id="cloudField"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 13 100 REASONS -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">12 — One hundred small reasons</span>
-    <h2 class="title">100 Reasons to Smile Today</h2>
-    <p class="lede">Not a list to finish quickly — a list to scroll through slowly.</p>
-    <div class="reasons-window">
-      <div class="reasons-track" id="reasonsTrack"></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 14 FRIENDSHIP VALUES -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">13 — What holds it together</span>
-    <h2 class="title">Friendship Values</h2>
-    <div class="values-wrap" id="valuesWrap"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 15 BEAUTIFUL WISHES -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">14 — A few wishes</span>
-    <h2 class="title">Beautiful Wishes</h2>
-    <div class="wish-cards" id="wishCards"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 16 SHOOTING STARS -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">15 — Make a wish</span>
-    <h2 class="title">Shooting Stars</h2>
-    <p class="lede" style="margin:0 auto;">Click the sky to send one across.</p>
-    <div class="shooting-wrap" id="shootingWrap"></div>
-    <div class="star-msg" id="wishMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 17 FLOATING BALLOONS -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">16 — Something light</span>
-    <h2 class="title">Floating Balloons</h2>
-    <p class="lede" style="margin:0 auto;">Tap a balloon before it drifts away.</p>
-    <div class="balloon-field" id="balloonField"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 18 LIFE LESSONS -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">17 — What friendship quietly teaches</span>
-    <h2 class="title">Life Lessons</h2>
-    <div class="timeline" id="timeline"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 19 SPREAD HAPPINESS -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">18 — An interactive board</span>
-    <h2 class="title">Spread Happiness</h2>
-    <p class="lede" style="margin:0 auto;">Click each one. Watch the board light up.</p>
-    <div class="happiness-board" id="happinessBoard"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 20 CELEBRATION WALL -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">19 — Celebration Wall</span>
-    <h2 class="title">A wall that never stops celebrating</h2>
-    <div class="celebration-wall" id="celebrationWall"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 21 SKY FULL OF DREAMS -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">20 — A sky full of dreams</span>
-    <h2 class="title">Dream. Believe. Achieve.</h2>
-    <div class="dream-canvas-wrap"><canvas id="dreamCanvas"></canvas></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 22 TODAY'S REMINDER -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">21 — Before you keep scrolling</span>
-    <h2 class="title">Today's Reminder</h2>
-    <div class="reminder-box" id="reminderBox"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 23 GLOBAL COUNTER -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">22 — Somewhere, right now</span>
-    <h2 class="title">The Global Friendship Count</h2>
-    <div class="counter-grid" id="counterGrid"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 24 SILENT FRIENDSHIPS -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">23 — On silence</span>
-    <h2 class="title" style="max-width:720px; margin:0 auto; line-height:1.3;">Some friendships don't need daily conversation.</h2>
-    <p class="lede" style="margin:1.6rem auto 0; text-align:center;">Some friends disappear for months. And yet, when they come back, nothing has changed. That's not the absence of friendship — that's proof of it.</p>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 25 OPEN LETTER -->
-  <section class="reveal" data-count>
-    <span class="eyebrow">24 — An open letter</span>
-    <h2 class="title">To every friend, wherever you are</h2>
-    <div class="letter">
-      <p>If you're reading this — thank you.</p>
-      <p>Maybe we don't talk every day. Maybe life got busy. Maybe distance grew between us without either of us choosing it.</p>
-      <p>But the memories never faded.</p>
-      <p>You made someone's journey easier. You made someone smile on a hard day. You became someone's comfort, without ever asking to.</p>
-      <p>And for that — thank you.</p>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 26 FORTUNE WHEEL -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">25 — Bonus: spin something</span>
-    <h2 class="title">Friendship Fortune Wheel</h2>
-    <div class="wheel-wrap">
-      <div class="wheel-pointer">▼</div>
-      <div class="wheel" id="fortuneWheel"></div>
-    </div>
-    <button class="btn" id="spinBtn">Spin the wheel</button>
-    <div class="surprise-msg" id="wheelMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 27 EMOJI RAIN -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">26 — Bonus: make it rain</span>
-    <h2 class="title">Emoji Rain</h2>
-    <button class="btn" id="rainBtn">Start the rain</button>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 28 WISH TREE -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">27 — Bonus: a tree of wishes</span>
-    <h2 class="title">The Digital Wish Tree</h2>
-    <p class="lede" style="margin:0 auto;">Every leaf holds a wish. Tap one.</p>
-    <div class="wish-tree" id="wishTree"></div>
-    <div class="star-msg" id="treeMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 29 MOOD PICKER -->
-  <section class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">28 — Bonus: how are you, really</span>
-    <h2 class="title">Mood Picker</h2>
-    <p class="lede" style="margin:0 auto;">How are you feeling today?</p>
-    <div class="mood-row" id="moodRow"></div>
-    <div class="surprise-msg" id="moodMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 30 GRATITUDE JAR + COMPLIMENT GENERATOR -->
-  <section class="reveal" data-count>
-    <div class="split">
-      <div style="text-align:center;">
-        <span class="eyebrow">29 — Bonus: the jar</span>
-        <h2 class="title">Gratitude Jar</h2>
-        <p class="lede" style="margin:1rem auto;">Reach in for a message.</p>
-        <div class="jar" id="jarBtn">🫙</div>
-        <div class="surprise-msg" id="jarMsg"></div>
-      </div>
-      <div style="text-align:center;">
-        <span class="eyebrow">30 — Bonus: never the same twice</span>
-        <h2 class="title">Compliment Generator</h2>
-        <p class="lede" style="margin:1rem auto;">A new one, every time.</p>
-        <button class="btn" id="complimentBtn">Give me one</button>
-        <div class="surprise-msg" id="complimentMsg"></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 31 FINAL APPRECIATION -->
-  <section id="final-appreciation" class="reveal" data-count>
-    <span class="eyebrow">31 — Final appreciation</span>
-    <h2 class="title">100 Quiet Thank-Yous</h2>
-    <p class="lede">To everyone reading this — thank you for being a reason behind someone's smile.</p>
-    <div class="reasons-window">
-      <div class="reasons-track reverse" id="thanksTrack"></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 32 SURPRISE + PROMISES + FACTS + FINAL -->
-  <section id="surprise" class="reveal" data-count style="text-align:center;">
-    <span class="eyebrow">32 — One for you</span>
-    <h2 class="title">A small surprise</h2>
-    <button class="btn" id="surpriseBtn">Tap here</button>
-    <div class="surprise-msg" id="surpriseMsg"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="reveal">
-    <span class="eyebrow">A friendship promise</span>
-    <h2 class="title">Six things worth promising</h2>
-    <p class="lede">Tap each one you mean it about.</p>
-    <div class="promise-list" id="promiseList"></div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="reveal">
-    <span class="eyebrow">For the record</span>
-    <h2 class="title">A few facts about friendship</h2>
-    <div class="fact-grid">
-      <div class="fact"><div class="num">~600</div><p>people the average person meets well enough to know their name — only a handful become lifelong friends.</p></div>
-      <div class="fact"><div class="num">↓ stress</div><p>Close friendships are linked to measurably lower stress and better recovery from setbacks.</p></div>
-      <div class="fact"><div class="num">↑ happiness</div><p>Time spent with friends is one of the strongest everyday predictors of reported happiness.</p></div>
-      <div class="fact"><div class="num">0 sec</div><p>the time it takes for real friendship to pick up exactly where it left off.</p></div>
-    </div>
-  </section>
-
-  <div class="marquee-wrap">
-    <div class="marquee" id="marqueeTrack"></div>
-  </div>
-
-  <section id="final" class="reveal">
-    <h2>Every friend matters.</h2>
-    <p class="lede" style="margin:0 auto; max-width:560px;">No matter where they live. No matter how often they reply. No matter how different they are from you. Every friendship makes this world a little brighter.</p>
-    <p style="margin-top:1.4rem; color:var(--ink);">Thank you for being part of someone's journey — and for staying on this page long enough to feel it.</p>
-  </section>
-
-</main>
-
-<section id="final">
-
-    <div class="footer-card">
-
-        <p class="footer-quote">
-            “Friendship isn't measured by distance or time. It's measured by the smiles,
-            trust and beautiful moments we share along the journey.”
-        </p>
-
-        <h2 class="footer-title">
-            ✨ Happy Friendship Day 2026 ✨
-        </h2>
-
-        <p class="made-by">
-           Made with <span class="heart">❤️</span> by 
-            <span class="creator">Yashuu </span>
-        </p>
-
-        <div class="footer-divider"></div>
-
-        <div class="footer-contact">
-
-            <h3>🚀 Love This Experience?</h3>
-
-            <p>
-                Want a premium, modern & fully animated website like this?
-                Let's create something extraordinary for your
-                <strong>School, Business, Brand, Event or Portfolio.</strong>
-            </p>
-
-            <a href="mailto:designyourdreams.in@gmail.com" class="contact-btn">
-                📩 designyourdreams.in@gmail.com
-            </a>
-
-            <p class="footer-tagline">
-                Turning Ideas into Beautiful Digital Experiences.
-            </p>
-
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"><span id="cursorLabel"></span></div>
+
+<!-- ============ AMBIENT BACKGROUND ============ -->
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar glass">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo" onclick="renderHomeDashboard(); return false;" data-cursor-label="Home">
+            BCA<span class="gradient-text">HUB</span>
+        </a>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)" autocomplete="off">
+            <button id="searchClearBtn" class="search-clear" title="Clear" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
+            <div class="quick-search-dropdown glass" id="quickSearchDropdown"></div>
         </div>
 
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#" onclick="renderHomeDashboard(); return false;" class="magnetic" data-cursor-label="">Semesters</a>
+            <a href="#" onclick="scrollToNotices(); return false;" class="magnetic" data-cursor-label="">Notices</a>
+            <a href="#" onclick="scrollToImportantLinks(); return false;" class="magnetic" data-cursor-label="">Links</a>
+            <a href="#" onclick="scrollToTeam(); return false;" class="magnetic" data-cursor-label="">Our Team</a>
+            <a href="#" onclick="scrollToSavedResources(); return false;" class="magnetic" data-cursor-label="">Saved</a>
+        </nav>
+
+        
+
+        <div class="theme-panel-wrap">
+            <button id="themeToggle" class="circle-btn" title="Change theme" aria-label="Change theme" aria-expanded="false">
+                <i class="fa-solid fa-palette"></i>
+            </button>
+            <div class="theme-panel glass" id="themePanel">
+                <p class="theme-panel-label">Theme</p>
+                <div class="theme-swatches">
+                    <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+                    <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+                    <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+                    <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+                    <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+                    <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+                </div>
+                <p class="theme-panel-label">Custom accent</p>
+                <div class="custom-accent-row">
+                    <input type="color" id="customAccentPicker" value="#a6b8ff" aria-label="Pick a custom accent color">
+                    <button id="resetAccentBtn" class="btn-ghost" style="padding:0.5rem 0.9rem;font-size:0.78rem;">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+        <a href="#" onclick="renderHomeDashboard(); document.getElementById('navMobile').classList.remove('open'); return false;">Semesters</a>
+        <a href="#" onclick="scrollToNotices(); document.getElementById('navMobile').classList.remove('open'); return false;">Notices</a>
+        <a href="#" onclick="scrollToImportantLinks(); document.getElementById('navMobile').classList.remove('open'); return false;">Important Links</a>
+        <a href="#" onclick="scrollToTeam(); document.getElementById('navMobile').classList.remove('open'); return false;">Our Team</a>
+        <a href="#" onclick="scrollToSavedResources(); document.getElementById('navMobile').classList.remove('open'); return false;">Saved Resources</a>
+        <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
+        <div class="theme-swatches">
+            <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+            <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+            <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+            <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+            <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+            <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+        </div>
+    </div>
+</header>
+
+<!-- ============ LIVE NOTICE TICKER (persistent, thin, always visible) ============ -->
+<div class="ticker glass" id="tickerBar">
+    <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="main-wrapper">
+    <div id="dynamicContentContext"></div>
+</div>
+
+<!-- ============ MEET OUR TEAM ============ -->
+<section class="team-section" id="team">
+    <div class="team-particles" aria-hidden="true" id="teamParticles"></div>
+
+    <div class="team-header">
+        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> The People Behind BCA Hub</p>
+        <h2 class="team-heading reveal-up">Meet Our Team</h2>
+        <p class="team-subhead reveal-up">A small student-run crew keeping BCA Hub 100% free, organized, and up to date.</p>
+
+        <div class="team-stats reveal-up">
+            <div class="team-stat"><span class="stat-number" data-target="10">0</span><span class="stat-label">Team Members</span></div>
+            <div class="team-stat"><span class="stat-number" data-target="5">0</span><span class="stat-label">Departments</span></div>
+        </div>
+
+        <div class="team-dept-legend reveal-up" id="teamDeptLegend"></div>
     </div>
 
+    <div class="team-controls reveal-up">
+        <div class="search-box team-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="teamSearchInput" placeholder="Search by name or position..." autocomplete="off">
+        </div>
+        <div class="filter-bar" id="teamFilterBar" role="tablist" aria-label="Filter team by department">
+            <button class="filter-pill active" data-dept="all">All</button>
+            <button class="filter-pill" data-dept="leadership">Leadership</button>
+            <button class="filter-pill" data-dept="tech">Tech</button>
+            <button class="filter-pill" data-dept="academics">Academics</button>
+            <button class="filter-pill" data-dept="content">Content &amp; Design</button>
+            <button class="filter-pill" data-dept="support">Support</button>
+        </div>
+    </div>
+
+    <div class="team-grid" id="teamGrid">
+        <!-- Cards are lazy-rendered by script.js once this section nears the viewport -->
+    </div>
+    <p class="empty" id="teamEmptyState" style="display:none;">No team members match that search.</p>
 </section>
+
+<button class="join-team-float glass" id="joinTeamBtn" data-cursor-label="Join">
+    <i class="fa-solid fa-hand-sparkles"></i><span>Join Our Team</span>
+</button>
+
+<!-- ============ TEAM PROFILE MODAL ============ -->
+<div class="modal-overlay" id="teamProfileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass team-modal-panel">
+        <button class="modal-close" id="teamModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="team-modal-body" id="teamModalBody"></div>
+    </div>
+</div>
+
+<!-- ============ ROTATING DISCLAIMER STRIP ============ -->
+<div class="disclaimer-strip glass">
+    <i class="fa-solid fa-shield-halved"></i>
+    <span id="disclaimerText"></span>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <span class="footer-logo">BCA<span class="gradient-text">HUB</span></span>
+        <div class="footer-time">
+            <i class="fa-regular fa-clock"></i>
+            <span id="footerTime">--:--</span>
+            <span class="footer-time-label">Your local time</span>
+        </div>
+        <div class="footer-socials">
+            <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://erp.univraj.org/" target="_blank" class="social-glow magnetic" aria-label="University Exam Portal"><i class="fa-solid fa-graduation-cap"></i></a>
+        </div>
+    </div>
+    <p class="footer-copy">
+        © <span id="footerYear"></span> BCA Hub. Developed <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH</span>
+    </p>
+    <p class="footer-copy footer-blessing">।। श्री राधा रमणों विजयते ।।</p>
+</footer>
+
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="toastContainer" aria-live="polite"></div>
+
+<!-- ============ FILE PREVIEW MODAL ============ -->
+<div class="modal-overlay" id="premiumFileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass">
+        <div class="modal-header">
+            <span id="modalFileTitle">Document Viewer</span>
+            <button onclick="closePremiumModal()" class="modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
