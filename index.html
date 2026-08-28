@@ -88,7 +88,13 @@
             <a href="#" onclick="scrollToSavedResources(); return false;" class="magnetic" data-cursor-label="">Saved</a>
         </nav>
 
-        
+        <button class="circle-btn" id="guideBtn" title="How to use this site" aria-label="Open usage guide" data-cursor-label="Guide">
+            <i class="fa-solid fa-circle-question"></i>
+        </button>
+
+        <button class="btn-glow magnetic" data-cursor-label="Ask" onclick="openAiAssistantView()">
+            <i class="fa-solid fa-robot"></i><span>Ask AI</span>
+        </button>
 
         <div class="theme-panel-wrap">
             <button id="themeToggle" class="circle-btn" title="Change theme" aria-label="Change theme" aria-expanded="false">
@@ -122,6 +128,7 @@
         <a href="#" onclick="scrollToImportantLinks(); document.getElementById('navMobile').classList.remove('open'); return false;">Important Links</a>
         <a href="#" onclick="scrollToTeam(); document.getElementById('navMobile').classList.remove('open'); return false;">Our Team</a>
         <a href="#" onclick="scrollToSavedResources(); document.getElementById('navMobile').classList.remove('open'); return false;">Saved Resources</a>
+        <a href="#" id="guideBtnMobile">How to Use This Site</a>
         <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
         <div class="theme-swatches">
             <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
@@ -148,7 +155,7 @@
     <div class="team-particles" aria-hidden="true" id="teamParticles"></div>
 
     <div class="team-header">
-        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> The People Behind BCA Hub</p>
+        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> <span>The People Behind BCA Hub</span></p>
         <h2 class="team-heading reveal-up">Meet Our Team</h2>
         <p class="team-subhead reveal-up">A small student-run crew keeping BCA Hub 100% free, organized, and up to date.</p>
 
@@ -163,7 +170,7 @@
     <div class="team-controls reveal-up">
         <div class="search-box team-search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="teamSearchInput" placeholder="Search by name or position..." autocomplete="off">
+            <input type="text" id="teamSearchInput" placeholder="Search by position or department..." autocomplete="off">
         </div>
         <div class="filter-bar" id="teamFilterBar" role="tablist" aria-label="Filter team by department">
             <button class="filter-pill active" data-dept="all">All</button>
@@ -193,6 +200,30 @@
     </div>
 </div>
 
+<!-- ============ GUIDE MODAL — how to use the site ============ -->
+<div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass guide-modal-panel">
+        <button class="modal-close" id="guideModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="guide-modal-body" id="guideModalBody"></div>
+    </div>
+</div>
+
+<!-- ============ GET INVOLVED ============ -->
+<section class="involve-section glass" id="involve">
+    <div class="involve-text">
+        <h3>🤝 Have notes to share, or something to tell us?</h3>
+        <p>Contributions and feedback both go a long way in keeping BCA Hub useful for everyone.</p>
+    </div>
+    <div class="involve-actions">
+        <button class="btn-glow magnetic" onclick="handleContributeNotes()" data-cursor-label="Email">
+            <i class="fa-solid fa-paper-plane"></i><span>Share Your Notes</span>
+        </button>
+        <button class="btn-ghost magnetic" onclick="handleSendFeedback()" data-cursor-label="Email">
+            <i class="fa-solid fa-comment-dots"></i><span>Send Feedback</span>
+        </button>
+    </div>
+</section>
+
 <!-- ============ ROTATING DISCLAIMER STRIP ============ -->
 <div class="disclaimer-strip glass">
     <i class="fa-solid fa-shield-halved"></i>
@@ -209,14 +240,28 @@
             <span class="footer-time-label">Your local time</span>
         </div>
         <div class="footer-socials">
+            <a href="mailto:bca24by7@gmail.com" class="social-glow magnetic" aria-label="Email BCA Hub"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://erp.univraj.org/" target="_blank" class="social-glow magnetic" aria-label="University Exam Portal"><i class="fa-solid fa-graduation-cap"></i></a>
         </div>
     </div>
+
+    <p class="footer-contact">
+        <i class="fa-solid fa-headset"></i> <span>Contact Support:</span>
+        <a href="mailto:bca24by7@gmail.com">bca24by7@gmail.com</a>
+    </p>
+
+    <p class="footer-copy footer-copyright-main">
+        © <span id="footerYear"></span> <strong>BCA Hub</strong> — <span>All Rights Reserved.</span>
+    </p>
+    <p class="footer-copy footer-legal">
+        This is a 100% free, student-run educational resource. All content is provided for self-study purposes only.
+    </p>
     <p class="footer-copy">
-        © <span id="footerYear"></span> BCA Hub. Developed <i class="fa-solid fa-heart neon-heart"></i> by <span class="yash-name">YASH</span>
+        <span>Developed with</span> <i class="fa-solid fa-heart neon-heart"></i> <span>by</span> <span class="yash-name">YASH</span>
     </p>
     <p class="footer-copy footer-blessing">।। श्री राधा रमणों विजयते ।।</p>
+    <p class="footer-copy footer-admin-link"><a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin Login</a></p>
 </footer>
 
 <button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
@@ -233,6 +278,11 @@
     </div>
 </div>
 
+<!-- Firebase SDK (compat build — works with plain <script> tags, no bundler needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
