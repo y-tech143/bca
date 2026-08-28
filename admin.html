@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BCA Hub — Admin Panel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body" data-theme="dark">
+
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="loginScreen" class="admin-center-screen">
+    <div class="admin-login-card glass">
+        <div class="admin-login-logo">BCA<span class="gradient-text">HUB</span></div>
+        <p class="admin-login-sub">Admin Panel</p>
+
+        <div id="firebaseWarning" class="admin-warning" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Firebase isn't configured yet. Open <code>firebase-config.js</code> and follow SETUP_GUIDE.md first.
+        </div>
+
+        <form id="loginForm" class="admin-form">
+            <label>Email
+                <input type="email" id="loginEmail" required autocomplete="username" placeholder="you@example.com">
+            </label>
+            <label>Password
+                <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
+            </label>
+            <p id="loginError" class="admin-error" style="display:none;"></p>
+            <button type="submit" class="btn-glow admin-submit-btn"><span><i class="fa-solid fa-right-to-bracket"></i> Log In</span></button>
+        </form>
+
+        <a href="index.html" class="admin-back-link"><i class="fa-solid fa-arrow-left"></i> Back to BCA Hub</a>
+    </div>
+</div>
+
+<!-- ============ ADMIN DASHBOARD ============ -->
+<div id="adminDashboard" class="admin-dashboard" style="display:none;">
+    <header class="admin-topbar glass">
+        <div class="admin-logo">BCA<span class="gradient-text">HUB</span> <span class="admin-badge">Admin</span></div>
+        <div class="admin-topbar-right">
+            <span id="loggedInAs" class="admin-user-email"></span>
+            <a href="index.html" class="btn-ghost admin-small-btn"><i class="fa-solid fa-house"></i> View Site</a>
+            <button id="logoutBtn" class="btn-ghost admin-small-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </header>
+
+    <nav class="admin-tabs glass">
+        <button class="admin-tab active" data-tab="notices"><i class="fa-solid fa-bell"></i> Notices</button>
+        <button class="admin-tab" data-tab="subjects"><i class="fa-solid fa-book"></i> Subjects</button>
+        <button class="admin-tab" data-tab="resources"><i class="fa-solid fa-file-lines"></i> Resources</button>
+        <button class="admin-tab" data-tab="links"><i class="fa-solid fa-link"></i> Important Links</button>
+    </nav>
+
+    <main class="admin-main">
+
+        <!-- ---------------- NOTICES TAB ---------------- -->
+        <section class="admin-panel active" id="panel-notices">
+            <div class="admin-panel-grid">
+                <form id="noticeForm" class="admin-form glass admin-add-card">
+                    <h3><i class="fa-solid fa-circle-plus"></i> Add Notice</h3>
+                    <label>Title
+                        <input type="text" id="noticeTitle" required placeholder="e.g. Sem 2nd Exam Form Open">
+                    </label>
+                    <label>Date
+                        <input type="text" id="noticeDate" required placeholder="e.g. June 3, 2026">
+                    </label>
+                    <label>Tag
+                        <input type="text" id="noticeTag" required placeholder="e.g. Exam / Update / Live Now">
+                    </label>
+                    <label class="admin-checkbox-label">
+                        <input type="checkbox" id="noticeImportant">
+                        Mark as important (shows a red badge instead of blue)
+                    </label>
+                    <button type="submit" class="btn-glow admin-submit-btn"><span><i class="fa-solid fa-plus"></i> Publish Notice</span></button>
+                </form>
+
+                <div class="admin-list-card glass">
+                    <h3><i class="fa-solid fa-list"></i> Live Notices</h3>
+                    <div id="noticesList" class="admin-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------------- SUBJECTS TAB ---------------- -->
+        <section class="admin-panel" id="panel-subjects">
+            <div class="admin-panel-grid">
+                <form id="subjectForm" class="admin-form glass admin-add-card">
+                    <h3><i class="fa-solid fa-circle-plus"></i> Add Subject</h3>
+                    <label>Semester
+                        <select id="subjectSemester" required>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                        </select>
+                    </label>
+                    <label>Subject Name
+                        <input type="text" id="subjectName" required placeholder="e.g. Operating System (OS)">
+                    </label>
+                    <label>Icon <span class="admin-hint">(FontAwesome class — optional)</span>
+                        <input type="text" id="subjectIcon" placeholder="e.g. fa-sitemap">
+                    </label>
+                    <p class="admin-hint admin-icon-examples">Examples: fa-code, fa-database, fa-network-wired, fa-shield-halved, fa-cloud, fa-brain — browse more at fontawesome.com/icons</p>
+                    <button type="submit" class="btn-glow admin-submit-btn"><span><i class="fa-solid fa-plus"></i> Add Subject</span></button>
+                </form>
+
+                <div class="admin-list-card glass">
+                    <h3><i class="fa-solid fa-list"></i> All Subjects</h3>
+                    <div id="subjectsList" class="admin-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------------- RESOURCES TAB ---------------- -->
+        <section class="admin-panel" id="panel-resources">
+            <div class="admin-panel-grid">
+                <form id="resourceForm" class="admin-form glass admin-add-card">
+                    <h3><i class="fa-solid fa-circle-plus"></i> Add Resource</h3>
+                    <label>Semester
+                        <select id="resourceSemester" required>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                        </select>
+                    </label>
+                    <label>Subject
+                        <select id="resourceSubject" required></select>
+                    </label>
+                    <label>Category
+                        <select id="resourceCategory" required>
+                            <option value="notes">Notes</option>
+                            <option value="previousYearPapers">Previous Year Papers (PYQ)</option>
+                            <option value="pdfs">Reference Books / PDFs</option>
+                            <option value="guessPapers">Guess Papers</option>
+                            <option value="assignments">Assignments</option>
+                            <option value="practicals">Practicals / Lab Files</option>
+                            <option value="videoLinks">Video Lectures</option>
+                        </select>
+                    </label>
+                    <label>Title
+                        <input type="text" id="resourceTitle" required placeholder="e.g. Unit 1: Process Management">
+                    </label>
+                    <label>Link (Google Drive / PDF / any URL)
+                        <input type="url" id="resourceUrl" required placeholder="https://drive.google.com/...">
+                    </label>
+                    <button type="submit" class="btn-glow admin-submit-btn"><span><i class="fa-solid fa-plus"></i> Publish Resource</span></button>
+                </form>
+
+                <div class="admin-list-card glass">
+                    <h3><i class="fa-solid fa-list"></i> All Resources</h3>
+                    <input type="text" id="resourceFilter" class="admin-filter-input" placeholder="Filter by title or subject...">
+                    <div id="resourcesList" class="admin-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------------- IMPORTANT LINKS TAB ---------------- -->
+        <section class="admin-panel" id="panel-links">
+            <div class="admin-panel-grid">
+                <form id="linkForm" class="admin-form glass admin-add-card">
+                    <h3><i class="fa-solid fa-circle-plus"></i> Add Important Link</h3>
+                    <label>Title
+                        <input type="text" id="linkTitle" required placeholder="e.g. University Exam Portal">
+                    </label>
+                    <label>URL
+                        <input type="url" id="linkUrl" required placeholder="https://...">
+                    </label>
+                    <button type="submit" class="btn-glow admin-submit-btn"><span><i class="fa-solid fa-plus"></i> Add Link</span></button>
+                </form>
+
+                <div class="admin-list-card glass">
+                    <h3><i class="fa-solid fa-list"></i> Live Links</h3>
+                    <div id="linksList" class="admin-list"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<div id="toastContainer" aria-live="polite"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
