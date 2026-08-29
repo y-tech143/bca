@@ -1,404 +1,293 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCA Hub - Maintenance Announcement</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(23, 31, 48, 0.75);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --accent-blue: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.4);
-            --accent-orange: #f59e0b;
-            --accent-green: #25D366;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCA Hub — Notes, PYQs, Syllabus & Assignments</title>
+<meta name="description" content="Free BCA semester-wise notes, previous year question papers, solved assignments, practicals and syllabus in one modern dashboard.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
+<script>
+    // Applied before the stylesheet paints anything, so there's no flash of the wrong theme
+    (function () {
+        try {
+            var saved = localStorage.getItem('bcaHubTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+    })();
+</script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BCA Hub",
+  "description": "A 100% free student-run BCA learning community offering notes, PYQs, syllabus and assignments.",
+  "url": "https://example.com/",
+  "member": [
+    { "@type": "Person", "name": "Yash Sharma", "jobTitle": "Founder" },
+    { "@type": "Person", "name": "Priya Verma", "jobTitle": "Co-Founder" },
+    { "@type": "Person", "name": "Arjun Mehta", "jobTitle": "Technical Head" },
+    { "@type": "Person", "name": "Rohit Deshmukh", "jobTitle": "Academic Head" },
+    { "@type": "Person", "name": "Ananya Singh", "jobTitle": "Notes Manager" },
+    { "@type": "Person", "name": "Karan Malhotra", "jobTitle": "Content Manager" },
+    { "@type": "Person", "name": "Ishita Kapoor", "jobTitle": "Graphic Designer" },
+    { "@type": "Person", "name": "Simran Kaur", "jobTitle": "Social Media Manager" },
+    { "@type": "Person", "name": "Neha Joshi", "jobTitle": "Student Support" },
+    { "@type": "Person", "name": "Aditya Rao", "jobTitle": "PYQ & Resources Manager" }
+  ]
+}
+</script>
 
-        .ambient-glow {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .letter-card {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 650px;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 25px;
-        }
-
-        .brand {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--accent-orange);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--accent-orange);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .subject-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid var(--accent-blue);
-            padding: 14px 18px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            font-size: 15px;
-            color: #e2e8f0;
-        }
-
-        .content {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #cbd5e1;
-        }
-
-        .salutation {
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        .section-en { margin-bottom: 20px; }
-        .divider { height: 1px; background: var(--border-color); margin: 20px 0; }
-        .section-hi { margin-bottom: 25px; }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .info-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            padding: 12px 16px;
-            border-radius: 10px;
-        }
-
-        .info-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .info-value {
-            font-size: 13px;
-            font-weight: 600;
-            color: #f1f5f9;
-        }
-
-        .action-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .btn-mail {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: #fff;
-            box-shadow: 0 4px 12px var(--accent-glow);
-        }
-
-        .btn-wa {
-            background: var(--accent-green);
-            color: #fff;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
-        }
-
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .signoff {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .signoff strong {
-            color: var(--text-primary);
-            display: block;
-            font-size: 14px;
-            margin-top: 2px;
-        }
-
-        /* Email Ticket Modal Popup */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-card {
-            background: #111827;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 500px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.6);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title { font-size: 18px; font-weight: 700; color: #fff; }
-        .close-btn { color: var(--text-secondary); cursor: pointer; font-size: 20px; }
-
-        .form-group { margin-bottom: 16px; text-align: left; }
-        .form-label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
-
-        .form-control {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .form-control:focus { border-color: var(--accent-blue); }
-        textarea.form-control { height: 120px; resize: none; }
-
-        @media (max-width: 480px) {
-            .letter-card { padding: 25px 20px; }
-            .action-group { flex-direction: column; }
-        }
-    </style>
+<!-- GSAP powers only the hero stagger-reveal; every other motion (reveals, tilt,
+     magnetic buttons, cursor, marquee) is vanilla JS so nothing depends on it loading. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-hidden="true">
+    <span class="preloader-mark">BCA<span class="gradient-text">HUB</span></span>
+    <span class="preloader-count" id="preloaderCount">0</span>
+</div>
 
-    <div class="letter-card">
-        <div class="header">
-            <div class="brand"><i class="fa-solid fa-cube"></i> BCA HUB PORTAL</div>
-            <div class="badge">
-                <span class="dot"></span> Service Maintenance
-            </div>
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"><span id="cursorLabel"></span></div>
+
+<!-- ============ AMBIENT BACKGROUND ============ -->
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar glass">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo" onclick="renderHomeDashboard(); return false;" data-cursor-label="Home">
+            BCA<span class="gradient-text">HUB</span>
+        </a>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)" autocomplete="off">
+            <button id="searchClearBtn" class="search-clear" title="Clear" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
+            <div class="quick-search-dropdown glass" id="quickSearchDropdown"></div>
         </div>
 
-        <div class="subject-box">
-            Subject: Important Notice — BCA Hub Portal Temporary Maintenance Status
-        </div>
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#" onclick="renderHomeDashboard(); return false;" class="magnetic" data-cursor-label="">Semesters</a>
+            <a href="#" onclick="scrollToNotices(); return false;" class="magnetic" data-cursor-label="">Notices</a>
+            <a href="#" onclick="scrollToImportantLinks(); return false;" class="magnetic" data-cursor-label="">Links</a>
+            <a href="#" onclick="scrollToTeam(); return false;" class="magnetic" data-cursor-label="">Our Team</a>
+            <a href="#" onclick="scrollToSavedResources(); return false;" class="magnetic" data-cursor-label="">Saved</a>
+        </nav>
 
-        <div class="content">
-            <div class="salutation">Dear User / प्रिय उपयोगकर्ता,</div>
+        <button class="circle-btn" id="guideBtn" title="How to use this site" aria-label="Open usage guide" data-cursor-label="Guide">
+            <i class="fa-solid fa-circle-question"></i>
+        </button>
 
-            <div class="section-en">
-                We are currently performing scheduled system updates to enhance infrastructure performance and user security on the <strong>BCA Hub Portal</strong>. Access to all portal services will be temporarily restricted during this window.
-            </div>
+        <a href="login.html" id="myAccountLink" class="btn-ghost magnetic" data-cursor-label="">
+            <i class="fa-solid fa-user"></i><span id="myAccountLabel">Login</span>
+        </a>
 
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">Current Status / स्थिति</div>
-                    <div class="info-value" style="color: var(--accent-orange);">Under Maintenance</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Official Support Email</div>
-                    <div class="info-value">bca24by7@gmail.com</div>
-                </div>
-            </div>
+        <button class="btn-glow magnetic" data-cursor-label="Ask" onclick="openAiAssistantView()">
+            <i class="fa-solid fa-robot"></i><span>Ask AI</span>
+        </button>
 
-            <div class="divider"></div>
-
-            <div class="section-hi">
-                हम <strong>BCA Hub Portal</strong> पर आपको बेहतर और सुरक्षित सेवाएं प्रदान करने के लिए सिस्टम अपडेट कर रहे हैं। इस प्रक्रिया के दौरान पोर्टल की सेवाएं कुछ समय के लिए उपलब्ध नहीं रहेंगी। कृपया थोड़ी देर बाद पुनः प्रयास करें।
-            </div>
-        </div>
-
-        <div class="action-group">
-            <button class="btn btn-mail" onclick="openMailModal()">
-                <i class="fa-regular fa-paper-plane"></i> Write & Send Support Mail
+        <div class="theme-panel-wrap">
+            <button id="themeToggle" class="circle-btn" title="Change theme" aria-label="Change theme" aria-expanded="false">
+                <i class="fa-solid fa-palette"></i>
             </button>
-            <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="btn btn-wa">
-                <i class="fa-brands fa-whatsapp" style="font-size: 16px;"></i> Join WhatsApp Group
-            </a>
+            <div class="theme-panel glass" id="themePanel">
+                <p class="theme-panel-label">Theme</p>
+                <div class="theme-swatches">
+                    <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+                    <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+                    <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+                    <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+                    <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+                    <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+                </div>
+                <p class="theme-panel-label">Custom accent</p>
+                <div class="custom-accent-row">
+                    <input type="color" id="customAccentPicker" value="#a6b8ff" aria-label="Pick a custom accent color">
+                    <button id="resetAccentBtn" class="btn-ghost" style="padding:0.5rem 0.9rem;font-size:0.78rem;">Reset</button>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">
-            <div class="signoff">
-                आज्ञा से / By Order of:
-                <strong>Founder & Head</strong>
-                <span style="font-size: 12px; color: #94a3b8; display: block; margin-top: 2px;">
-                    BCA Hub Portal
-                </span>
-            </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+        <a href="#" onclick="renderHomeDashboard(); document.getElementById('navMobile').classList.remove('open'); return false;">Semesters</a>
+        <a href="#" onclick="scrollToNotices(); document.getElementById('navMobile').classList.remove('open'); return false;">Notices</a>
+        <a href="#" onclick="scrollToImportantLinks(); document.getElementById('navMobile').classList.remove('open'); return false;">Important Links</a>
+        <a href="#" onclick="scrollToTeam(); document.getElementById('navMobile').classList.remove('open'); return false;">Our Team</a>
+        <a href="#" onclick="scrollToSavedResources(); document.getElementById('navMobile').classList.remove('open'); return false;">Saved Resources</a>
+        <a href="#" id="guideBtnMobile">How to Use This Site</a>
+        <a href="login.html" id="myAccountLinkMobile"><i class="fa-solid fa-user"></i> <span id="myAccountLabelMobile">Login / Register</span></a>
+        <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
+        <div class="theme-swatches">
+            <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
+            <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
+            <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
+            <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
+            <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
+            <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
+        </div>
+    </div>
+</header>
+
+<!-- ============ LIVE NOTICE TICKER (persistent, thin, always visible) ============ -->
+<div class="ticker glass" id="tickerBar">
+    <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="main-wrapper">
+    <div id="dynamicContentContext"></div>
+</div>
+
+<!-- ============ MEET OUR TEAM ============ -->
+<section class="team-section" id="team">
+    <div class="team-particles" aria-hidden="true" id="teamParticles"></div>
+
+    <div class="team-header">
+        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> <span>The People Behind BCA Hub</span></p>
+        <h2 class="team-heading reveal-up">Meet Our Team</h2>
+        <p class="team-subhead reveal-up">A small student-run crew keeping BCA Hub 100% free, organized, and up to date.</p>
+
+        <div class="team-stats reveal-up">
+            <div class="team-stat"><span class="stat-number" data-target="10">0</span><span class="stat-label">Team Members</span></div>
+            <div class="team-stat"><span class="stat-number" data-target="5">0</span><span class="stat-label">Departments</span></div>
+        </div>
+
+        <div class="team-dept-legend reveal-up" id="teamDeptLegend"></div>
+    </div>
+
+    <div class="team-controls reveal-up">
+        <div class="search-box team-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="teamSearchInput" placeholder="Search by position or department..." autocomplete="off">
+        </div>
+        <div class="filter-bar" id="teamFilterBar" role="tablist" aria-label="Filter team by department">
+            <button class="filter-pill active" data-dept="all">All</button>
+            <button class="filter-pill" data-dept="leadership">Leadership</button>
+            <button class="filter-pill" data-dept="tech">Tech</button>
+            <button class="filter-pill" data-dept="academics">Academics</button>
+            <button class="filter-pill" data-dept="content">Content &amp; Design</button>
+            <button class="filter-pill" data-dept="support">Support</button>
         </div>
     </div>
 
-    <div class="modal" id="emailModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title">Send Email Ticket</div>
-                <i class="fa-solid fa-xmark close-btn" onclick="closeMailModal()"></i>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Recipient Email / प्राप्तकर्ता</label>
-                <input type="text" class="form-control" value="bca24by7@gmail.com" readonly style="opacity: 0.7;">
-            </div>
+    <div class="team-grid" id="teamGrid">
+        <!-- Cards are lazy-rendered by script.js once this section nears the viewport -->
+    </div>
+    <p class="empty" id="teamEmptyState" style="display:none;">No team members match that search.</p>
+</section>
 
-            <div class="form-group">
-                <label class="form-label">Your Subject / विषय</label>
-                <input type="text" id="userSubject" class="form-control" value="BCA Hub Portal - Support Request" placeholder="Enter subject here...">
-            </div>
+<button class="join-team-float glass" id="joinTeamBtn" data-cursor-label="Join">
+    <i class="fa-solid fa-hand-sparkles"></i><span>Join Our Team</span>
+</button>
 
-            <div class="form-group">
-                <label class="form-label">Your Query / मैसेज यहाँ टाइप करें</label>
-                <textarea id="userMessage" class="form-control" placeholder="Describe your query or problem here..."></textarea>
-            </div>
+<!-- ============ TEAM PROFILE MODAL ============ -->
+<div class="modal-overlay" id="teamProfileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass team-modal-panel">
+        <button class="modal-close" id="teamModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="team-modal-body" id="teamModalBody"></div>
+    </div>
+</div>
 
-            <button class="btn btn-mail" style="width: 100%;" onclick="dispatchEmail()">
-                <i class="fa-solid fa-paper-plane"></i> Send Ticket Now
-            </button>
+<!-- ============ GUIDE MODAL — how to use the site ============ -->
+<div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass guide-modal-panel">
+        <button class="modal-close" id="guideModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="guide-modal-body" id="guideModalBody"></div>
+    </div>
+</div>
+
+<!-- ============ GET INVOLVED ============ -->
+<section class="involve-section glass" id="involve">
+    <div class="involve-text">
+        <h3>🤝 Have notes to share, or something to tell us?</h3>
+        <p>Contributions and feedback both go a long way in keeping BCA Hub useful for everyone.</p>
+    </div>
+    <div class="involve-actions">
+        <button class="btn-glow magnetic" onclick="handleContributeNotes()" data-cursor-label="Email">
+            <i class="fa-solid fa-paper-plane"></i><span>Share Your Notes</span>
+        </button>
+        <button class="btn-ghost magnetic" onclick="handleSendFeedback()" data-cursor-label="Email">
+            <i class="fa-solid fa-comment-dots"></i><span>Send Feedback</span>
+        </button>
+    </div>
+</section>
+
+<!-- ============ ROTATING DISCLAIMER STRIP ============ -->
+<div class="disclaimer-strip glass">
+    <i class="fa-solid fa-shield-halved"></i>
+    <span id="disclaimerText"></span>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <span class="footer-logo">BCA<span class="gradient-text">HUB</span></span>
+        <div class="footer-time">
+            <i class="fa-regular fa-clock"></i>
+            <span id="footerTime">--:--</span>
+            <span class="footer-time-label">Your local time</span>
+        </div>
+        <div class="footer-socials">
+            <a href="mailto:bca24by7@gmail.com" class="social-glow magnetic" aria-label="Email BCA Hub"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://erp.univraj.org/" target="_blank" class="social-glow magnetic" aria-label="University Exam Portal"><i class="fa-solid fa-graduation-cap"></i></a>
         </div>
     </div>
 
-    <script>
-        function openMailModal() {
-            document.getElementById('emailModal').style.display = 'flex';
-        }
+    <p class="footer-contact">
+        <i class="fa-solid fa-headset"></i> <span>Contact Support:</span>
+        <a href="mailto:bca24by7@gmail.com">bca24by7@gmail.com</a>
+    </p>
 
-        function closeMailModal() {
-            document.getElementById('emailModal').style.display = 'none';
-        }
+    <p class="footer-copy footer-copyright-main">
+        © <span id="footerYear"></span> <strong>BCA Hub</strong> — <span>All Rights Reserved.</span>
+    </p>
+    <p class="footer-copy footer-legal">
+        This is a 100% free, student-run educational resource. All content is provided for self-study purposes only.
+    </p>
+    <p class="footer-copy">
+        <span>Developed with</span> <i class="fa-solid fa-heart neon-heart"></i> <span>by</span> <span class="yash-name">YASH</span>
+    </p>
+    <p class="footer-copy footer-blessing">।। श्री राधा रमणों विजयते ।।</p>
+    <p class="footer-copy footer-admin-link"><a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin Login</a></p>
+</footer>
 
-        function dispatchEmail() {
-            const subject = document.getElementById('userSubject').value;
-            const message = document.getElementById('userMessage').value;
-            const targetEmail = "bca24by7@gmail.com";
-            
-            if(!message.trim()){
-                alert("Please enter your message before sending!");
-                return;
-            }
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="toastContainer" aria-live="polite"></div>
 
-            const mailLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-            window.location.href = mailLink;
-            closeMailModal();
-        }
+<!-- ============ FILE PREVIEW MODAL ============ -->
+<div class="modal-overlay" id="premiumFileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass">
+        <div class="modal-header">
+            <span id="modalFileTitle">Document Viewer</span>
+            <button onclick="closePremiumModal()" class="modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+</div>
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('emailModal');
-            if (event.target == modal) {
-                closeMailModal();
-            }
-        }
-    </script>
+<!-- Firebase SDK (compat build — works with plain <script> tags, no bundler needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
