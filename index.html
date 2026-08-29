@@ -1,293 +1,1472 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BCA Hub — Notes, PYQs, Syllabus & Assignments</title>
-<meta name="description" content="Free BCA semester-wise notes, previous year question papers, solved assignments, practicals and syllabus in one modern dashboard.">
-<meta name="theme-color" content="#0a0a0a">
-<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1SEUrloEFO0AP9w7qxTsjKRbCY-j4YPZE">
-<script>
-    // Applied before the stylesheet paints anything, so there's no flash of the wrong theme
-    (function () {
-        try {
-            var saved = localStorage.getItem('bcaHubTheme') || 'dark';
-            document.documentElement.setAttribute('data-theme', saved);
-        } catch (e) {}
-    })();
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+  <title>BCA Hub Portal — Under Maintenance</title>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "BCA Hub",
-  "description": "A 100% free student-run BCA learning community offering notes, PYQs, syllabus and assignments.",
-  "url": "https://example.com/",
-  "member": [
-    { "@type": "Person", "name": "Yash Sharma", "jobTitle": "Founder" },
-    { "@type": "Person", "name": "Priya Verma", "jobTitle": "Co-Founder" },
-    { "@type": "Person", "name": "Arjun Mehta", "jobTitle": "Technical Head" },
-    { "@type": "Person", "name": "Rohit Deshmukh", "jobTitle": "Academic Head" },
-    { "@type": "Person", "name": "Ananya Singh", "jobTitle": "Notes Manager" },
-    { "@type": "Person", "name": "Karan Malhotra", "jobTitle": "Content Manager" },
-    { "@type": "Person", "name": "Ishita Kapoor", "jobTitle": "Graphic Designer" },
-    { "@type": "Person", "name": "Simran Kaur", "jobTitle": "Social Media Manager" },
-    { "@type": "Person", "name": "Neha Joshi", "jobTitle": "Student Support" },
-    { "@type": "Person", "name": "Aditya Rao", "jobTitle": "PYQ & Resources Manager" }
-  ]
-}
-</script>
+  <meta
+    name="description"
+    content="BCA Hub Portal is currently undergoing major maintenance and system improvements."
+  />
 
-<!-- GSAP powers only the hero stagger-reveal; every other motion (reveals, tilt,
-     magnetic buttons, cursor, marquee) is vanilla JS so nothing depends on it loading. -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --card: rgba(14, 19, 31, 0.72);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f5f7fb;
+      --muted: #9da6b8;
+
+      --primary: #7c5cff;
+      --secondary: #25d9ff;
+      --success: #54e08a;
+
+      --gold: #ffd84d;
+      --gold-soft: #f5c842;
+
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(124, 92, 255, 0.12),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(37, 217, 255, 0.10),
+          transparent 28%
+        ),
+        var(--bg);
+
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* =========================================
+       BACKGROUND
+    ========================================== */
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      pointer-events: none;
+      opacity: 0.45;
+
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.035) 1px,
+          transparent 1px
+        );
+
+      background-size: 45px 45px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%
+      );
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(5px);
+      z-index: -4;
+    }
+
+    .orb.one {
+      width: 260px;
+      height: 260px;
+      background: rgba(124, 92, 255, 0.08);
+      top: 7%;
+      left: -80px;
+      animation: floatOrb 11s ease-in-out infinite;
+    }
+
+    .orb.two {
+      width: 220px;
+      height: 220px;
+      background: rgba(37, 217, 255, 0.07);
+      right: -60px;
+      top: 45%;
+      animation: floatOrb 13s ease-in-out infinite reverse;
+    }
+
+    .orb.three {
+      width: 180px;
+      height: 180px;
+      background: rgba(84, 224, 138, 0.035);
+      left: 45%;
+      bottom: -60px;
+      animation: floatOrb 15s ease-in-out infinite;
+    }
+
+    @keyframes floatOrb {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(30px, -25px) scale(1.08);
+      }
+    }
+
+    /* =========================================
+       TOP SACRED LINE
+    ========================================== */
+
+    .spiritual-line {
+      width: 100%;
+      text-align: center;
+
+      padding-top: 17px;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      font-family:
+        "Noto Serif Devanagari",
+        serif;
+
+      font-size: 17px;
+      font-weight: 700;
+
+      letter-spacing: 0.8px;
+
+      color: var(--gold);
+
+      text-shadow:
+        0 0 10px rgba(255, 216, 77, 0.20),
+        0 0 22px rgba(255, 190, 40, 0.10);
+
+      animation: spiritualGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes spiritualGlow {
+      0%,
+      100% {
+        opacity: 0.82;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* =========================================
+       HEADER
+    ========================================== */
+
+    header {
+      width: 100%;
+
+      padding:
+        22px
+        7%
+        24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      text-decoration: none;
+      color: white;
+    }
+
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+
+      border-radius: 13px;
+
+      display: grid;
+      place-items: center;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c5cff,
+          #25d9ff
+        );
+
+      box-shadow:
+        0 0 30px rgba(124, 92, 255, 0.20);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .status-pill {
+      padding: 9px 13px;
+
+      border-radius: 100px;
+
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--border);
+
+      color: #cbd3e2;
+
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #f4bf50;
+
+      box-shadow:
+        0 0 12px rgba(244, 191, 80, 0.65);
+
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.35;
+      }
+    }
+
+    /* =========================================
+       MAIN
+    ========================================== */
+
+    main {
+      width: 100%;
+
+      min-height: calc(100vh - 150px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        35px
+        20px
+        65px;
+    }
+
+    .container {
+      width: min(950px, 100%);
+      text-align: center;
+    }
+
+    /* =========================================
+       ANIMATED MAINTENANCE VISUAL
+    ========================================== */
+
+    .maintenance-visual {
+      width: 150px;
+      height: 150px;
+
+      margin:
+        0
+        auto
+        35px;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ring.r1 {
+      width: 150px;
+      height: 150px;
+
+      animation:
+        spin
+        14s
+        linear
+        infinite;
+    }
+
+    .ring.r2 {
+      width: 118px;
+      height: 118px;
+
+      border-color:
+        rgba(124, 92, 255, 0.30);
+
+      border-right-color:
+        transparent;
+
+      animation:
+        spinReverse
+        7s
+        linear
+        infinite;
+    }
+
+    .ring.r3 {
+      width: 88px;
+      height: 88px;
+
+      border-color:
+        rgba(37, 217, 255, 0.30);
+
+      border-left-color:
+        transparent;
+
+      animation:
+        spin
+        5s
+        linear
+        infinite;
+    }
+
+    .core {
+      width: 62px;
+      height: 62px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124, 92, 255, 0.95),
+          rgba(37, 217, 255, 0.8)
+        );
+
+      display: grid;
+      place-items: center;
+
+      box-shadow:
+        0 0 35px rgba(124, 92, 255, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+      animation:
+        pulseCore
+        2.7s
+        ease-in-out
+        infinite;
+    }
+
+    .core svg {
+      width: 30px;
+      height: 30px;
+
+      fill: none;
+      stroke: white;
+      stroke-width: 1.7;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .spark {
+      position: absolute;
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: white;
+
+      box-shadow:
+        0 0 14px rgba(255, 255, 255, 0.75);
+    }
+
+    .spark.s1 {
+      top: 17px;
+      right: 20px;
+
+      animation:
+        sparkle
+        2s
+        infinite;
+    }
+
+    .spark.s2 {
+      bottom: 20px;
+      left: 18px;
+
+      animation:
+        sparkle
+        2s
+        0.8s
+        infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spinReverse {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @keyframes pulseCore {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.07);
+      }
+    }
+
+    @keyframes sparkle {
+      0%,
+      100% {
+        transform: scale(0.5);
+        opacity: 0.25;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+    }
+
+    /* =========================================
+       TEXT
+    ========================================== */
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 8px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      color: #bcb4ff;
+
+      letter-spacing: 2.5px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+
+      width: 22px;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(124, 92, 255, 0.8)
+        );
+    }
+
+    .eyebrow::after {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(37, 217, 255, 0.8),
+          transparent
+        );
+    }
+
+    h1 {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          42px,
+          7vw,
+          76px
+        );
+
+      line-height: 0.98;
+
+      letter-spacing: -3px;
+
+      font-weight: 700;
+
+      margin-bottom: 24px;
+
+      background:
+        linear-gradient(
+          110deg,
+          #ffffff 10%,
+          #bcbcff 45%,
+          #75e7ff 90%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        reveal
+        1s
+        ease
+        both;
+    }
+
+    .description {
+      max-width: 670px;
+
+      margin: 0 auto;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.8;
+
+      animation:
+        fadeUp
+        0.9s
+        0.15s
+        ease
+        both;
+    }
+
+    .description strong {
+      color: #e9ecf5;
+      font-weight: 600;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================================
+       MAINTENANCE CARD
+    ========================================== */
+
+    .maintenance-card {
+      margin:
+        40px
+        auto
+        0;
+
+      max-width: 680px;
+
+      padding: 24px;
+
+      border-radius: 22px;
+
+      background: var(--card);
+
+      border:
+        1px solid
+        var(--border);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 25px 80px var(--shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+      animation:
+        cardEnter
+        1s
+        0.3s
+        ease
+        both;
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform:
+          translateY(18px)
+          scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0)
+          scale(1);
+      }
+    }
+
+    .maintenance-top {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 14px;
+
+      gap: 20px;
+    }
+
+    .maintenance-label {
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: #dce2ed;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+    }
+
+    .maintenance-state {
+      color: var(--success);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+    }
+
+    .maintenance-state::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      background: var(--success);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 10px
+        rgba(84, 224, 138, 0.7);
+    }
+
+    .progress {
+      height: 7px;
+      width: 100%;
+
+      background:
+        rgba(255, 255, 255, 0.055);
+
+      border-radius: 100px;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .progress::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: -35%;
+
+      width: 35%;
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          #7c5cff,
+          #25d9ff,
+          transparent
+        );
+
+      animation:
+        loading
+        2.4s
+        ease-in-out
+        infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        left: -35%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* =========================================
+       BUTTONS
+    ========================================== */
+
+    .actions {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin-top: 28px;
+
+      flex-wrap: wrap;
+
+      animation:
+        fadeUp
+        0.9s
+        0.5s
+        ease
+        both;
+    }
+
+    .btn {
+      min-height: 49px;
+
+      padding:
+        0
+        22px;
+
+      border-radius: 13px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      text-decoration: none;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .btn-primary {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7656f8,
+          #3dcdf1
+        );
+
+      box-shadow:
+        0 10px 30px
+        rgba(99, 82, 240, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 16px 35px
+        rgba(99, 82, 240, 0.35);
+    }
+
+    .btn-secondary {
+      color: #dce2ee;
+
+      border:
+        1px solid
+        var(--border);
+
+      background:
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+
+      border-color:
+        rgba(124, 92, 255, 0.35);
+
+      background:
+        rgba(255, 255, 255, 0.055);
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* =========================================
+       INFO CHIPS
+    ========================================== */
+
+    .info-row {
+      margin-top: 42px;
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      animation:
+        fadeUp
+        0.9s
+        0.65s
+        ease
+        both;
+    }
+
+    .info-chip {
+      padding:
+        10px
+        14px;
+
+      border-radius: 100px;
+
+      background:
+        rgba(255, 255, 255, 0.025);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.065);
+
+      color: #8e98aa;
+
+      font-size: 11px;
+
+      font-weight: 600;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================== */
+
+    footer {
+      width: 100%;
+
+      text-align: center;
+
+      padding:
+        0
+        20px
+        30px;
+
+      color: #596274;
+
+      font-size: 11px;
+    }
+
+    .regards {
+      color: #8d96a8;
+
+      font-size: 11px;
+
+      margin-bottom: 3px;
+    }
+
+    .team-name {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      color: #dce2ee;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.4px;
+
+      margin-bottom: 8px;
+    }
+
+    .copyright {
+      color: #596274;
+
+      font-size: 10px;
+    }
+
+    .copyright span {
+      color: #7c5cff;
+    }
+
+    /* =========================================
+       CURSOR GLOW
+    ========================================== */
+
+    .cursor-glow {
+      position: fixed;
+
+      width: 250px;
+      height: 250px;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      z-index: -2;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(124, 92, 255, 0.08) 0%,
+          rgba(37, 217, 255, 0.03) 35%,
+          transparent 70%
+        );
+
+      transform:
+        translate(-50%, -50%);
+
+      transition:
+        left 0.18s ease-out,
+        top 0.18s ease-out;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 650px) {
+
+      .spiritual-line {
+        font-size: 15px;
+        padding-top: 14px;
+      }
+
+      header {
+        padding:
+          18px
+          18px;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .status-pill {
+        font-size: 10px;
+        padding:
+          8px
+          10px;
+      }
+
+      main {
+        padding:
+          30px
+          18px
+          55px;
+      }
+
+      .maintenance-visual {
+        width: 130px;
+        height: 130px;
+      }
+
+      .ring.r1 {
+        width: 130px;
+        height: 130px;
+      }
+
+      .ring.r2 {
+        width: 102px;
+        height: 102px;
+      }
+
+      .ring.r3 {
+        width: 75px;
+        height: 75px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .description {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .maintenance-card {
+        padding: 19px;
+        border-radius: 18px;
+      }
+
+      .maintenance-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .info-row {
+        margin-top: 28px;
+      }
+    }
+
+    /* =========================================
+       REDUCE MOTION
+    ========================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ============ PRELOADER ============ -->
-<div id="preloader" aria-hidden="true">
-    <span class="preloader-mark">BCA<span class="gradient-text">HUB</span></span>
-    <span class="preloader-count" id="preloaderCount">0</span>
-</div>
+  <!-- =========================================
+       TOP SPIRITUAL LINE
+  ========================================== -->
 
-<!-- ============ CUSTOM CURSOR ============ -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"><span id="cursorLabel"></span></div>
+  <div class="spiritual-line">
+    ।। श्री राधा रमणों विजयते ।।
+  </div>
 
-<!-- ============ AMBIENT BACKGROUND ============ -->
-<div class="mesh-bg" aria-hidden="true">
-    <div class="blob blob-a"></div>
-    <div class="blob blob-b"></div>
-</div>
 
-<!-- ============ NAVBAR ============ -->
-<header class="navbar glass">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo" onclick="renderHomeDashboard(); return false;" data-cursor-label="Home">
-            BCA<span class="gradient-text">HUB</span>
+  <!-- =========================================
+       BACKGROUND
+  ========================================== -->
+
+  <div class="bg-grid"></div>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div
+    class="cursor-glow"
+    id="cursorGlow"
+  ></div>
+
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header>
+
+    <a
+      href="#"
+      class="brand"
+      aria-label="BCA Hub Portal"
+    >
+
+      <div class="brand-logo">
+        BH
+      </div>
+
+      <div class="brand-text">
+
+        <div class="brand-name">
+          BCA Hub Portal
+        </div>
+
+        <div class="brand-sub">
+          Student Platform
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <div class="status-pill">
+
+      <span class="status-dot"></span>
+
+      Major Maintenance
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================== -->
+
+  <main>
+
+    <section class="container">
+
+
+      <!-- Animated Maintenance Graphic -->
+
+      <div class="maintenance-visual">
+
+        <div class="ring r1"></div>
+
+        <div class="ring r2"></div>
+
+        <div class="ring r3"></div>
+
+        <div class="spark s1"></div>
+
+        <div class="spark s2"></div>
+
+
+        <div class="core">
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+            />
+
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.9 1.9-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2.68v-.08A1.7 1.7 0 0 0 11.22 18.4a1.7 1.7 0 0 0-1.88.34l-.06.06-1.9-1.9.06-.06A1.7 1.7 0 0 0 7.78 15a1.7 1.7 0 0 0-1.56-1.03H6V11.3h.08A1.7 1.7 0 0 0 7.64 10.3a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.9-1.9.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.19 5.3V5h2.68v.3a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.9 1.9-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03H21v2.68h-.3A1.7 1.7 0 0 0 19.4 15Z"
+            />
+
+          </svg>
+
+        </div>
+
+      </div>
+
+
+      <!-- Eyebrow -->
+
+      <div class="eyebrow">
+        System Upgrade In Progress
+      </div>
+
+
+      <!-- Main Heading -->
+
+      <h1>
+        We’re Building<br>
+        Something Better.
+      </h1>
+
+
+      <!-- Description -->
+
+      <p class="description">
+
+        <strong>BCA Hub Portal</strong>
+        is currently undergoing
+        <strong>major maintenance and system improvements.</strong>
+
+        We’re working behind the scenes to make your portal
+        faster, smoother and more reliable.
+
+        <br><br>
+
+        Thank you for your patience while we upgrade your experience.
+
+      </p>
+
+
+      <!-- Maintenance Progress -->
+
+      <div class="maintenance-card">
+
+        <div class="maintenance-top">
+
+          <span class="maintenance-label">
+            Portal Status
+          </span>
+
+          <span class="maintenance-state">
+            Upgrade in progress
+          </span>
+
+        </div>
+
+
+        <div class="progress"></div>
+
+      </div>
+
+
+      <!-- Buttons -->
+
+      <div class="actions">
+
+
+        <!-- Contact Support -->
+
+        <a
+          href="mailto:bca24by7@gmail.com?subject=BCA%20Hub%20Portal%20Support"
+          class="btn btn-primary"
+        >
+
+          <svg viewBox="0 0 24 24">
+
+            <path
+              d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"
+            />
+
+            <path
+              d="m22 6-10 7L2 6"
+            />
+
+          </svg>
+
+          Contact Support
+
         </a>
 
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="liveSearchInput" placeholder="Search notes, PYQs, subjects... (Ctrl+K)" autocomplete="off">
-            <button id="searchClearBtn" class="search-clear" title="Clear" aria-label="Clear search"><i class="fa-solid fa-xmark"></i></button>
-            <div class="quick-search-dropdown glass" id="quickSearchDropdown"></div>
-        </div>
 
-        <nav class="nav-links" aria-label="Primary">
-            <a href="#" onclick="renderHomeDashboard(); return false;" class="magnetic" data-cursor-label="">Semesters</a>
-            <a href="#" onclick="scrollToNotices(); return false;" class="magnetic" data-cursor-label="">Notices</a>
-            <a href="#" onclick="scrollToImportantLinks(); return false;" class="magnetic" data-cursor-label="">Links</a>
-            <a href="#" onclick="scrollToTeam(); return false;" class="magnetic" data-cursor-label="">Our Team</a>
-            <a href="#" onclick="scrollToSavedResources(); return false;" class="magnetic" data-cursor-label="">Saved</a>
-        </nav>
+        <!-- Refresh -->
 
-        <button class="circle-btn" id="guideBtn" title="How to use this site" aria-label="Open usage guide" data-cursor-label="Guide">
-            <i class="fa-solid fa-circle-question"></i>
-        </button>
+        <a
+          href="#"
+          class="btn btn-secondary"
+          onclick="location.reload(); return false;"
+        >
 
-        <a href="login.html" id="myAccountLink" class="btn-ghost magnetic" data-cursor-label="">
-            <i class="fa-solid fa-user"></i><span id="myAccountLabel">Login</span>
+          <svg viewBox="0 0 24 24">
+
+            <path
+              d="M20 11a8.1 8.1 0 0 0-14.9-4L3 10"
+            />
+
+            <path
+              d="M3 4v6h6"
+            />
+
+            <path
+              d="M4 13a8.1 8.1 0 0 0 14.9 4L21 14"
+            />
+
+            <path
+              d="M21 20v-6h-6"
+            />
+
+          </svg>
+
+          Check Again
+
         </a>
 
-        <button class="btn-glow magnetic" data-cursor-label="Ask" onclick="openAiAssistantView()">
-            <i class="fa-solid fa-robot"></i><span>Ask AI</span>
-        </button>
+      </div>
 
-        <div class="theme-panel-wrap">
-            <button id="themeToggle" class="circle-btn" title="Change theme" aria-label="Change theme" aria-expanded="false">
-                <i class="fa-solid fa-palette"></i>
-            </button>
-            <div class="theme-panel glass" id="themePanel">
-                <p class="theme-panel-label">Theme</p>
-                <div class="theme-swatches">
-                    <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
-                    <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
-                    <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
-                    <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
-                    <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
-                    <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
-                </div>
-                <p class="theme-panel-label">Custom accent</p>
-                <div class="custom-accent-row">
-                    <input type="color" id="customAccentPicker" value="#a6b8ff" aria-label="Pick a custom accent color">
-                    <button id="resetAccentBtn" class="btn-ghost" style="padding:0.5rem 0.9rem;font-size:0.78rem;">Reset</button>
-                </div>
-            </div>
+
+      <!-- Information Chips -->
+
+      <div class="info-row">
+
+        <div class="info-chip">
+          ⚡ Performance Improvements
         </div>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span>
-        </button>
-    </div>
-    <div class="nav-mobile" id="navMobile">
-        <a href="#" onclick="renderHomeDashboard(); document.getElementById('navMobile').classList.remove('open'); return false;">Semesters</a>
-        <a href="#" onclick="scrollToNotices(); document.getElementById('navMobile').classList.remove('open'); return false;">Notices</a>
-        <a href="#" onclick="scrollToImportantLinks(); document.getElementById('navMobile').classList.remove('open'); return false;">Important Links</a>
-        <a href="#" onclick="scrollToTeam(); document.getElementById('navMobile').classList.remove('open'); return false;">Our Team</a>
-        <a href="#" onclick="scrollToSavedResources(); document.getElementById('navMobile').classList.remove('open'); return false;">Saved Resources</a>
-        <a href="#" id="guideBtnMobile">How to Use This Site</a>
-        <a href="login.html" id="myAccountLinkMobile"><i class="fa-solid fa-user"></i> <span id="myAccountLabelMobile">Login / Register</span></a>
-        <button class="btn-glow" onclick="openAiAssistantView()"><i class="fa-solid fa-robot"></i><span>Ask AI</span></button>
-        <div class="theme-swatches">
-            <button class="swatch" data-theme-name="dark" title="Dark"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>Dark</button>
-            <button class="swatch" data-theme-name="light" title="Light"><span class="swatch-dot" style="background:linear-gradient(135deg,#ff8156,#4a5fe0)"></span>Light</button>
-            <button class="swatch" data-theme-name="amoled" title="AMOLED"><span class="swatch-dot" style="background:linear-gradient(135deg,#ffb199,#a6b8ff)"></span>AMOLED</button>
-            <button class="swatch" data-theme-name="blue" title="Blue"><span class="swatch-dot" style="background:linear-gradient(135deg,#60a5fa,#38e0ff)"></span>Blue</button>
-            <button class="swatch" data-theme-name="green" title="Green"><span class="swatch-dot" style="background:linear-gradient(135deg,#34d399,#a3f7bf)"></span>Green</button>
-            <button class="swatch" data-theme-name="purple" title="Purple"><span class="swatch-dot" style="background:linear-gradient(135deg,#c084fc,#a78bfa)"></span>Purple</button>
-        </div>
-    </div>
-</header>
-
-<!-- ============ LIVE NOTICE TICKER (persistent, thin, always visible) ============ -->
-<div class="ticker glass" id="tickerBar">
-    <div class="ticker-track" id="tickerTrack"></div>
-</div>
-
-<div class="main-wrapper">
-    <div id="dynamicContentContext"></div>
-</div>
-
-<!-- ============ MEET OUR TEAM ============ -->
-<section class="team-section" id="team">
-    <div class="team-particles" aria-hidden="true" id="teamParticles"></div>
-
-    <div class="team-header">
-        <p class="eyebrow reveal-up"><span class="dot-pulse"></span> <span>The People Behind BCA Hub</span></p>
-        <h2 class="team-heading reveal-up">Meet Our Team</h2>
-        <p class="team-subhead reveal-up">A small student-run crew keeping BCA Hub 100% free, organized, and up to date.</p>
-
-        <div class="team-stats reveal-up">
-            <div class="team-stat"><span class="stat-number" data-target="10">0</span><span class="stat-label">Team Members</span></div>
-            <div class="team-stat"><span class="stat-number" data-target="5">0</span><span class="stat-label">Departments</span></div>
+        <div class="info-chip">
+          🔐 Security Updates
         </div>
 
-        <div class="team-dept-legend reveal-up" id="teamDeptLegend"></div>
-    </div>
-
-    <div class="team-controls reveal-up">
-        <div class="search-box team-search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="teamSearchInput" placeholder="Search by position or department..." autocomplete="off">
+        <div class="info-chip">
+          🎓 Student Experience
         </div>
-        <div class="filter-bar" id="teamFilterBar" role="tablist" aria-label="Filter team by department">
-            <button class="filter-pill active" data-dept="all">All</button>
-            <button class="filter-pill" data-dept="leadership">Leadership</button>
-            <button class="filter-pill" data-dept="tech">Tech</button>
-            <button class="filter-pill" data-dept="academics">Academics</button>
-            <button class="filter-pill" data-dept="content">Content &amp; Design</button>
-            <button class="filter-pill" data-dept="support">Support</button>
+
+        <div class="info-chip">
+          🛠️ System Upgrades
         </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer>
+
+    <div class="regards">
+      Regards,
     </div>
 
-    <div class="team-grid" id="teamGrid">
-        <!-- Cards are lazy-rendered by script.js once this section nears the viewport -->
-    </div>
-    <p class="empty" id="teamEmptyState" style="display:none;">No team members match that search.</p>
-</section>
-
-<button class="join-team-float glass" id="joinTeamBtn" data-cursor-label="Join">
-    <i class="fa-solid fa-hand-sparkles"></i><span>Join Our Team</span>
-</button>
-
-<!-- ============ TEAM PROFILE MODAL ============ -->
-<div class="modal-overlay" id="teamProfileModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-panel glass team-modal-panel">
-        <button class="modal-close" id="teamModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-        <div class="team-modal-body" id="teamModalBody"></div>
-    </div>
-</div>
-
-<!-- ============ GUIDE MODAL — how to use the site ============ -->
-<div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-panel glass guide-modal-panel">
-        <button class="modal-close" id="guideModalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-        <div class="guide-modal-body" id="guideModalBody"></div>
-    </div>
-</div>
-
-<!-- ============ GET INVOLVED ============ -->
-<section class="involve-section glass" id="involve">
-    <div class="involve-text">
-        <h3>🤝 Have notes to share, or something to tell us?</h3>
-        <p>Contributions and feedback both go a long way in keeping BCA Hub useful for everyone.</p>
-    </div>
-    <div class="involve-actions">
-        <button class="btn-glow magnetic" onclick="handleContributeNotes()" data-cursor-label="Email">
-            <i class="fa-solid fa-paper-plane"></i><span>Share Your Notes</span>
-        </button>
-        <button class="btn-ghost magnetic" onclick="handleSendFeedback()" data-cursor-label="Email">
-            <i class="fa-solid fa-comment-dots"></i><span>Send Feedback</span>
-        </button>
-    </div>
-</section>
-
-<!-- ============ ROTATING DISCLAIMER STRIP ============ -->
-<div class="disclaimer-strip glass">
-    <i class="fa-solid fa-shield-halved"></i>
-    <span id="disclaimerText"></span>
-</div>
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-    <div class="footer-inner">
-        <span class="footer-logo">BCA<span class="gradient-text">HUB</span></span>
-        <div class="footer-time">
-            <i class="fa-regular fa-clock"></i>
-            <span id="footerTime">--:--</span>
-            <span class="footer-time-label">Your local time</span>
-        </div>
-        <div class="footer-socials">
-            <a href="mailto:bca24by7@gmail.com" class="social-glow magnetic" aria-label="Email BCA Hub"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://chat.whatsapp.com/IGVGUkdRXvYLSB594flU1n" target="_blank" class="social-glow magnetic" aria-label="WhatsApp Group"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://erp.univraj.org/" target="_blank" class="social-glow magnetic" aria-label="University Exam Portal"><i class="fa-solid fa-graduation-cap"></i></a>
-        </div>
+    <div class="team-name">
+      BCA Hub Team
     </div>
 
-    <p class="footer-contact">
-        <i class="fa-solid fa-headset"></i> <span>Contact Support:</span>
-        <a href="mailto:bca24by7@gmail.com">bca24by7@gmail.com</a>
-    </p>
+    <div class="copyright">
 
-    <p class="footer-copy footer-copyright-main">
-        © <span id="footerYear"></span> <strong>BCA Hub</strong> — <span>All Rights Reserved.</span>
-    </p>
-    <p class="footer-copy footer-legal">
-        This is a 100% free, student-run educational resource. All content is provided for self-study purposes only.
-    </p>
-    <p class="footer-copy">
-        <span>Developed with</span> <i class="fa-solid fa-heart neon-heart"></i> <span>by</span> <span class="yash-name">YASH</span>
-    </p>
-    <p class="footer-copy footer-blessing">।। श्री राधा रमणों विजयते ।।</p>
-    <p class="footer-copy footer-admin-link"><a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin Login</a></p>
-</footer>
+      ©
+      <span id="year"></span>
+      BCA Hub Portal ·
+      System temporarily unavailable during maintenance
 
-<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-<div id="toastContainer" aria-live="polite"></div>
-
-<!-- ============ FILE PREVIEW MODAL ============ -->
-<div class="modal-overlay" id="premiumFileModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-panel glass">
-        <div class="modal-header">
-            <span id="modalFileTitle">Document Viewer</span>
-            <button onclick="closePremiumModal()" class="modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <iframe id="modalIframeViewer" src="" width="100%" height="100%" frameborder="0"></iframe>
     </div>
-</div>
 
-<!-- Firebase SDK (compat build — works with plain <script> tags, no bundler needed) -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script src="script.js"></script>
+  </footer>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    /* Dynamic Year */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* Mouse Glow */
+
+    const glow =
+      document.getElementById("cursorGlow");
+
+
+    document.addEventListener(
+      "mousemove",
+      function (event) {
+
+        glow.style.left =
+          event.clientX + "px";
+
+        glow.style.top =
+          event.clientY + "px";
+
+      }
+    );
+
+  </script>
+
 </body>
 </html>
