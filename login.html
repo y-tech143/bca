@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Log In — BCA Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="student.css">
+</head>
+<body class="auth-body" data-theme="dark">
+
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<div class="auth-center-screen">
+    <div class="auth-card glass">
+        <div class="auth-logo">BCA<span class="gradient-text">HUB</span></div>
+        <p class="auth-sub">Log in to your student account</p>
+
+        <div id="firebaseWarning" class="auth-warning" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Firebase isn't configured yet. Open <code>firebase-config.js</code> and follow SETUP_GUIDE.md first.
+        </div>
+
+        <div id="loginArea">
+            <div class="auth-method-toggle">
+                <button type="button" class="auth-method-btn active" id="methodEmailBtn">Email</button>
+                <button type="button" class="auth-method-btn" id="methodIdBtn">Student ID</button>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <label id="emailFieldWrap">Email
+                    <input type="email" id="loginEmail" autocomplete="username" placeholder="you@example.com">
+                </label>
+                <label id="idFieldWrap" style="display:none;">Student ID
+                    <input type="text" id="loginStudentId" autocomplete="username" placeholder="e.g. BCA26-JPR-0001">
+                </label>
+
+                <label>Password
+                    <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
+                </label>
+
+                <p class="auth-forgot-link"><a href="#" id="forgotPasswordLink">Forgot password?</a></p>
+
+                <p id="loginError" class="auth-error" style="display:none;"></p>
+                <p id="loginSuccess" class="auth-success" style="display:none;"></p>
+                <button type="submit" class="btn-glow auth-submit-btn" id="loginSubmitBtn"><span><i class="fa-solid fa-right-to-bracket"></i> Log In</span></button>
+            </form>
+        </div>
+
+        <!-- ---------- Forgot password panel (swapped in over the login form) ---------- -->
+        <div id="forgotArea" style="display:none;">
+            <form id="forgotForm" class="auth-form">
+                <label>Email or Student ID
+                    <input type="text" id="forgotIdentifier" required placeholder="you@example.com or BCA26-JPR-0001">
+                </label>
+                <p id="forgotError" class="auth-error" style="display:none;"></p>
+                <p id="forgotSuccess" class="auth-success" style="display:none;"></p>
+                <button type="submit" class="btn-glow auth-submit-btn" id="forgotSubmitBtn"><span><i class="fa-solid fa-paper-plane"></i> Send Reset Link</span></button>
+                <button type="button" class="btn-ghost auth-submit-btn" id="backToLoginBtn"><span>Back to Log In</span></button>
+            </form>
+        </div>
+
+        <p class="auth-switch">New here? <a href="register.html">Create an account</a></p>
+        <a href="index.html" class="auth-back-link"><i class="fa-solid fa-arrow-left"></i> Back to BCA Hub</a>
+    </div>
+</div>
+
+<div id="toastContainer" aria-live="polite"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth-service.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Create Your Student Account — BCA Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="student.css">
+</head>
+<body class="auth-body" data-theme="dark">
+
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<div class="auth-center-screen">
+    <div class="auth-card glass wide">
+        <div class="auth-logo">BCA<span class="gradient-text">HUB</span></div>
+        <p class="auth-sub">Create your student account</p>
+
+        <div id="firebaseWarning" class="auth-warning" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Firebase isn't configured yet. Open <code>firebase-config.js</code> and follow SETUP_GUIDE.md first.
+        </div>
+
+        <form id="registerForm" class="auth-form">
+            <div class="auth-form-grid">
+                <label class="full">Full Name
+                    <input type="text" id="regName" required placeholder="e.g. Aditi Sharma" pattern="[A-Za-z][A-Za-z .'\-]{1,59}" title="Letters, spaces, periods, hyphens and apostrophes only">
+                </label>
+
+                <label class="full">Email
+                    <input type="email" id="regEmail" required placeholder="you@example.com">
+                </label>
+
+                <label>Password
+                    <input type="password" id="regPassword" required minlength="6" placeholder="At least 6 characters">
+                </label>
+                <label>Confirm Password
+                    <input type="password" id="regConfirmPassword" required minlength="6" placeholder="Re-enter password">
+                </label>
+
+                <label>Semester
+                    <select id="regSemester" required>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                        <option value="3">Semester 3</option>
+                        <option value="4">Semester 4</option>
+                        <option value="5">Semester 5</option>
+                        <option value="6">Semester 6</option>
+                    </select>
+                </label>
+                <label>Year
+                    <select id="regYear" required>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                    </select>
+                </label>
+
+                <label>City
+                    <input type="text" id="regCity" required placeholder="e.g. Jaipur" pattern="[A-Za-z][A-Za-z .'\-]{1,59}">
+                </label>
+                <label>College
+                    <input type="text" id="regCollege" required placeholder="e.g. XYZ College" pattern="[A-Za-z0-9][A-Za-z0-9 .,&amp;'()/\-]{1,99}" title="Letters, numbers, and common punctuation only">
+                </label>
+
+                <label>Gender
+                    <select id="regGender" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+                <div></div>
+
+                <div class="photo-upload-row full">
+                    <div class="photo-upload-preview" id="photoPreview"></div>
+                    <div class="photo-upload-btn">
+                        <label for="regPhoto"><i class="fa-solid fa-camera"></i> Upload photo (optional)</label>
+                        <input type="file" id="regPhoto" accept="image/*">
+                        <p class="auth-hint">Max 2MB. Skip this and we'll generate a default avatar for you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p id="registerError" class="auth-error" style="display:none;"></p>
+            <button type="submit" class="btn-glow auth-submit-btn" id="registerSubmitBtn"><span><i class="fa-solid fa-user-plus"></i> Create Account</span></button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+        <a href="index.html" class="auth-back-link"><i class="fa-solid fa-arrow-left"></i> Back to BCA Hub</a>
+    </div>
+</div>
+
+<div id="toastContainer" aria-live="polite"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth-service.js"></script>
+<script src="register.js"></script>
+</body>
+</html>

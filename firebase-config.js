@@ -23,14 +23,13 @@
    ========================================================================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAb8yOFtvNWwmXEY74f8dGnatZplmFfWCo",
-    authDomain: "bca-hub-7e5ec.firebaseapp.com",
-    projectId: "bca-hub-7e5ec",
-    storageBucket: "bca-hub-7e5ec.firebasestorage.app",
-    messagingSenderId: "404096974272",
-    appId: "1:404096974272:web:3baa2bb76ca5492632dc25"
+  apiKey: "AIzaSyA42WRcSKRqrsQhLGQJaxxexRH_b9fYLhk",
+  authDomain: "bcahubuserlogin.firebaseapp.com",
+  projectId: "bcahubuserlogin",
+  storageBucket: "bcahubuserlogin.firebasestorage.app",
+  messagingSenderId: "516108502242",
+  appId: "1:516108502242:web:a3080d202e947346d18abb"
 };
-
 // Detects whether the placeholder values above have actually been replaced yet.
 const FIREBASE_IS_CONFIGURED = !!(firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("PASTE_"));
 

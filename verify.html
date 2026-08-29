@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Verify Student ID — BCA Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="student.css">
+</head>
+<body class="auth-body" data-theme="dark">
+
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<div class="auth-center-screen">
+    <div class="auth-card glass verify-result" id="verifyCard">
+        <div class="auth-logo">BCA<span class="gradient-text">HUB</span></div>
+        <p class="auth-sub">Student ID Verification</p>
+        <div id="verifyContent">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.6rem; color: var(--accent-b);"></i>
+        </div>
+        <a href="index.html" class="auth-back-link"><i class="fa-solid fa-arrow-left"></i> Back to BCA Hub</a>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth-service.js"></script>
+<script src="verify.js"></script>
+</body>
+</html>

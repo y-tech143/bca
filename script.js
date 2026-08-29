@@ -462,10 +462,35 @@ function initApp() {
     setupDisclaimerStrip();
     setupTeamLazyLoad();
     setupTeamStatics();
+    setupAccountLink();
     renderHomeDashboard();      // first paint — shows a loading state until Firestore responds
     setupFirestoreListeners();  // live data starts flowing in and re-renders automatically
     updateFooter();
     setInterval(updateFooter, 30000);
+}
+
+// Reflects whether a student is currently logged in on the navbar's account
+// link — "Login" → login.html when logged out, "My Profile" → profile.html
+// (with their name) once they're signed in. Uses the same `auth` object
+// already initialized by firebase-config.js, so no extra setup is needed.
+function setupAccountLink() {
+    const link = document.getElementById("myAccountLink");
+    const label = document.getElementById("myAccountLabel");
+    const linkMobile = document.getElementById("myAccountLinkMobile");
+    const labelMobile = document.getElementById("myAccountLabelMobile");
+    if (typeof FIREBASE_IS_CONFIGURED === "undefined" || !FIREBASE_IS_CONFIGURED || !auth) return;
+
+    auth.onAuthStateChanged((user) => {
+        const loggedIn = !!user;
+        const href = loggedIn ? "profile.html" : "login.html";
+        const text = loggedIn ? "My Profile" : "Login";
+        const mobileText = loggedIn ? "My Profile" : "Login / Register";
+
+        if (link) { link.href = href; }
+        if (label) label.textContent = text;
+        if (linkMobile) linkMobile.href = href;
+        if (labelMobile) labelMobile.textContent = mobileText;
+    });
 }
 
 window.addEventListener("pageshow", (e) => { if (e.persisted) renderHomeDashboard(); });

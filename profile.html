@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>My Profile — BCA Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="student.css">
+</head>
+<body class="auth-body" data-theme="dark">
+
+<div class="mesh-bg" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+</div>
+
+<!-- Shown briefly while we check auth state -->
+<div id="loadingScreen" class="auth-center-screen">
+    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.8rem; color: var(--accent-b);"></i>
+</div>
+
+<div id="profileShell" class="profile-shell" style="display:none;">
+    <header class="profile-topbar glass">
+        <span class="profile-topbar-logo">BCA<span class="gradient-text">HUB</span></span>
+        <div class="admin-topbar-right">
+            <a href="index.html" class="btn-ghost admin-small-btn"><i class="fa-solid fa-house"></i> Browse Site</a>
+            <button id="logoutBtn" class="btn-ghost admin-small-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </header>
+
+    <div class="profile-hero glass">
+        <div class="profile-avatar" id="profileAvatar"></div>
+        <div class="profile-hero-info">
+            <h2 id="profileName">—</h2>
+            <span class="profile-uid" id="profileUid">—</span>
+        </div>
+        <div class="profile-hero-actions">
+            <button class="btn-glow" id="viewIdCardBtn"><span><i class="fa-solid fa-id-card"></i> View ID Card</span></button>
+        </div>
+    </div>
+
+    <div class="profile-grid">
+        <div class="profile-field glass"><div class="profile-field-label">Email</div><div class="profile-field-value" id="fieldEmail">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">College</div><div class="profile-field-value" id="fieldCollege">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">Semester</div><div class="profile-field-value" id="fieldSemester">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">Year</div><div class="profile-field-value" id="fieldYear">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">City</div><div class="profile-field-value" id="fieldCity">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">Gender</div><div class="profile-field-value" id="fieldGender">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">Member Since</div><div class="profile-field-value" id="fieldCreated">—</div></div>
+        <div class="profile-field glass"><div class="profile-field-label">Student ID</div><div class="profile-field-value" id="fieldUid">—</div></div>
+    </div>
+
+    <div class="profile-actions-row">
+        <button class="btn-glow" id="editProfileBtn"><span><i class="fa-solid fa-pen"></i> Edit Profile</span></button>
+        <button class="btn-ghost" id="changePasswordBtn"><span><i class="fa-solid fa-key"></i> Change Password</span></button>
+    </div>
+
+    <div class="profile-history glass">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Semester History</h3>
+        <div id="historyList"></div>
+    </div>
+</div>
+
+<!-- ============ EDIT PROFILE MODAL ============ -->
+<div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass" style="max-width: 560px; height: auto; max-height: 88vh;">
+        <div class="modal-header">
+            <span>Edit Profile</span>
+            <button class="modal-close" id="editModalClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div style="padding: 1.6rem; overflow-y: auto;">
+            <form id="editForm" class="auth-form">
+                <div class="auth-form-grid">
+                    <div class="photo-upload-row full">
+                        <div class="photo-upload-preview" id="editPhotoPreview"></div>
+                        <div class="photo-upload-btn">
+                            <label for="editPhoto"><i class="fa-solid fa-camera"></i> Change photo</label>
+                            <input type="file" id="editPhoto" accept="image/*">
+                        </div>
+                    </div>
+                    <label class="full">Full Name <input type="text" id="editName" required pattern="[A-Za-z][A-Za-z .'\-]{1,59}"></label>
+                    <label>Semester
+                        <select id="editSemester">
+                            <option value="1">Semester 1</option><option value="2">Semester 2</option><option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option><option value="5">Semester 5</option><option value="6">Semester 6</option>
+                        </select>
+                    </label>
+                    <label>Year
+                        <select id="editYear"><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option></select>
+                    </label>
+                    <label>City <input type="text" id="editCity" required pattern="[A-Za-z][A-Za-z .'\-]{1,59}"></label>
+                    <label>College <input type="text" id="editCollege" required pattern="[A-Za-z0-9][A-Za-z0-9 .,&amp;'()/\-]{1,99}" title="Letters, numbers, and common punctuation only"></label>
+                    <label>Gender
+                        <select id="editGender"><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select>
+                    </label>
+                </div>
+                <p id="editError" class="auth-error" style="display:none;"></p>
+                <button type="submit" class="btn-glow auth-submit-btn" id="editSubmitBtn"><span><i class="fa-solid fa-check"></i> Save Changes</span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ============ CHANGE PASSWORD MODAL ============ -->
+<div class="modal-overlay" id="passwordModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel glass" style="max-width: 420px; height: auto;">
+        <div class="modal-header">
+            <span>Change Password</span>
+            <button class="modal-close" id="passwordModalClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div style="padding: 1.6rem;">
+            <form id="passwordForm" class="auth-form">
+                <label>Current Password <input type="password" id="currentPassword" required></label>
+                <label>New Password <input type="password" id="newPassword" required minlength="6"></label>
+                <label>Confirm New Password <input type="password" id="confirmNewPassword" required minlength="6"></label>
+                <p id="passwordError" class="auth-error" style="display:none;"></p>
+                <button type="submit" class="btn-glow auth-submit-btn" id="passwordSubmitBtn"><span><i class="fa-solid fa-key"></i> Update Password</span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ============ DIGITAL ID CARD ============ -->
+<div class="id-card-overlay" id="idCardOverlay">
+    <div class="id-card-wrap">
+        <div style="position: relative;">
+            <button class="id-card-close" id="idCardClose"><i class="fa-solid fa-xmark"></i></button>
+            <div class="id-card" id="idCard">
+                <div class="id-card-band">
+                    <span class="id-card-band-logo">BCA HUB</span>
+                    <span class="id-card-band-tag">STUDENT IDENTITY CARD</span>
+                </div>
+                <div class="id-card-body">
+                    <div class="id-card-photo" id="idCardPhoto"></div>
+                    <div class="id-card-details">
+                        <div class="id-card-name" id="idCardName">—</div>
+                        <div class="id-card-uid" id="idCardUid">—</div>
+                        <div class="id-card-row"><span>College</span><strong id="idCardCollege">—</strong></div>
+                        <div class="id-card-row"><span>Semester</span><strong id="idCardSemester">—</strong></div>
+                        <div class="id-card-row"><span>Year</span><strong id="idCardYear">—</strong></div>
+                        <div class="id-card-row"><span>City</span><strong id="idCardCity">—</strong></div>
+                    </div>
+                </div>
+                <div class="id-card-footer">
+                    <div class="id-card-qr" id="idCardQr"></div>
+                    <div class="id-card-validity">Valid while<br>enrolled at<br>BCA Hub</div>
+                </div>
+            </div>
+        </div>
+        <div class="id-card-actions">
+            <button class="btn-glow" id="downloadIdBtn"><span><i class="fa-solid fa-download"></i> Download</span></button>
+            <button class="btn-ghost" id="printIdBtn"><span><i class="fa-solid fa-print"></i> Print</span></button>
+        </div>
+    </div>
+</div>
+
+<div id="toastContainer" aria-live="polite"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth-service.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

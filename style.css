@@ -750,7 +750,7 @@ body.no-custom-cursor .accordion-header { cursor: pointer; }
     .nav-links { display: none; }
     .navbar .nav-inner .btn-glow span { display: none; }
     .theme-panel-wrap { display: none; }
-    #guideBtn, .navbar .lang-toggle { display: none; }
+    #guideBtn, .navbar .lang-toggle, #myAccountLink { display: none; }
     .nav-toggle { display: flex; }
 }
 
